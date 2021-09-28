@@ -11,6 +11,13 @@ GeoPath2DAbsoluteHorizontal class >> commandName [
 ]
 
 { #category : #accessing }
+GeoPath2DAbsoluteHorizontal >> absolutePoint: aPoint previousPoint: aPoint2 in: aCollection [ 
+
+	aCollection add: aPoint.
+	^aPoint
+]
+
+{ #category : #accessing }
 GeoPath2DAbsoluteHorizontal >> createPoints: aCollection previousPoint: aPoint [
 
 	^ { (aCollection first @ aPoint y) }

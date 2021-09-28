@@ -46,7 +46,7 @@ GeoPath2DParser >> initializeFor: dString [
 { #category : #parsing }
 GeoPath2DParser >> isCommand: aString [
 
-	^#('m' 'h' 'v' 'l' 'M' 'H' 'V' 'L' 'z' 'Z' 'c') anySatisfy: [ : each | each  = aString ]
+	^#('m' 'h' 'v' 'l' 'M' 'H' 'V' 'L' 'z' 'Z' 'c' 'C') anySatisfy: [ : each | each  = aString ]
 ]
 
 { #category : #parsing }

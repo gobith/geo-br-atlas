@@ -17,7 +17,7 @@ GeoBRPathParser class >> example001 [
 { #category : #tests }
 GeoBRPathParser class >> exampleDeepsouth [
 
-	^((self onFileNamed: '/home/georges/Geo BR Atlas/deepsouth004.svg') parse)
+	^((self onFileNamed: '/home/georges/Geo BR Atlas/deepsouth007.svg') parse)
 ]
 
 { #category : #'instance creation' }

@@ -26,7 +26,7 @@ GeoPath2DDocument >> absolutePoints [
 					previousPoint: previousPoint
 					in: coll ]
 			ifFalse: [ command := element ] ].
-	^ coll collect: [ : point | (point x round: 4) @ (point y round: 4) ]
+	^ coll collect: [ : point | (point x round: 3) @ (point y round: 3) ]
 ]
 
 { #category : #accessing }

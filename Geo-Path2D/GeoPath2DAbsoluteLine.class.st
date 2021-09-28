@@ -11,9 +11,16 @@ GeoPath2DAbsoluteLine class >> commandName [
 ]
 
 { #category : #accessing }
+GeoPath2DAbsoluteLine >> absolutePoint: aPoint previousPoint: aPoint2 in: aCollection [ 
+	
+	aCollection add: aPoint.
+	^aPoint
+]
+
+{ #category : #accessing }
 GeoPath2DAbsoluteLine >> createPoints: aCollection previousPoint: anObject [
 
-	self halt 
+	^ { (aCollection first @ aCollection last) }
 ]
 
 { #category : #private }

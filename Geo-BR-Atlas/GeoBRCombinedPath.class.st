@@ -28,16 +28,16 @@ GeoBRCombinedPath >> createD [
 
 	beginPoint := absolutePoints first.
 
-	[ absolutePoints last =<>= beginPoint or: [ idx = 100 ] ] 
+	[ absolutePoints last = beginPoint or: [ idx = 100 ] ] 
 		whileFalse: [ 
 			| pathPoints isReverse |
 			idx := idx + 1.
 			absolutePathPoints do: [ :points | 
 				pathPoints ifNil: [ 
-					points first =<>= absolutePoints last ifTrue: [ 
+					points first = absolutePoints last ifTrue: [ 
 						isReverse := false.
 						pathPoints := points ].
-					points last =<>= absolutePoints last ifTrue: [ 
+					points last = absolutePoints last ifTrue: [ 
 						isReverse := true.
 						pathPoints := points ] ] ].
 

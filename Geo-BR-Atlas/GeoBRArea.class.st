@@ -10,6 +10,18 @@ Class {
 }
 
 { #category : #accessing }
+GeoBRArea class >> neoJsonMapping: mapper [
+	mapper for: self do: [ :mapping | self neoJsonMappingOn: mapping ]
+]
+
+{ #category : #accessing }
+GeoBRArea class >> neoJsonMappingOn: mapping [
+	mapping
+		mapAccessor: #name;
+		mapAccessor: #d
+]
+
+{ #category : #accessing }
 GeoBRArea >> combinePath [
 	self shouldBeImplemented.
 ]
@@ -34,6 +46,12 @@ GeoBRArea >> createCombinedPathUsing: pathCollection [
 	pathCollection do: [ :path |
 		(pathIds includes: path id) ifTrue: [paths add: path]].
 	combinedPath := GeoBRCombinedPath on: paths
+]
+
+{ #category : #accessing }
+GeoBRArea >> d [
+
+	^self combinedPath d
 ]
 
 { #category : #accessing }

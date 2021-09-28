@@ -11,6 +11,13 @@ GeoPath2DAbsoluteMove class >> commandName [
 ]
 
 { #category : #accessing }
+GeoPath2DAbsoluteMove >> absolutePoint: aPoint previousPoint: anUndefinedObject in: aCollection [ 
+	
+	aCollection add: aPoint.
+	^aPoint
+]
+
+{ #category : #accessing }
 GeoPath2DAbsoluteMove >> createPoints: aCollection previousPoint: aPoint [
 
 	^ { (aCollection first @ aCollection last) }
