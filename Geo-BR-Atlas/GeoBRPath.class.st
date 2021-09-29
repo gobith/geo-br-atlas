@@ -18,12 +18,15 @@ GeoBRPath class >> neoJsonMapping: mapper [
 
 { #category : #accessing }
 GeoBRPath class >> neoJsonMappingOn: mapping [
-	mapping
+
+	"mapping
 		mapAccessor: #id;
 		mapAccessor: #d;
 		mapAccessor: #data;
 		mapAccessor: #selected;
-		mapAccessor: #center
+		mapAccessor: #center"
+
+	mapping mapAccessor: #d
 ]
 
 { #category : #accessing }
@@ -61,7 +64,7 @@ GeoBRPath >> bJson [
 { #category : #accessing }
 GeoBRPath >> center [
 
-	^a interpolateTo: b at: 0.5 
+	^self a interpolateTo: self b at: 0.5 
 ]
 
 { #category : #accessing }

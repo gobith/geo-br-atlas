@@ -17,9 +17,9 @@ GeoBRGrid class >> neoJsonMapping: mapper [
 { #category : #accessing }
 GeoBRGrid class >> neoJsonMappingOn: mapping [
 	mapping
-		mapAccessor: #areaDots;
+	"	mapAccessor: #areaDots;
 		mapAccessor: #lines;
-		mapAccessor: #dots;
+		mapAccessor: #dots;"
 		mapAccessor: #areas
 		
 ]

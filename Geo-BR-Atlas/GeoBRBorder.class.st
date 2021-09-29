@@ -1,45 +1,31 @@
 Class {
-	#name : #GeoBRArea,
+	#name : #GeoBRBorder,
 	#superclass : #Object,
 	#instVars : [
-		'id',
 		'd'
 	],
 	#category : #'Geo-BR-Atlas'
 }
 
 { #category : #accessing }
-GeoBRArea class >> neoJsonMapping: mapper [
+GeoBRBorder class >> neoJsonMapping: mapper [
 	mapper for: self do: [ :mapping | self neoJsonMappingOn: mapping ]
 ]
 
 { #category : #accessing }
-GeoBRArea class >> neoJsonMappingOn: mapping [
+GeoBRBorder class >> neoJsonMappingOn: mapping [
 	mapping
-		mapAccessor: #id;
 		mapAccessor: #d
 ]
 
 { #category : #accessing }
-GeoBRArea >> d [
+GeoBRBorder >> d [
 
 	^ d
 ]
 
 { #category : #accessing }
-GeoBRArea >> d: anObject [
+GeoBRBorder >> d: anObject [
 
 	d := anObject
-]
-
-{ #category : #accessing }
-GeoBRArea >> id [
-
-	^ id
-]
-
-{ #category : #accessing }
-GeoBRArea >> id: anObject [
-
-	id := anObject
 ]

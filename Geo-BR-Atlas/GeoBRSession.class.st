@@ -16,6 +16,7 @@ GeoBRSession >> addRoutes [
 	teapot GET: '/paths' -> [ :request | self requestPaths: request ].
 	teapot GET: '/areas' -> [ :request | self requestAreas: request ].
 	teapot GET: '/grid' -> [ :request | self requestGrid: request ].
+	teapot GET: '/map' -> [ :request | self requestMap: request ].
 ]
 
 { #category : #accessing }
@@ -26,6 +27,12 @@ GeoBRSession >> grid [
 	grid paths: paths.
 	grid calculate.
 	^grid
+]
+
+{ #category : #accessing }
+GeoBRSession >> map [
+
+	^GeoBRMap new
 ]
 
 { #category : #accessing }
@@ -41,6 +48,12 @@ GeoBRSession >> requestGrid: request [
 ]
 
 { #category : #accessing }
+GeoBRSession >> requestMap: aRequest [
+
+	^self map
+]
+
+{ #category : #accessing }
 GeoBRSession >> requestPaths: request [
 
 	^paths
@@ -52,34 +65,7 @@ GeoBRSession >> setup [
 	| area |
 	paths := GeoBRPathParser exampleDeepsouth.
 	areas := OrderedCollection new.
-	areas
-		add: (GeoBRArea new
-				 pathIds: { 5. 11. 12. 13. 14. 15 };
-				 name: 'Garolfs');
-		add: (GeoBRArea new
-				 pathIds: { 13. 16. 17. 18 };
-				 name: 'Numut');
-		add: (GeoBRArea new
-				 pathIds: { 2. 3. 4. 5. 22 };
-				 name: 'Cear');
-	"	add: (GeoBRArea new
-				 pathIds: { 190. 192. 194 };
-				 name: 'Queensland');"
-		add: (GeoBRArea new
-				 pathIds: { 169. 186. 191. 192. 193 };
-				 name: 'Nordan Barony');
-		add: (GeoBRArea new
-				 pathIds: { 187. 189. 190. 191 };
-				 name: 'Colks Barony');
-		"add: (GeoBRArea new
-				 pathIds: { 166. 168. 186. 187. 188 };
-				 name: 'Golden Fields');"
-		"add: (GeoBRArea new
-				 pathIds: { 165. 168. 169. 170 };
-				 name: 'Barns Barony')
-				;"  add: (GeoBRArea new pathIds: { 3 .6 .7 .8 . }; name: 'Bernau').
-
-	areas do: [ :a | a createCombinedPathUsing: paths ]
+	
 ]
 
 { #category : #accessing }
