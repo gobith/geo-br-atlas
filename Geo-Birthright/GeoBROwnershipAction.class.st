@@ -3,9 +3,11 @@ Class {
 	#superclass : #GeoBRAction,
 	#instVars : [
 		'regent',
+		'ruler',
+		'owner',
 		'province'
 	],
-	#category : #'Geo-Birthright'
+	#category : #'Geo-Birthright-Actions'
 }
 
 { #category : #accessing }

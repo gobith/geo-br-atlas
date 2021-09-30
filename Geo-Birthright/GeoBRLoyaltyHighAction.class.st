@@ -1,7 +1,7 @@
 Class {
 	#name : #GeoBRLoyaltyHighAction,
 	#superclass : #GeoBRLoyaltyAction,
-	#category : #'Geo-Birthright'
+	#category : #'Geo-Birthright-Actions'
 }
 
 { #category : #accessing }

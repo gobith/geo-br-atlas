@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'level'
 	],
-	#category : #'Geo-Birthright'
+	#category : #'Geo-Birthright-Actions'
 }
 
 { #category : #accessing }

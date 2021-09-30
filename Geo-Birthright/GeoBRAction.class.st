@@ -1,7 +1,7 @@
 Class {
 	#name : #GeoBRAction,
 	#superclass : #Object,
-	#category : #'Geo-Birthright'
+	#category : #'Geo-Birthright-Actions'
 }
 
 { #category : #accessing }

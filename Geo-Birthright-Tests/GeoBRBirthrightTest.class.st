@@ -12,8 +12,11 @@ GeoBRBirthrightTest >> test001 [
 	| world regent province1 province2 province3 province4|
 	world := GeoBRWorld new.
 	regent := GeoBRRegent new.
-	regent id: '1'.
-	regent name: 'Erin Velescarpe'.
+	regent 
+		id: '1';
+	 	name: 'Erin Velescarpe';
+		bloodline: 15.
+	
 	world regents at: regent id put: regent.
 	
 	province1 := GeoBRProvince new.
@@ -53,6 +56,8 @@ GeoBRBirthrightTest >> test001 [
 	
 	world replay.
 	
+	self assert: (world collectedRegencyPointsFor: regent) equals: 18.
+	self assert: (world domainPowerFor: regent) equals: 16
 ]
 
 { #category : #tests }
@@ -210,6 +215,34 @@ GeoBRBirthrightTest >> testAction005 [
 	self assert: province1 ownerships size equals: 2.
 	self assert: province1 ownerships first level equals: 2.
 	self assert: province1 ownerships last level equals: 3
+]
+
+{ #category : #tests }
+GeoBRBirthrightTest >> testBloodlineModifier [
+
+	self assert: (GeoBRRegent new bloodline: 0) bloodlineModifier equals: -5.
+	self assert: (GeoBRRegent new bloodline: 1) bloodlineModifier equals: -5.
+	self assert: (GeoBRRegent new bloodline: 2) bloodlineModifier equals: -4.
+	self assert: (GeoBRRegent new bloodline: 3) bloodlineModifier equals: -4.
+	self assert: (GeoBRRegent new bloodline: 4) bloodlineModifier equals: -3.
+	self assert: (GeoBRRegent new bloodline: 5) bloodlineModifier equals: -3.
+	self assert: (GeoBRRegent new bloodline: 6) bloodlineModifier equals: -2.
+	self assert: (GeoBRRegent new bloodline: 7) bloodlineModifier equals: -2.
+	self assert: (GeoBRRegent new bloodline: 8) bloodlineModifier equals: -1.
+	self assert: (GeoBRRegent new bloodline: 9) bloodlineModifier equals: -1.
+	self assert: (GeoBRRegent new bloodline: 10) bloodlineModifier equals: 0.
+	self assert: (GeoBRRegent new bloodline: 11) bloodlineModifier equals: 0.
+	self assert: (GeoBRRegent new bloodline: 12) bloodlineModifier equals: 1.
+	self assert: (GeoBRRegent new bloodline: 13) bloodlineModifier equals: 1.
+	self assert: (GeoBRRegent new bloodline: 14) bloodlineModifier equals: 2.	
+	self assert: (GeoBRRegent new bloodline: 15) bloodlineModifier equals: 2.
+	self assert: (GeoBRRegent new bloodline: 16) bloodlineModifier equals: 3.
+	self assert: (GeoBRRegent new bloodline: 17) bloodlineModifier equals: 3.
+	self assert: (GeoBRRegent new bloodline: 18) bloodlineModifier equals: 4.
+	self assert: (GeoBRRegent new bloodline: 19) bloodlineModifier equals: 4.
+	self assert: (GeoBRRegent new bloodline: 20) bloodlineModifier equals: 5.
+	self assert: (GeoBRRegent new bloodline: 21) bloodlineModifier equals: 5.
+	self assert: (GeoBRRegent new bloodline: 22) bloodlineModifier equals: 6.
 ]
 
 { #category : #tests }

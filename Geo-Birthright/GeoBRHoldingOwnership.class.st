@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'level'
 	],
-	#category : #'Geo-Birthright'
+	#category : #'Geo-Birthright-Ownership'
 }
 
 { #category : #printing }
@@ -34,4 +34,10 @@ GeoBRHoldingOwnership >> printOn: aStream [
 		nextPutAll: self typeString;
 		space;
 		print: self level
+]
+
+{ #category : #accessing }
+GeoBRHoldingOwnership >> regencyPoints [ 
+
+	^level
 ]

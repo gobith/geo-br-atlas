@@ -22,11 +22,23 @@ GeoBRWorld >> addAction: anOwnershipAction [
 	actions add: anOwnershipAction
 ]
 
+{ #category : #accessing }
+GeoBRWorld >> collectedRegencyPointsFor: aRegent [
+
+	^ (self domainPowerFor: aRegent) + aRegent bloodlineModifier
+]
+
 { #category : #actions }
 GeoBRWorld >> doOwnershipAction: anOwnershipAction [
 
 	self addAction: anOwnershipAction
 
+]
+
+{ #category : #accessing }
+GeoBRWorld >> domainPowerFor: aRegent [
+
+	^ ownerships sum: [ :ownership | ownership regencyPointsFor: aRegent ]
 ]
 
 { #category : #initialization }

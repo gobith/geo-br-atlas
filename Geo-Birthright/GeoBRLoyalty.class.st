@@ -1,7 +1,7 @@
 Class {
 	#name : #GeoBRLoyalty,
 	#superclass : #Object,
-	#category : #'Geo-Birthright'
+	#category : #'Geo-Birthright-Loyalty'
 }
 
 { #category : #printing }

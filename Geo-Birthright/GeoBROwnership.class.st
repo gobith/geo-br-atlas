@@ -5,7 +5,7 @@ Class {
 		'regent',
 		'province'
 	],
-	#category : #'Geo-Birthright'
+	#category : #'Geo-Birthright-Ownership'
 }
 
 { #category : #printing }
@@ -53,6 +53,19 @@ GeoBROwnership >> province [
 GeoBROwnership >> province: anObject [
 
 	province := anObject
+]
+
+{ #category : #accessing }
+GeoBROwnership >> regencyPoints [ 
+
+	^self subclassResponsibility 
+]
+
+{ #category : #accessing }
+GeoBROwnership >> regencyPointsFor: aRegent [
+
+	aRegent = regent ifFalse: [ 0 ].
+	^self regencyPoints
 ]
 
 { #category : #accessing }

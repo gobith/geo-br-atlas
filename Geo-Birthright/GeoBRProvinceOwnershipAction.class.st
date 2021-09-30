@@ -1,7 +1,7 @@
 Class {
 	#name : #GeoBRProvinceOwnershipAction,
 	#superclass : #GeoBROwnershipAction,
-	#category : #'Geo-Birthright'
+	#category : #'Geo-Birthright-Actions'
 }
 
 { #category : #accessing }

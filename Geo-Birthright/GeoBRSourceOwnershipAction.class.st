@@ -1,7 +1,7 @@
 Class {
 	#name : #GeoBRSourceOwnershipAction,
 	#superclass : #GeoBRHoldingOwnershipAction,
-	#category : #'Geo-Birthright'
+	#category : #'Geo-Birthright-Actions'
 }
 
 { #category : #accessing }

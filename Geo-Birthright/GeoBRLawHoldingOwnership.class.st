@@ -1,7 +1,7 @@
 Class {
 	#name : #GeoBRLawHoldingOwnership,
 	#superclass : #GeoBRHoldingOwnership,
-	#category : #'Geo-Birthright'
+	#category : #'Geo-Birthright-Ownership'
 }
 
 { #category : #printing }
