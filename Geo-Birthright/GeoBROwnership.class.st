@@ -2,7 +2,8 @@ Class {
 	#name : #GeoBROwnership,
 	#superclass : #Object,
 	#instVars : [
-		'regent',
+		'ruler',
+		'owner',
 		'province'
 	],
 	#category : #'Geo-Birthright-Ownership'
@@ -31,14 +32,30 @@ GeoBROwnership >> isSameAs: anOwnership [
 
 	^ self typeString = anOwnership typeString and: [ 
 		  province id = anOwnership province id and: [ 
-			  regent id = anOwnership regent id ] ]
+			  ruler id = anOwnership ruler id or: [ 
+				  owner id = anOwnership owner id ] ] ]
+]
+
+{ #category : #accessing }
+GeoBROwnership >> owner [
+
+	^ owner
+]
+
+{ #category : #accessing }
+GeoBROwnership >> owner: anObject [
+
+	owner := anObject
 ]
 
 { #category : #printing }
 GeoBROwnership >> printOn: aStream [
 
 	aStream
-		nextPutAll: regent name;
+		nextPutAll: 'Owner: ';
+		nextPutAll: owner name;
+		nextPutAll: ' - ruler: ';
+		nextPutAll: ruler name;
 		nextPutAll: ' - ';
 		nextPutAll: province name
 ]
@@ -64,20 +81,21 @@ GeoBROwnership >> regencyPoints [
 { #category : #accessing }
 GeoBROwnership >> regencyPointsFor: aRegent [
 
-	aRegent = regent ifFalse: [ 0 ].
-	^self regencyPoints
+	^ aRegent = owner
+		  ifTrue: [ self regencyPoints ]
+		  ifFalse: [ 0 ]
 ]
 
 { #category : #accessing }
-GeoBROwnership >> regent [
+GeoBROwnership >> ruler [
 
-	^ regent
+	^ ruler
 ]
 
 { #category : #accessing }
-GeoBROwnership >> regent: anObject [
+GeoBROwnership >> ruler: anObject [
 
-	regent := anObject
+	ruler := anObject
 ]
 
 { #category : #accessing }

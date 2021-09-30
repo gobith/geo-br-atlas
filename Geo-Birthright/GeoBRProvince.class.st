@@ -6,8 +6,10 @@ Class {
 		'areaId',
 		'name',
 		'level',
+		'sourceRating',
 		'loyalty',
-		'ownerships'
+		'ownerships',
+		'terrain'
 	],
 	#category : #'Geo-Birthright'
 }

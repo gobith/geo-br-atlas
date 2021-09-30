@@ -2,7 +2,6 @@ Class {
 	#name : #GeoBROwnershipAction,
 	#superclass : #GeoBRAction,
 	#instVars : [
-		'regent',
 		'ruler',
 		'owner',
 		'province'
@@ -34,10 +33,23 @@ GeoBROwnershipAction >> doActionIn: aWorld [
 ]
 
 { #category : #accessing }
+GeoBROwnershipAction >> owner [
+
+	^ owner
+]
+
+{ #category : #accessing }
+GeoBROwnershipAction >> owner: anObject [
+
+	owner := anObject
+]
+
+{ #category : #accessing }
 GeoBROwnershipAction >> ownerShipUsing: aWorld [
 
 	^ self typeClass new
-		  regent: (aWorld regents at: regent);
+		  owner: (aWorld regents at: owner);
+		  ruler: (aWorld regents at: ruler);
 		  province: (aWorld provinces at: province);
 		  yourself
 ]
@@ -49,8 +61,10 @@ GeoBROwnershipAction >> printOn: aStream [
 	
 		nextPutAll: 'Prov: ';
 		nextPutAll: province;
-		nextPutAll: ' regent: ';
-		nextPutAll: regent;
+		nextPutAll: ' - owner: ';
+		nextPutAll: owner;
+		nextPutAll: ' - ruler: ';
+		nextPutAll: ruler;
 		space;
 		nextPutAll: self typeString
 ]
@@ -68,15 +82,15 @@ GeoBROwnershipAction >> province: anObject [
 ]
 
 { #category : #accessing }
-GeoBROwnershipAction >> regent [
+GeoBROwnershipAction >> ruler [
 
-	^ regent
+	^ ruler
 ]
 
 { #category : #accessing }
-GeoBROwnershipAction >> regent: anObject [
+GeoBROwnershipAction >> ruler: anObject [
 
-	regent := anObject
+	ruler := anObject
 ]
 
 { #category : #accessing }

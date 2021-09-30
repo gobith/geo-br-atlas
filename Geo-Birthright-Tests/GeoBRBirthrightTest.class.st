@@ -44,20 +44,21 @@ GeoBRBirthrightTest >> test001 [
 		level: 4.
 	world provinces at: province4 id put: province4.
 	
-	world addAction: (GeoBRProvinceOwnershipAction new province: '1'; regent: '1').
-	world addAction: (GeoBRProvinceOwnershipAction new province: '2'; regent: '1').
-	world addAction: (GeoBRProvinceOwnershipAction new province: '3'; regent: '1').
-	world addAction: (GeoBRProvinceOwnershipAction new province: '4'; regent: '1').
+	world addAction: (GeoBRProvinceOwnershipAction new province: '1'; owner: '1'; ruler: '1').
+	world addAction: (GeoBRProvinceOwnershipAction new province: '2'; owner: '1'; ruler: '1').
+	world addAction: (GeoBRProvinceOwnershipAction new province: '3'; owner: '1'; ruler: '1').
+	world addAction: (GeoBRProvinceOwnershipAction new province: '4'; owner: '1'; ruler: '1').
 	
-	world addAction: (GeoBRLawOwnershipAction new province: '1'; regent: '1'; level: 2).
-	world addAction: (GeoBRTempleOwnershipAction new province: '1'; regent: '1'; level: 2).
-	world addAction: (GeoBRSourceOwnershipAction new province: '1'; regent: '1'; level: 1).
-	world addAction: (GeoBRGuildOwnershipAction new province: '1'; regent: '1'; level: 1).
+	world addAction: (GeoBRLawOwnershipAction new province: '1'; owner: '1'; ruler: '1'; level: 2).
+	world addAction: (GeoBRTempleOwnershipAction new province: '1'; owner: '1'; ruler: '1'; level: 2).
+	world addAction: (GeoBRSourceOwnershipAction new province: '1'; owner: '1'; ruler: '1'; level: 1).
+	world addAction: (GeoBRGuildOwnershipAction new province: '1'; owner: '1'; ruler: '1'; level: 1).
 	
 	world replay.
 	
 	self assert: (world collectedRegencyPointsFor: regent) equals: 18.
-	self assert: (world domainPowerFor: regent) equals: 16
+	self assert: (world domainPowerFor: regent) equals: 16.
+	world inspect
 ]
 
 { #category : #tests }
@@ -79,8 +80,8 @@ GeoBRBirthrightTest >> testAction001 [
 	world provinces at: province1 id put: province1.
 	
 	
-	world addAction: (GeoBRLawOwnershipAction new province: '1'; regent: '1'; level: 2).
-	world addAction: (GeoBRLawOwnershipAction new province: '1'; regent: '1'; level: 3).
+	world addAction: (GeoBRLawOwnershipAction new province: '1'; owner: '1'; ruler: '1'; level: 2).
+	world addAction: (GeoBRLawOwnershipAction new province: '1'; owner: '1'; ruler: '1'; level: 3).
 	
 	
 	world replay.
@@ -110,8 +111,8 @@ GeoBRBirthrightTest >> testAction002 [
 	world provinces at: province1 id put: province1.
 	
 	
-	world addAction: (GeoBRGuildOwnershipAction new province: '1'; regent: '1'; level: 2).
-	world addAction: (GeoBRGuildOwnershipAction new province: '1'; regent: '1'; level: 3).
+	world addAction: (GeoBRGuildOwnershipAction new province: '1'; owner: '1'; ruler: '1'; level: 2).
+	world addAction: (GeoBRGuildOwnershipAction new province: '1'; owner: '1'; ruler: '1'; level: 3).
 	
 	
 	world replay.
@@ -141,8 +142,8 @@ GeoBRBirthrightTest >> testAction003 [
 	world provinces at: province1 id put: province1.
 	
 	
-	world addAction: (GeoBRSourceOwnershipAction new province: '1'; regent: '1'; level: 2).
-	world addAction: (GeoBRSourceOwnershipAction new province: '1'; regent: '1'; level: 3).
+	world addAction: (GeoBRSourceOwnershipAction new province: '1'; owner: '1'; ruler: '1'; level: 2).
+	world addAction: (GeoBRSourceOwnershipAction new province: '1'; owner: '1'; ruler: '1'; level: 3).
 	
 	
 	world replay.
@@ -172,8 +173,8 @@ GeoBRBirthrightTest >> testAction004 [
 	world provinces at: province1 id put: province1.
 	
 	
-	world addAction: (GeoBRTempleOwnershipAction new province: '1'; regent: '1'; level: 2).
-	world addAction: (GeoBRTempleOwnershipAction new province: '1'; regent: '1'; level: 3).
+	world addAction: (GeoBRTempleOwnershipAction new province: '1'; owner: '1'; ruler: '1'; level: 2).
+	world addAction: (GeoBRTempleOwnershipAction new province: '1'; owner: '1'; ruler: '1'; level: 3).
 	
 	
 	world replay.
@@ -203,8 +204,8 @@ GeoBRBirthrightTest >> testAction005 [
 	world provinces at: province1 id put: province1.
 	
 	
-	world addAction: (GeoBRTempleOwnershipAction new province: '1'; regent: '1'; level: 2).
-	world addAction: (GeoBRLawOwnershipAction new province: '1'; regent: '1'; level: 3).
+	world addAction: (GeoBRTempleOwnershipAction new province: '1'; owner: '1'; ruler: '1'; level: 2).
+	world addAction: (GeoBRLawOwnershipAction new province: '1'; owner: '1'; ruler: '1'; level: 3).
 	
 	
 	world replay.
@@ -271,4 +272,54 @@ GeoBRBirthrightTest >> testLoyaltyAction001 [
 	world replay.
 	
 	self assert: province1 loyalty typeString equals: GeoBRLoyaltyHigh new typeString
+]
+
+{ #category : #tests }
+GeoBRBirthrightTest >> testVasal001 [
+	
+	| world regent regent1 regent2 regent3 province1 |
+	
+	world := GeoBRWorld new.
+	regent1 := GeoBRRegent new.
+	regent1 id: '1'.
+	regent1 bloodline: 10.
+	regent1 name: 'Owner'.
+	world regents at: regent1 id put: regent1.
+	
+	regent2 := GeoBRRegent new.
+	regent2 id: '2'.
+	regent2 bloodline: 10.
+	regent2 name: 'Ruler 1'.
+	world regents at: regent2 id put: regent2.
+	
+	regent3 := GeoBRRegent new.
+	regent3 id: '3'.
+	regent3 bloodline: 10.
+	regent3 name: 'Ruler 2'.
+	world regents at: regent3 id put: regent3.
+	
+	province1 := GeoBRProvince new.
+	province1
+		id: '1';
+		name: 'Province 1';
+		level: 3.
+	world provinces at: province1 id put: province1.
+	
+	world addAction: (GeoBRProvinceOwnershipAction new ruler: '2'; owner: '1' ; province: '1').
+	world addAction: (GeoBRProvinceOwnershipAction new ruler: '3'; owner: '1' ; province: '1').
+	
+	
+	world replay.
+	
+	self assert: province1 ownerships size equals: 1.
+	self assert: province1 ownerships first owner equals: regent1.
+	
+	self assert: (world collectedRegencyPointsFor: regent1) equals: 3.
+	self assert: (world domainPowerFor: regent1) equals: 3.
+	
+	self assert: (world collectedRegencyPointsFor: regent2) equals: 0.
+	self assert: (world domainPowerFor: regent2) equals: 0.
+	
+	self assert: (world collectedRegencyPointsFor: regent3) equals: 0.
+	self assert: (world domainPowerFor: regent3) equals: 0.
 ]
