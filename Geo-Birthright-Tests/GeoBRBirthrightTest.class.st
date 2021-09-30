@@ -41,13 +41,201 @@ GeoBRBirthrightTest >> test001 [
 		level: 4.
 	world provinces at: province4 id put: province4.
 	
-	world addOwnership: (GeoBRProvinceOwnership new province: '1'; regent: '1').
-	world addOwnership: (GeoBRProvinceOwnership new province: '2'; regent: '1').
-	world addOwnership: (GeoBRProvinceOwnership new province: '3'; regent: '1').
-	world addOwnership: (GeoBRProvinceOwnership new province: '4'; regent: '1').
+	world addAction: (GeoBRProvinceOwnershipAction new province: '1'; regent: '1').
+	world addAction: (GeoBRProvinceOwnershipAction new province: '2'; regent: '1').
+	world addAction: (GeoBRProvinceOwnershipAction new province: '3'; regent: '1').
+	world addAction: (GeoBRProvinceOwnershipAction new province: '4'; regent: '1').
 	
-	world addOwnership: (GeoBRLawOwnership new province: '1'; regent: '1'; level: 2).
-	world addOwnership: (GeoBRLawOwnership new province: '2'; regent: '1'; level: 2).
-	world addOwnership: (GeoBRLawOwnership new province: '2'; regent: '1'; level: 1).
-	world addOwnership: (GeoBRLawOwnership new province: '2'; regent: '1'; level: 1).
+	world addAction: (GeoBRLawOwnershipAction new province: '1'; regent: '1'; level: 2).
+	world addAction: (GeoBRTempleOwnershipAction new province: '1'; regent: '1'; level: 2).
+	world addAction: (GeoBRSourceOwnershipAction new province: '1'; regent: '1'; level: 1).
+	world addAction: (GeoBRGuildOwnershipAction new province: '1'; regent: '1'; level: 1).
+	
+	world replay.
+	
+]
+
+{ #category : #tests }
+GeoBRBirthrightTest >> testAction001 [
+	
+	| world regent province1 |
+	
+	world := GeoBRWorld new.
+	regent := GeoBRRegent new.
+	regent id: '1'.
+	regent name: 'Erin Velescarpe'.
+	world regents at: regent id put: regent.
+	
+	province1 := GeoBRProvince new.
+	province1
+		id: '1';
+		name: 'Province 1';
+		level: 3.
+	world provinces at: province1 id put: province1.
+	
+	
+	world addAction: (GeoBRLawOwnershipAction new province: '1'; regent: '1'; level: 2).
+	world addAction: (GeoBRLawOwnershipAction new province: '1'; regent: '1'; level: 3).
+	
+	
+	world replay.
+	
+	self assert: world ownerships size equals: 1.
+	self assert: world ownerships first level equals: 3.
+	self assert: province1 ownerships size equals: 1.
+	self assert: province1 ownerships first level equals: 3
+]
+
+{ #category : #tests }
+GeoBRBirthrightTest >> testAction002 [
+	
+	| world regent province1 |
+	
+	world := GeoBRWorld new.
+	regent := GeoBRRegent new.
+	regent id: '1'.
+	regent name: 'Erin Velescarpe'.
+	world regents at: regent id put: regent.
+	
+	province1 := GeoBRProvince new.
+	province1
+		id: '1';
+		name: 'Province 1';
+		level: 3.
+	world provinces at: province1 id put: province1.
+	
+	
+	world addAction: (GeoBRGuildOwnershipAction new province: '1'; regent: '1'; level: 2).
+	world addAction: (GeoBRGuildOwnershipAction new province: '1'; regent: '1'; level: 3).
+	
+	
+	world replay.
+	
+	self assert: world ownerships size equals: 1.
+	self assert: world ownerships first level equals: 3.
+	self assert: province1 ownerships size equals: 1.
+	self assert: province1 ownerships first level equals: 3
+]
+
+{ #category : #tests }
+GeoBRBirthrightTest >> testAction003 [
+	
+	| world regent province1 |
+	
+	world := GeoBRWorld new.
+	regent := GeoBRRegent new.
+	regent id: '1'.
+	regent name: 'Erin Velescarpe'.
+	world regents at: regent id put: regent.
+	
+	province1 := GeoBRProvince new.
+	province1
+		id: '1';
+		name: 'Province 1';
+		level: 3.
+	world provinces at: province1 id put: province1.
+	
+	
+	world addAction: (GeoBRSourceOwnershipAction new province: '1'; regent: '1'; level: 2).
+	world addAction: (GeoBRSourceOwnershipAction new province: '1'; regent: '1'; level: 3).
+	
+	
+	world replay.
+	
+	self assert: world ownerships size equals: 1.
+	self assert: world ownerships first level equals: 3.
+	self assert: province1 ownerships size equals: 1.
+	self assert: province1 ownerships first level equals: 3
+]
+
+{ #category : #tests }
+GeoBRBirthrightTest >> testAction004 [
+	
+	| world regent province1 |
+	
+	world := GeoBRWorld new.
+	regent := GeoBRRegent new.
+	regent id: '1'.
+	regent name: 'Erin Velescarpe'.
+	world regents at: regent id put: regent.
+	
+	province1 := GeoBRProvince new.
+	province1
+		id: '1';
+		name: 'Province 1';
+		level: 3.
+	world provinces at: province1 id put: province1.
+	
+	
+	world addAction: (GeoBRTempleOwnershipAction new province: '1'; regent: '1'; level: 2).
+	world addAction: (GeoBRTempleOwnershipAction new province: '1'; regent: '1'; level: 3).
+	
+	
+	world replay.
+	
+	self assert: world ownerships size equals: 1.
+	self assert: world ownerships first level equals: 3.
+	self assert: province1 ownerships size equals: 1.
+	self assert: province1 ownerships first level equals: 3
+]
+
+{ #category : #tests }
+GeoBRBirthrightTest >> testAction005 [
+	
+	| world regent province1 |
+	
+	world := GeoBRWorld new.
+	regent := GeoBRRegent new.
+	regent id: '1'.
+	regent name: 'Erin Velescarpe'.
+	world regents at: regent id put: regent.
+	
+	province1 := GeoBRProvince new.
+	province1
+		id: '1';
+		name: 'Province 1';
+		level: 3.
+	world provinces at: province1 id put: province1.
+	
+	
+	world addAction: (GeoBRTempleOwnershipAction new province: '1'; regent: '1'; level: 2).
+	world addAction: (GeoBRLawOwnershipAction new province: '1'; regent: '1'; level: 3).
+	
+	
+	world replay.
+	
+	self assert: world ownerships size equals: 2.
+	self assert: world ownerships first level equals: 2.
+	self assert: world ownerships last level equals: 3.
+	self assert: province1 ownerships size equals: 2.
+	self assert: province1 ownerships first level equals: 2.
+	self assert: province1 ownerships last level equals: 3
+]
+
+{ #category : #tests }
+GeoBRBirthrightTest >> testLoyaltyAction001 [
+	
+	| world regent province1 |
+	
+	world := GeoBRWorld new.
+	regent := GeoBRRegent new.
+	regent id: '1'.
+	regent name: 'Erin Velescarpe'.
+	world regents at: regent id put: regent.
+	
+	province1 := GeoBRProvince new.
+	province1
+		id: '1';
+		name: 'Province 1';
+		level: 3.
+	world provinces at: province1 id put: province1.
+	
+	
+	world addAction: (GeoBRLoyaltyAverageAction  new province: '1').
+	world addAction: (GeoBRLoyaltyHighAction new province: '1').
+	
+	
+	world replay.
+	
+	self assert: province1 loyalty typeString equals: GeoBRLoyaltyHigh new typeString
 ]

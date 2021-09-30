@@ -3,22 +3,14 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'id',
+		'areaId',
 		'name',
 		'level',
-		'guildHolding',
-		'lawHolding',
-		'templeHolding',
-		'sourceHolding',
-		'loyalty'
+		'loyalty',
+		'ownerships'
 	],
 	#category : #'Geo-Birthright'
 }
-
-{ #category : #accessing }
-GeoBRProvince >> guildHolding [
-
-	^ guildHolding
-]
 
 { #category : #accessing }
 GeoBRProvince >> id [
@@ -36,18 +28,7 @@ GeoBRProvince >> id: anObject [
 GeoBRProvince >> initialize [
 
 	super initialize.
-
-	guildHolding := GeoBRGuild new.
-	lawHolding := GeoBRLaw new.
-	templeHolding := GeoBRTemple new.
-	sourceHolding := GeoBRSource new.
-	loyalty := GeoBRLoyaltyPoor new
-]
-
-{ #category : #accessing }
-GeoBRProvince >> lawHolding [
-
-	^ lawHolding
+	self reset
 ]
 
 { #category : #accessing }
@@ -87,13 +68,19 @@ GeoBRProvince >> name: anObject [
 ]
 
 { #category : #accessing }
-GeoBRProvince >> sourceHolding [
-
-	^ sourceHolding
+GeoBRProvince >> ownerships [
+	^ ownerships
 ]
 
-{ #category : #accessing }
-GeoBRProvince >> templeHolding [
+{ #category : #printing }
+GeoBRProvince >> printOn: aStream [
 
-	^ templeHolding
+	aStream nextPutAll: self name
+]
+
+{ #category : #initialization }
+GeoBRProvince >> reset [
+
+	ownerships := OrderedCollection new.
+	loyalty := GeoBRLoyaltyPoor new
 ]

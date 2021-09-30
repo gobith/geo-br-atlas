@@ -31,3 +31,9 @@ GeoBRRegent >> name: anObject [
 
 	name := anObject
 ]
+
+{ #category : #printing }
+GeoBRRegent >> printOn: aStream [
+
+	aStream nextPutAll: self name
+]

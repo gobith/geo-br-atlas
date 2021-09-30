@@ -3,3 +3,9 @@ Class {
 	#superclass : #GeoBRLoyalty,
 	#category : #'Geo-Birthright'
 }
+
+{ #category : #printing }
+GeoBRLoyaltyRebellious class >> typeString [ 
+
+	^'Rebellious'
+]
