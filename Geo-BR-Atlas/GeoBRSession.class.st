@@ -3,8 +3,7 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'teapot',
-		'paths',
-		'areas'
+		'world'
 	],
 	#category : #'Geo-BR-Atlas'
 }
@@ -12,60 +11,26 @@ Class {
 { #category : #accessing }
 GeoBRSession >> addRoutes [
 
-
-	teapot GET: '/paths' -> [ :request | self requestPaths: request ].
-	teapot GET: '/areas' -> [ :request | self requestAreas: request ].
-	teapot GET: '/grid' -> [ :request | self requestGrid: request ].
 	teapot GET: '/map' -> [ :request | self requestMap: request ].
-]
-
-{ #category : #accessing }
-GeoBRSession >> grid [
-
-	| grid |
-	grid := GeoBRGrid new.
-	grid paths: paths.
-	grid calculate.
-	^grid
-]
-
-{ #category : #accessing }
-GeoBRSession >> map [
-
-	^GeoBRMap new
-]
-
-{ #category : #accessing }
-GeoBRSession >> requestAreas: request [
-
-	^areas
-]
-
-{ #category : #accessing }
-GeoBRSession >> requestGrid: request [
-
-	^self grid
+	teapot GET: '/world' -> [ :request | self requestWorld: request ].
 ]
 
 { #category : #accessing }
 GeoBRSession >> requestMap: aRequest [
 
-	^self map
+	^GeoBRMap new
 ]
 
 { #category : #accessing }
-GeoBRSession >> requestPaths: request [
+GeoBRSession >> requestWorld: aRequest [
 
-	^paths
+	^world
 ]
 
 { #category : #accessing }
-GeoBRSession >> setup [
+GeoBRSession >> setup [ 
 
-	| area |
-	paths := GeoBRPathParser exampleDeepsouth.
-	areas := OrderedCollection new.
-	
+	world := GeoBRWorld birthright 
 ]
 
 { #category : #accessing }
@@ -85,9 +50,6 @@ GeoBRSession >> start [
 
 { #category : #accessing }
 GeoBRSession >> stop [ 
-	
-	paths := nil.
-	areas := nil.
 	
 	teapot ifNotNil: [ teapot stop ].
 	teapot := nil

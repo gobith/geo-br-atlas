@@ -11,6 +11,15 @@ GeoBRAction class >> typeClass [
 ]
 
 { #category : #actions }
+GeoBRAction >> asActionWrapper [
+
+	^ GeoBRActionWrapper new
+		  action: self;
+		  dateAndTime: DateAndTime now;
+		  yourself
+]
+
+{ #category : #actions }
 GeoBRAction >> doActionIn: aWorld [
 
 	self subclassResponsibility 

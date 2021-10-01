@@ -5,10 +5,25 @@ Class {
 		'provinces',
 		'regents',
 		'ownerships',
-		'actions'
+		'actions',
+		'repository'
 	],
 	#category : #'Geo-Birthright'
 }
+
+{ #category : #'instance creation' }
+GeoBRWorld class >> birthright [
+
+	^ self newWithRepositoryHost: 'localhost' database: 'birthright'
+]
+
+{ #category : #'instance creation' }
+GeoBRWorld class >> newWithRepositoryHost: hostName database: databaseName [
+
+	^ self new
+		  withRepositoryHost: hostName database: databaseName;
+		  yourself
+]
 
 { #category : #accessing }
 GeoBRWorld >> actions [
@@ -29,10 +44,9 @@ GeoBRWorld >> collectedRegencyPointsFor: aRegent [
 ]
 
 { #category : #actions }
-GeoBRWorld >> doOwnershipAction: anOwnershipAction [
+GeoBRWorld >> doAction: action [
 
-	self addAction: anOwnershipAction
-
+	^ action doActionIn: self
 ]
 
 { #category : #accessing }
@@ -45,9 +59,7 @@ GeoBRWorld >> domainPowerFor: aRegent [
 GeoBRWorld >> initialize [ 
 
 	super initialize.
-	provinces := Dictionary new.
-	regents := Dictionary new.
-	ownerships := OrderedCollection new.
+	self reset.
 	actions := OrderedCollection new
 ]
 
@@ -70,6 +82,12 @@ GeoBRWorld >> provinces [
 ]
 
 { #category : #accessing }
+GeoBRWorld >> regentAt: regentId [
+
+	^regents at: regentId
+]
+
+{ #category : #accessing }
 GeoBRWorld >> regents [
 
 	^ regents
@@ -79,11 +97,35 @@ GeoBRWorld >> regents [
 GeoBRWorld >> replay [
 
 	self reset.
-	actions do: [ :action | action doActionIn: self ]
+	actions do: [ :action | self doAction: action ]
 ]
 
 { #category : #actions }
 GeoBRWorld >> reset [ 
 	
-	provinces do: [ :province | province reset ]
+	provinces := Dictionary new.
+	regents := Dictionary new.
+	ownerships := OrderedCollection new.
+]
+
+{ #category : #actions }
+GeoBRWorld >> saveAction: anAction [
+
+	repository ifNil: [ ^self ].
+
+	anAction asWrapper save: repository 
+]
+
+{ #category : #actions }
+GeoBRWorld >> takeAction: anAction [.
+
+	self saveAction: anAction.
+	self addAction: anAction.
+	self doAction: anAction
+]
+
+{ #category : #initialization }
+GeoBRWorld >> withRepositoryHost: hostName database: databaseName [
+
+	repository := VOMongoRepository host: hostName database: databaseName
 ]

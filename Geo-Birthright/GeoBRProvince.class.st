@@ -86,3 +86,15 @@ GeoBRProvince >> reset [
 	ownerships := OrderedCollection new.
 	loyalty := GeoBRLoyaltyPoor new
 ]
+
+{ #category : #accessing }
+GeoBRProvince >> terrain [
+
+	^ terrain
+]
+
+{ #category : #accessing }
+GeoBRProvince >> terrain: anObject [
+
+	terrain := anObject
+]
