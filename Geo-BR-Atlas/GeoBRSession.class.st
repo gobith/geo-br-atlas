@@ -52,6 +52,7 @@ GeoBRSession >> start [
 { #category : #accessing }
 GeoBRSession >> stop [ 
 	
+	world := nil.
 	teapot ifNotNil: [ teapot stop ].
 	teapot := nil
 ]

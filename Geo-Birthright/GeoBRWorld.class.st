@@ -154,6 +154,11 @@ GeoBRWorld >> saveAction: anAction [
 
 { #category : #initialization }
 GeoBRWorld >> setup [
+
+	repository ifNil: [ ^self ].
+	
+	actions := (repository selectAll: GeoBRActionWrapper) collect: [ :actionWrapper | actionWrapper action ].
+	self replay
 ]
 
 { #category : #actions }
