@@ -25,6 +25,17 @@ GeoBRAction >> doActionIn: aWorld [
 	self subclassResponsibility 
 ]
 
+{ #category : #accessing }
+GeoBRAction >> ensureId [
+
+]
+
+{ #category : #accessing }
+GeoBRAction >> id [
+
+	^nil
+]
+
 { #category : #actions }
 GeoBRAction >> typeClass [ 
 	

@@ -39,6 +39,12 @@ GeoBRAddRegentAction >> doActionIn: aWorld [
 ]
 
 { #category : #accessing }
+GeoBRAddRegentAction >> ensureId [
+
+	id ifNil: [ id := UUID new asString ]
+]
+
+{ #category : #accessing }
 GeoBRAddRegentAction >> id [
 
 	^ id

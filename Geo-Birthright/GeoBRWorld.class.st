@@ -55,12 +55,21 @@ GeoBRWorld >> domainPowerFor: aRegent [
 	^ ownerships sum: [ :ownership | ownership regencyPointsFor: aRegent ]
 ]
 
+{ #category : #'actions database' }
+GeoBRWorld >> emptyAllData [
+	
+	repository ifNil: [ ^self ].
+	repository removeAll: GeoBRActionWrapper.
+	self reset.
+	self resetActions
+]
+
 { #category : #initialization }
-GeoBRWorld >> initialize [ 
+GeoBRWorld >> initialize [
 
 	super initialize.
 	self reset.
-	actions := OrderedCollection new
+	self resetActions
 ]
 
 { #category : #accessing }
@@ -108,20 +117,33 @@ GeoBRWorld >> reset [
 	ownerships := OrderedCollection new.
 ]
 
+{ #category : #initialization }
+GeoBRWorld >> resetActions [
+
+	actions := OrderedCollection new
+]
+
 { #category : #actions }
 GeoBRWorld >> saveAction: anAction [
 
 	repository ifNil: [ ^self ].
 
-	anAction asWrapper save: repository 
+	anAction ensureId.
+
+	repository save: anAction asActionWrapper
+]
+
+{ #category : #initialization }
+GeoBRWorld >> setup [
 ]
 
 { #category : #actions }
-GeoBRWorld >> takeAction: anAction [.
+GeoBRWorld >> takeAction: anAction [
 
 	self saveAction: anAction.
 	self addAction: anAction.
-	self doAction: anAction
+	self doAction: anAction.
+	^anAction
 ]
 
 { #category : #initialization }

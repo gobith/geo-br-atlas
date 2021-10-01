@@ -45,6 +45,12 @@ GeoBRAddProvinceAction >> doActionIn: aWorld [
 ]
 
 { #category : #accessing }
+GeoBRAddProvinceAction >> ensureId [
+
+	id ifNil: [ id := UUID new asString ]
+]
+
+{ #category : #accessing }
 GeoBRAddProvinceAction >> id [
 
 	^ id
