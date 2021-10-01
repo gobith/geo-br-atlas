@@ -20,7 +20,8 @@ GeoBRWorld class >> birthright [
 { #category : #'instance creation' }
 GeoBRWorld class >> neoJsonMappingOn: mapping [
 	mapping
-		mapAccessor: #provinceCollection to: #provinces
+		mapAccessor: #provinceCollection to: #provinces;
+		mapAccessor: #regents to: #regents
 ]
 
 { #category : #'instance creation' }
@@ -106,6 +107,12 @@ GeoBRWorld >> provinces [
 GeoBRWorld >> regentAt: regentId [
 
 	^regents at: regentId
+]
+
+{ #category : #accessing }
+GeoBRWorld >> regentCollection [
+
+	^regents values asSortedCollection: [ :provA :provB | provA name <= provB name ]
 ]
 
 { #category : #accessing }

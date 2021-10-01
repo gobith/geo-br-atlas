@@ -23,10 +23,14 @@ GeoBRProvince class >> neoJsonMappingOn: mapping [
 		mapAccessor: #level;
 		mapAccessor: #sourceRating;
 		mapAccessor: #ownership;
-		mapAccessor: #guilds;
+		mapAccessor: #guild;
 		mapAccessor: #law;
-		mapAccessor: #sources;
-		mapAccessor: #temples;
+		mapAccessor: #temple;
+		mapAccessor: #source;
+		mapAccessor: #guildHoldings;
+		mapAccessor: #lawHoldings;
+		mapAccessor: #templeHoldings;
+		mapAccessor: #sourceHoldings;
 		mapAccessor: #terrain
 ]
 
@@ -43,7 +47,13 @@ GeoBRProvince >> areaId: anObject [
 ]
 
 { #category : #accessing }
-GeoBRProvince >> guilds [
+GeoBRProvince >> guild [
+
+	^ self guildHoldings sum: [ :each | each level ]
+]
+
+{ #category : #accessing }
+GeoBRProvince >> guildHoldings [
 
 	^ ownerships select: [ :ownership | ownership isGuild ]
 ]
@@ -69,6 +79,12 @@ GeoBRProvince >> initialize [
 
 { #category : #accessing }
 GeoBRProvince >> law [
+
+	^ self lawHoldings sum: [ : each | each level ]
+]
+
+{ #category : #accessing }
+GeoBRProvince >> lawHoldings [
 
 	^ ownerships select: [ :ownership | ownership isLaw ]
 ]
@@ -134,6 +150,18 @@ GeoBRProvince >> reset [
 ]
 
 { #category : #accessing }
+GeoBRProvince >> source [
+
+	^ self sourceHoldings sum: [ :each | each level ]
+]
+
+{ #category : #accessing }
+GeoBRProvince >> sourceHoldings [
+
+	^ ownerships select: [ :ownership | ownership isSource ]
+]
+
+{ #category : #accessing }
 GeoBRProvince >> sourceRating [
 
 	^ terrain potential - level max: 0
@@ -141,9 +169,15 @@ GeoBRProvince >> sourceRating [
 ]
 
 { #category : #accessing }
-GeoBRProvince >> sources [
+GeoBRProvince >> temple [
 
-	^ ownerships select: [ :ownership | ownership isSource ]
+	^ self templeHoldings sum: [ :each | each level ]
+]
+
+{ #category : #accessing }
+GeoBRProvince >> templeHoldings [
+
+	^ ownerships select: [ :ownership | ownership isTemple ]
 ]
 
 { #category : #accessing }
