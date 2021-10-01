@@ -6,13 +6,47 @@ Class {
 		'areaId',
 		'name',
 		'level',
-		'sourceRating',
 		'loyalty',
 		'ownerships',
 		'terrain'
 	],
-	#category : #'Geo-Birthright'
+	#category : #'Geo-Birthright-Domain'
 }
+
+{ #category : #accessing }
+GeoBRProvince class >> neoJsonMappingOn: mapping [
+
+	mapping
+		mapAccessor: #id;
+		mapAccessor: #areaId;
+		mapAccessor: #name;
+		mapAccessor: #level;
+		mapAccessor: #sourceRating;
+		mapAccessor: #ownership;
+		mapAccessor: #guilds;
+		mapAccessor: #law;
+		mapAccessor: #sources;
+		mapAccessor: #temples;
+		mapAccessor: #terrain
+]
+
+{ #category : #accessing }
+GeoBRProvince >> areaId [
+
+	^ areaId
+]
+
+{ #category : #accessing }
+GeoBRProvince >> areaId: anObject [
+
+	areaId := anObject
+]
+
+{ #category : #accessing }
+GeoBRProvince >> guilds [
+
+	^ ownerships select: [ :ownership | ownership isGuild ]
+]
 
 { #category : #accessing }
 GeoBRProvince >> id [
@@ -31,6 +65,12 @@ GeoBRProvince >> initialize [
 
 	super initialize.
 	self reset
+]
+
+{ #category : #accessing }
+GeoBRProvince >> law [
+
+	^ ownerships select: [ :ownership | ownership isLaw ]
 ]
 
 { #category : #accessing }
@@ -70,6 +110,12 @@ GeoBRProvince >> name: anObject [
 ]
 
 { #category : #accessing }
+GeoBRProvince >> ownership [
+
+	^ ownerships detect: [ :ownership | ownership isProvince ]
+]
+
+{ #category : #accessing }
 GeoBRProvince >> ownerships [
 	^ ownerships
 ]
@@ -85,6 +131,25 @@ GeoBRProvince >> reset [
 
 	ownerships := OrderedCollection new.
 	loyalty := GeoBRLoyaltyPoor new
+]
+
+{ #category : #accessing }
+GeoBRProvince >> sourceRating [
+
+	^ terrain potential - level max: 0
+	
+]
+
+{ #category : #accessing }
+GeoBRProvince >> sources [
+
+	^ ownerships select: [ :ownership | ownership isSource ]
+]
+
+{ #category : #accessing }
+GeoBRProvince >> temples [
+
+	^ ownerships select: [ :ownership | ownership isTemple ]
 ]
 
 { #category : #accessing }

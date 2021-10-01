@@ -9,6 +9,14 @@ Class {
 	#category : #'Geo-Birthright-Ownership'
 }
 
+{ #category : #accessing }
+GeoBROwnership class >> neoJsonMappingOn: mapping [
+
+	mapping
+		mapAccessor: #ownerId to: #owner;
+		mapAccessor: #rulerId to: #ruler
+]
+
 { #category : #printing }
 GeoBROwnership class >> typeString [ 
 
@@ -28,12 +36,52 @@ GeoBROwnership >> addTo: aWorld [
 ]
 
 { #category : #testing }
+GeoBROwnership >> isGuild [
+
+	^false
+
+	
+]
+
+{ #category : #testing }
+GeoBROwnership >> isLaw [
+
+	^false
+
+	
+]
+
+{ #category : #testing }
+GeoBROwnership >> isProvince [
+
+	^false
+
+	
+]
+
+{ #category : #testing }
 GeoBROwnership >> isSameAs: anOwnership [
 
 	^ self typeString = anOwnership typeString and: [ 
 		  province id = anOwnership province id and: [ 
 			  ruler id = anOwnership ruler id or: [ 
 				  owner id = anOwnership owner id ] ] ]
+]
+
+{ #category : #testing }
+GeoBROwnership >> isSource [
+
+	^false
+
+	
+]
+
+{ #category : #testing }
+GeoBROwnership >> isTemple [
+
+	^false
+
+	
 ]
 
 { #category : #accessing }
@@ -46,6 +94,12 @@ GeoBROwnership >> owner [
 GeoBROwnership >> owner: anObject [
 
 	owner := anObject
+]
+
+{ #category : #accessing }
+GeoBROwnership >> ownerId [
+
+	^owner id
 ]
 
 { #category : #printing }
@@ -96,6 +150,12 @@ GeoBROwnership >> ruler [
 GeoBROwnership >> ruler: anObject [
 
 	ruler := anObject
+]
+
+{ #category : #accessing }
+GeoBROwnership >> rulerId [
+
+	^ruler id
 ]
 
 { #category : #accessing }

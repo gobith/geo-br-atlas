@@ -37,6 +37,7 @@ GeoBRAddProvinceAction >> doActionIn: aWorld [
 	province := self typeClass new.
 	province
 		id: id;
+		areaId: areaId;
 		name: name;
 		level: level;
 		loyalty: loyalty;

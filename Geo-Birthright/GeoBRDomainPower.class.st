@@ -1,5 +1,5 @@
 Class {
 	#name : #GeoBRDomainPower,
 	#superclass : #Object,
-	#category : #'Geo-Birthright'
+	#category : #'Geo-Birthright-Domain'
 }

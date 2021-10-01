@@ -8,13 +8,19 @@ Class {
 		'actions',
 		'repository'
 	],
-	#category : #'Geo-Birthright'
+	#category : #'Geo-Birthright-Domain'
 }
 
 { #category : #'instance creation' }
 GeoBRWorld class >> birthright [
 
 	^ self newWithRepositoryHost: 'localhost' database: 'birthright'
+]
+
+{ #category : #'instance creation' }
+GeoBRWorld class >> neoJsonMappingOn: mapping [
+	mapping
+		mapAccessor: #provinceCollection to: #provinces
 ]
 
 { #category : #'instance creation' }
@@ -82,6 +88,12 @@ GeoBRWorld >> ownerships [
 GeoBRWorld >> provinceAt: provinceId [
 
 	^provinces at: provinceId 
+]
+
+{ #category : #accessing }
+GeoBRWorld >> provinceCollection [
+
+	^provinces values asSortedCollection: [ :provA :provB | provA name <= provB name ]
 ]
 
 { #category : #accessing }

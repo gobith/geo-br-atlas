@@ -8,6 +8,14 @@ Class {
 }
 
 { #category : #printing }
+GeoBRHoldingOwnership class >> neoJsonMappingOn: mapping [
+
+	super neoJsonMappingOn: mapping.
+	mapping
+		mapAccessor: #level
+]
+
+{ #category : #printing }
 GeoBRHoldingOwnership class >> typeString [
 
 	self shouldNotImplement 

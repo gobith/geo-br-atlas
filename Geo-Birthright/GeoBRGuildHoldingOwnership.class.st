@@ -9,3 +9,9 @@ GeoBRGuildHoldingOwnership class >> typeString [
 
 	^'Guild'
 ]
+
+{ #category : #testing }
+GeoBRGuildHoldingOwnership >> isGuild [
+
+	^ true
+]

@@ -6,8 +6,17 @@ Class {
 		'name',
 		'bloodline'
 	],
-	#category : #'Geo-Birthright'
+	#category : #'Geo-Birthright-Domain'
 }
+
+{ #category : #accessing }
+GeoBRRegent class >> neoJsonMappingOn: mapping [
+
+	mapping 
+		mapAccessor: #id;
+		mapAccessor: #name;
+		mapAccessor: #bloodline
+]
 
 { #category : #accessing }
 GeoBRRegent >> bloodline [

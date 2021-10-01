@@ -9,3 +9,9 @@ GeoBRSourceHoldingOwnership class >> typeString [
 
 	^'Source'
 ]
+
+{ #category : #testing }
+GeoBRSourceHoldingOwnership >> isSource [
+
+	^ true
+]

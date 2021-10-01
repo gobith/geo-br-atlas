@@ -215,6 +215,34 @@ GeoBRBirthrightTest >> testLoyaltyAction001 [
 ]
 
 { #category : #tests }
+GeoBRBirthrightTest >> testProvinceTerrain [
+	
+	| world  province1 |
+	
+	world := GeoBRWorld new.
+	
+	world takeAction: (GeoBRAddProvinceAction new id: '1'; name: 'Province 1'; level: 3; terrain: GeoBRForest new; loyalty: GeoBRLoyaltyAverage new).
+	
+	province1 := world provinceAt: '1'.
+	
+	self assert: province1 sourceRating equals: 4
+]
+
+{ #category : #tests }
+GeoBRBirthrightTest >> testProvinceTerrainModifier [
+	
+	| world  province1 |
+	
+	world := GeoBRWorld new.
+	
+	world takeAction: (GeoBRAddProvinceAction new id: '1'; name: 'Province 1'; level: 3; terrain: (GeoBRForest new modifier: 2); loyalty: GeoBRLoyaltyAverage new).
+	
+	province1 := world provinceAt: '1'.
+	
+	self assert: province1 sourceRating equals: 6
+]
+
+{ #category : #tests }
 GeoBRBirthrightTest >> testVasal001 [
 	
 	| world regent1 regent2 regent3 province1 |

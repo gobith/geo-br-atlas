@@ -10,6 +10,12 @@ GeoBRProvinceOwnership class >> typeString [
 	^'Province'
 ]
 
+{ #category : #testing }
+GeoBRProvinceOwnership >> isProvince [
+
+	^ true
+]
+
 { #category : #accessing }
 GeoBRProvinceOwnership >> regencyPoints [ 
 

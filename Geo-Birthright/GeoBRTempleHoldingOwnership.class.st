@@ -9,3 +9,9 @@ GeoBRTempleHoldingOwnership class >> typeString [
 
 	^'Temple'
 ]
+
+{ #category : #testing }
+GeoBRTempleHoldingOwnership >> isTemple [
+
+	^ true
+]

@@ -9,3 +9,9 @@ GeoBRLawHoldingOwnership class >> typeString [
 
 	^'Law'
 ]
+
+{ #category : #testing }
+GeoBRLawHoldingOwnership >> isLaw [
+
+	^ true
+]
