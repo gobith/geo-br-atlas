@@ -2,7 +2,7 @@ Class {
 	#name : #GeoBRTestRepository,
 	#superclass : #Object,
 	#instVars : [
-		'actions'
+		'contents'
 	],
 	#category : #'Geo-Birthright-Tests'
 }
@@ -11,23 +11,23 @@ Class {
 GeoBRTestRepository >> initialize [ 
 
 	super initialize.
-	actions := OrderedCollection new
+	contents := OrderedCollection new
 ]
 
 { #category : #actions }
 GeoBRTestRepository >> removeAll: aClass [ 
 
-	actions := OrderedCollection new
+	contents := contents reject: [ : each | each class = aClass ]
 ]
 
 { #category : #actions }
-GeoBRTestRepository >> save: anActionWrapper [
+GeoBRTestRepository >> save: anObject [
 
-	actions add: anActionWrapper 
+	contents add: anObject 
 ]
 
 { #category : #actions }
 GeoBRTestRepository >> selectAll: aClass [ 
 
-	^actions
+	^ contents select: [ : each | each class = aClass ]
 ]

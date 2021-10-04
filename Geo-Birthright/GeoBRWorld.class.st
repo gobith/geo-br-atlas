@@ -5,7 +5,6 @@ Class {
 		'provinces',
 		'regents',
 		'ownerships',
-		'actions',
 		'repository'
 	],
 	#category : #'Geo-Birthright-Domain'
@@ -28,13 +27,20 @@ GeoBRWorld class >> neoJsonMappingOn: mapping [
 { #category : #accessing }
 GeoBRWorld >> actions [
 
-	^ actions 
+	^ (repository selectAll: GeoBRActionWrapper) collect: [ 
+		  :actionWrapper | actionWrapper action ]
 ]
 
-{ #category : #actions }
-GeoBRWorld >> addAction: anOwnershipAction [
+{ #category : #accessing }
+GeoBRWorld >> areas [
 
-	actions add: anOwnershipAction
+	^ repository selectAll: GeoBRArea
+]
+
+{ #category : #accessing }
+GeoBRWorld >> borders [
+
+	^ repository selectAll: GeoBRBorder
 ]
 
 { #category : #accessing }
@@ -57,19 +63,28 @@ GeoBRWorld >> domainPowerFor: aRegent [
 
 { #category : #'actions database' }
 GeoBRWorld >> emptyAllData [
-	
-	repository ifNil: [ ^self ].
-	repository removeAll: GeoBRActionWrapper.
-	self reset.
-	self resetActions
+
+	repository
+		removeAll: GeoBRActionWrapper;
+		removeAll: GeoBRArea;
+		removeAll: GeoBRBorder.
+	self reset
 ]
 
 { #category : #initialization }
 GeoBRWorld >> initialize [
 
 	super initialize.
-	self reset.
-	self resetActions
+	self reset
+]
+
+{ #category : #accessing }
+GeoBRWorld >> map [
+
+	^ GeoBRMap new
+		  areas: self areas;
+		  borders: self borders;
+		  yourself
 ]
 
 { #category : #accessing }
@@ -118,7 +133,12 @@ GeoBRWorld >> regents [
 GeoBRWorld >> replay [
 
 	self reset.
-	actions do: [ :action | self doAction: action ]
+	self actions do: [ :action | self doAction: action ]
+]
+
+{ #category : #accessing }
+GeoBRWorld >> repository [
+	^ repository
 ]
 
 { #category : #initialization }
@@ -135,16 +155,8 @@ GeoBRWorld >> reset [
 	ownerships := OrderedCollection new.
 ]
 
-{ #category : #initialization }
-GeoBRWorld >> resetActions [
-
-	actions := OrderedCollection new
-]
-
 { #category : #actions }
 GeoBRWorld >> saveAction: anAction [
-
-	repository ifNil: [ ^self ].
 
 	anAction ensureId.
 
@@ -154,9 +166,6 @@ GeoBRWorld >> saveAction: anAction [
 { #category : #initialization }
 GeoBRWorld >> setup [
 
-	repository ifNil: [ ^self ].
-	
-	actions := (repository selectAll: GeoBRActionWrapper) collect: [ :actionWrapper | actionWrapper action ].
 	self replay
 ]
 
@@ -164,7 +173,6 @@ GeoBRWorld >> setup [
 GeoBRWorld >> takeAction: anAction [
 
 	self saveAction: anAction.
-	self addAction: anAction.
 	self doAction: anAction.
 	^anAction
 ]

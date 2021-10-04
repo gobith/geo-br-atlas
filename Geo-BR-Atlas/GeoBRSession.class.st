@@ -18,7 +18,7 @@ GeoBRSession >> addRoutes [
 { #category : #accessing }
 GeoBRSession >> requestMap: aRequest [
 
-	^GeoBRMap new
+	^world map
 ]
 
 { #category : #accessing }
@@ -30,9 +30,10 @@ GeoBRSession >> requestWorld: aRequest [
 { #category : #accessing }
 GeoBRSession >> setup [ 
 
-	world := GeoBRWorld new.
-	world repository: GeoBRTestRepository new.
-	world setup.
+	world := GeoBRWorld birthright.
+	"world repository: GeoBRTestRepository new."
+	(GeoBRToWarInitialData on: world) run
+	world replay
 ]
 
 { #category : #accessing }
