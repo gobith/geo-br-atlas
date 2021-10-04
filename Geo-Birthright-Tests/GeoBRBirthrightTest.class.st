@@ -1,16 +1,26 @@
 Class {
 	#name : #GeoBRBirthrightTest,
 	#superclass : #TestCase,
+	#instVars : [
+		'world'
+	],
 	#category : #'Geo-Birthright-Tests'
 }
+
+{ #category : #tests }
+GeoBRBirthrightTest >> setUp [
+
+	world := GeoBRWorld new.
+	world repository: GeoBRTestRepository new
+]
 
 { #category : #tests }
 GeoBRBirthrightTest >> test001 [
 
 	"For example, Erin Velescarpe is a young Regent with a lot of work to do to carve out her domain. She owns four Provinces (levels 3, 2, 1, and 4 respectively) and five total Holdings (of levels 2, 2, 1, and 1). Her Bloodline score is 15, giving her a modifier of +2. At the beginning of the season, she collects 18 Regency Points."
 
-	| world regent province1 province2 province3 province4|
-	world := GeoBRWorld new.
+	|  regent province1 province2 province3 province4|
+
 	world takeAction: (GeoBRAddRegentAction new id: '1'; name: 'Eric Velescarpe'; bloodline: 15).
 	
 
@@ -46,9 +56,9 @@ GeoBRBirthrightTest >> test001 [
 { #category : #tests }
 GeoBRBirthrightTest >> testAction001 [
 	
-	| world regent province1 |
+	|  regent province1 |
 	
-	world := GeoBRWorld new.
+	
 	
 	world takeAction: (GeoBRAddRegentAction new id: '1'; name: 'Eric Velescarpe'; bloodline: 13).
 	
@@ -69,9 +79,9 @@ GeoBRBirthrightTest >> testAction001 [
 { #category : #tests }
 GeoBRBirthrightTest >> testAction002 [
 	
-	| world regent province1 |
+	|  regent province1 |
 	
-	world := GeoBRWorld new.
+
 	world takeAction: (GeoBRAddRegentAction new id: '1'; name: 'Eric Velescarpe'; bloodline: 13).
 	world takeAction: (GeoBRAddProvinceAction new id: '1'; name: 'Province 1'; level: 3; terrain: GeoBRForest new; loyalty: GeoBRLoyaltyAverage new).
 	
@@ -91,9 +101,9 @@ GeoBRBirthrightTest >> testAction002 [
 { #category : #tests }
 GeoBRBirthrightTest >> testAction003 [
 	
-	| world regent province1 |
+	|  regent province1 |
 	
-	world := GeoBRWorld new.
+	
 	world takeAction: (GeoBRAddRegentAction new id: '1'; name: 'Eric Velescarpe'; bloodline: 13).
 	
 	world takeAction: (GeoBRAddProvinceAction new id: '1'; name: 'Province 1'; level: 3; terrain: GeoBRForest new; loyalty: GeoBRLoyaltyAverage new).
@@ -115,9 +125,9 @@ GeoBRBirthrightTest >> testAction003 [
 { #category : #tests }
 GeoBRBirthrightTest >> testAction004 [
 	
-	| world regent province1 |
+	|  regent province1 |
 	
-	world := GeoBRWorld new.
+	
 	world takeAction: (GeoBRAddRegentAction new id: '1'; name: 'Eric Velescarpe'; bloodline: 13).
 	
 	world takeAction: (GeoBRAddProvinceAction new id: '1'; name: 'Province 1'; level: 3; terrain: GeoBRForest new; loyalty: GeoBRLoyaltyAverage new).
@@ -140,9 +150,9 @@ GeoBRBirthrightTest >> testAction004 [
 { #category : #tests }
 GeoBRBirthrightTest >> testAction005 [
 	
-	| world regent province1 |
+	|  regent province1 |
 	
-	world := GeoBRWorld new.
+	
 	world takeAction: (GeoBRAddRegentAction new id: '1'; name: 'Eric Velescarpe'; bloodline: 13).
 	
 	world takeAction: (GeoBRAddProvinceAction new id: '1'; name: 'Province 1'; level: 3; terrain: GeoBRForest new; loyalty: GeoBRLoyaltyAverage new).
@@ -194,10 +204,9 @@ GeoBRBirthrightTest >> testBloodlineModifier [
 { #category : #tests }
 GeoBRBirthrightTest >> testLoyaltyAction001 [
 	
-	| world regent province1 |
+	|  regent province1 |
 	
-	
-	world := GeoBRWorld new.
+
 	
 	world takeAction: (GeoBRAddRegentAction new id: '1'; name: 'Eric Velescarpe'; bloodline: 13).
 	
@@ -217,9 +226,9 @@ GeoBRBirthrightTest >> testLoyaltyAction001 [
 { #category : #tests }
 GeoBRBirthrightTest >> testProvinceTerrain [
 	
-	| world  province1 |
+	|   province1 |
 	
-	world := GeoBRWorld new.
+	
 	
 	world takeAction: (GeoBRAddProvinceAction new id: '1'; name: 'Province 1'; level: 3; terrain: GeoBRForest new; loyalty: GeoBRLoyaltyAverage new).
 	
@@ -231,9 +240,8 @@ GeoBRBirthrightTest >> testProvinceTerrain [
 { #category : #tests }
 GeoBRBirthrightTest >> testProvinceTerrainModifier [
 	
-	| world  province1 |
+	|   province1 |
 	
-	world := GeoBRWorld new.
 	
 	world takeAction: (GeoBRAddProvinceAction new id: '1'; name: 'Province 1'; level: 3; terrain: (GeoBRForest new modifier: 2); loyalty: GeoBRLoyaltyAverage new).
 	
@@ -245,9 +253,8 @@ GeoBRBirthrightTest >> testProvinceTerrainModifier [
 { #category : #tests }
 GeoBRBirthrightTest >> testVasal001 [
 	
-	| world regent1 regent2 regent3 province1 |
+	|  regent1 regent2 regent3 province1 |
 	
-	world := GeoBRWorld new.
 	
 	world takeAction: (GeoBRAddRegentAction new id: '1'; name: 'Owner'; bloodline: 10).
 	world takeAction: (GeoBRAddRegentAction new id: '2'; name: 'Ruler 1'; bloodline: 10).

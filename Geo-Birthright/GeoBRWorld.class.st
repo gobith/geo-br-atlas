@@ -14,7 +14,8 @@ Class {
 { #category : #'instance creation' }
 GeoBRWorld class >> birthright [
 
-	^ self newWithRepositoryHost: 'localhost' database: 'birthright'
+	^ self new repository:
+		  (VOMongoRepository host: 'localhost' database: 'birthright')
 ]
 
 { #category : #'instance creation' }
@@ -22,14 +23,6 @@ GeoBRWorld class >> neoJsonMappingOn: mapping [
 	mapping
 		mapAccessor: #provinceCollection to: #provinces;
 		mapAccessor: #regents to: #regents
-]
-
-{ #category : #'instance creation' }
-GeoBRWorld class >> newWithRepositoryHost: hostName database: databaseName [
-
-	^ self new
-		  withRepositoryHost: hostName database: databaseName;
-		  yourself
 ]
 
 { #category : #accessing }
@@ -128,6 +121,12 @@ GeoBRWorld >> replay [
 	actions do: [ :action | self doAction: action ]
 ]
 
+{ #category : #initialization }
+GeoBRWorld >> repository: aRepository [
+
+	repository := aRepository 
+]
+
 { #category : #actions }
 GeoBRWorld >> reset [ 
 	
@@ -168,10 +167,4 @@ GeoBRWorld >> takeAction: anAction [
 	self addAction: anAction.
 	self doAction: anAction.
 	^anAction
-]
-
-{ #category : #initialization }
-GeoBRWorld >> withRepositoryHost: hostName database: databaseName [
-
-	repository := VOMongoRepository host: hostName database: databaseName
 ]

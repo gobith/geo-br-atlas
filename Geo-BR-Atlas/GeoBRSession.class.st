@@ -30,7 +30,8 @@ GeoBRSession >> requestWorld: aRequest [
 { #category : #accessing }
 GeoBRSession >> setup [ 
 
-	world := GeoBRWorld birthright.
+	world := GeoBRWorld new.
+	world repository: GeoBRTestRepository new.
 	world setup.
 ]
 
