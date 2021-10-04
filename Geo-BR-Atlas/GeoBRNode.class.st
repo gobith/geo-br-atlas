@@ -75,14 +75,21 @@ GeoBRNode >> nextPointFrom: aPoint [
 GeoBRNode >> pathPointsTo: toNode [
 
 	| thePath points |
-	thePath := paths detect: [ :path | 
-		           path a = toNode point or: [ path b = toNode point ] ].
+	thePath := self pathTo: toNode.
 
 	points := thePath document absolutePoints.
 
-	^thePath a = point
-		          ifTrue: [ points ]
-		          ifFalse: [ points reverse ]
+	^ thePath a = point
+		  ifTrue: [ points ]
+		  ifFalse: [ points reverse ]
+]
+
+{ #category : #accessing }
+GeoBRNode >> pathTo: toNode [
+
+
+	^paths detect: [ :path | 
+		           path a = toNode point or: [ path b = toNode point ] ].
 ]
 
 { #category : #accessing }

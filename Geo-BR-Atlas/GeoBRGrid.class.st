@@ -56,8 +56,30 @@ GeoBRGrid >> areaDots [
 { #category : #accessing }
 GeoBRGrid >> areas [
 
-	^ (areas asOrderedCollection reject: [:each | each size > 17]) collect: [ :areaNodes | 
-		  {'d' -> (self dForNodes: areaNodes) } asDictionary ]
+	^ (areas asOrderedCollection reject: [ :each | each size > 17 ]) 
+		  collect: [ :areaNodes | 
+			  { 
+				  ('d' -> (self dForNodes: areaNodes)).
+				  ('borders' -> (self borderIdsForNodes: areaNodes)) }
+				  asDictionary ]
+]
+
+{ #category : #accessing }
+GeoBRGrid >> borderIdsForNodes: aCollection [ 
+	
+	| borderIds ws |
+	borderIds := OrderedCollection new.
+
+	1 to: aCollection size do: [ :fromIdx | 
+		| toIdx from to |
+		toIdx := fromIdx = aCollection size
+			         ifTrue: [ 1 ]
+			         ifFalse: [ fromIdx + 1 ].
+
+		from := aCollection at: fromIdx.
+		to := aCollection at: toIdx.
+		borderIds add: (from pathTo: to) id].
+	^borderIds
 ]
 
 { #category : #actions }

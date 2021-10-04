@@ -67,3 +67,26 @@ GeoBRSessionOld >> setup [
 	areas := OrderedCollection new.
 	
 ]
+
+{ #category : #accessing }
+GeoBRSessionOld >> start [
+
+	self stop.
+	
+	self setup.
+
+	teapot := Teapot configure: { 
+			          (#port -> 8101).
+			          (#defaultOutput -> #json).
+			          (#debugMode -> true) }.
+	self addRoutes.
+	teapot start
+]
+
+{ #category : #accessing }
+GeoBRSessionOld >> stop [ 
+	
+	areas := paths := nil.
+	teapot ifNotNil: [ teapot stop ].
+	teapot := nil
+]
