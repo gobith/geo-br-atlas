@@ -58,6 +58,12 @@ GeoBRProvince >> guildHoldings [
 	^ ownerships select: [ :ownership | ownership isGuild ]
 ]
 
+{ #category : #testing }
+GeoBRProvince >> hasOwner [ 
+	
+	^self ownership notNil
+]
+
 { #category : #accessing }
 GeoBRProvince >> id [
 
@@ -123,6 +129,11 @@ GeoBRProvince >> name [
 GeoBRProvince >> name: anObject [
 
 	name := anObject
+]
+
+{ #category : #accessing }
+GeoBRProvince >> owner [
+	^self ownership owner
 ]
 
 { #category : #accessing }

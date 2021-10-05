@@ -66,6 +66,7 @@ GeoBRInitialData >> borders [
 
 	^ (NeoJSONReader fromString: self class bordersJson) collect: [ :dict | 
 		  GeoBRBorder new
+			  id: (dict at: 'id');
 			  d: (dict at: 'd');
 			  yourself ]
 ]

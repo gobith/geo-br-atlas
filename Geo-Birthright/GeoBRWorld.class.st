@@ -84,6 +84,7 @@ GeoBRWorld >> map [
 	^ GeoBRMap new
 		  areas: self areas;
 		  borders: self borders;
+		  realmBorders: self realmBorders;
 		  yourself
 ]
 
@@ -109,6 +110,35 @@ GeoBRWorld >> provinceCollection [
 GeoBRWorld >> provinces [
 
 	^ provinces
+]
+
+{ #category : #accessing }
+GeoBRWorld >> realmBorderForOwner: aRegent provinces: collectionOfProvinces [ 
+	
+	| areaIds realmAreas borderIds realmBorderIds |
+	borderIds := Bag new.
+	areaIds := (collectionOfProvinces collect: [ : each | each areaId ]).
+	realmAreas := self areas select: [ : each | areaIds includes: each id ].
+	realmAreas do: [ : area | borderIds addAll: area borders ].
+	realmBorderIds := OrderedCollection new.
+	borderIds keysAndValuesDo: [ :value :count | count = 1 ifTrue: [ realmBorderIds add: value ] ].
+	
+	^GeoBRRealmBorder new owner: aRegent; borders: realmBorderIds
+]
+
+{ #category : #accessing }
+GeoBRWorld >> realmBorders [
+
+	| realmBorders |
+	realmBorders := OrderedCollection new.
+
+	((provinces select: [ :province | province hasOwner ]) partition: [ 
+		 :province | province owner ]) keysAndValuesDo: [ 
+		:owner 
+		:provincesPerOwner | 
+		realmBorders add:
+			(self realmBorderForOwner: owner provinces: provincesPerOwner) ].
+	^ realmBorders
 ]
 
 { #category : #accessing }

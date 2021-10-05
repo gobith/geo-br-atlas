@@ -26,7 +26,9 @@ GeoBRPath class >> neoJsonMappingOn: mapping [
 		mapAccessor: #selected;
 		mapAccessor: #center"
 
-	mapping mapAccessor: #d
+	mapping
+		mapAccessor: #id;
+		mapAccessor: #d
 ]
 
 { #category : #accessing }
