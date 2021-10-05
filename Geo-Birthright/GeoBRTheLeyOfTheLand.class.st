@@ -50,7 +50,7 @@ GeoBRTheLeyOfTheLand class >> bordersJson [
 { #category : #accessing }
 GeoBRTheLeyOfTheLand class >> paths [
 
-	^ (GeoBRPathParser onFileNamed: '/home/georges/Geo BR Atlas/ley_of_the_land_002.svg') parse
+	^ (GeoBRPathParser onFileNamed: '/home/georges/Geo BR Atlas/ley_of_the_land_003.svg') parse
 ]
 
 { #category : #accessing }
