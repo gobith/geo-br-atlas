@@ -30,8 +30,8 @@ GeoBRSession >> requestWorld: aRequest [
 { #category : #accessing }
 GeoBRSession >> setup [ 
 
-	world := GeoBRWorld birthright.
-	"world repository: GeoBRTestRepository new."
+	"world := GeoBRWorld birthright."
+	world := GeoBRWorld new repository: GeoBRTestRepository new; yourself.
 	(GeoBRTheLeyOfTheLand on: world) run
 	world replay
 ]
