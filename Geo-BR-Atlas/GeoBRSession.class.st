@@ -32,7 +32,7 @@ GeoBRSession >> setup [
 
 	world := GeoBRWorld birthright.
 	"world repository: GeoBRTestRepository new."
-	(GeoBRToWarInitialData on: world) run
+	(GeoBRTheLeyOfTheLand on: world) run
 	world replay
 ]
 

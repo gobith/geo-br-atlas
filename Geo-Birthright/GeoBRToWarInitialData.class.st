@@ -1318,6 +1318,12 @@ GeoBRToWarInitialData class >> bordersJson [
 ]'
 ]
 
+{ #category : #accessing }
+GeoBRToWarInitialData class >> paths [
+
+	^ (GeoBRPathParser onFileNamed: '/home/georges/Geo BR Atlas/deepsouth007.svg') parse
+]
+
 { #category : #scripts }
 GeoBRToWarInitialData >> script [
 

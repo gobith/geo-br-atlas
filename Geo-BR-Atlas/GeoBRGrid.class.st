@@ -82,6 +82,12 @@ GeoBRGrid >> borderIdsForNodes: aCollection [
 	^borderIds
 ]
 
+{ #category : #accessing }
+GeoBRGrid >> borders [
+
+	^paths
+]
+
 { #category : #actions }
 GeoBRGrid >> calculate [
 

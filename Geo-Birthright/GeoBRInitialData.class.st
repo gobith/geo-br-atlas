@@ -19,10 +19,26 @@ GeoBRInitialData class >> bordersJson [
 	^ '[]'
 ]
 
+{ #category : #accessing }
+GeoBRInitialData class >> grid [
+
+	| grid |
+	grid := GeoBRGrid new.
+	grid paths: self paths.
+	grid calculate.
+	^ grid
+]
+
 { #category : #'instance creation' }
 GeoBRInitialData class >> on: aWorld [
 
 	^self new world: aWorld
+]
+
+{ #category : #accessing }
+GeoBRInitialData class >> paths [
+
+	^self subclassResponsibility 
 ]
 
 { #category : #running }

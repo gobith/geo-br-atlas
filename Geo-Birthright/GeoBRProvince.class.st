@@ -128,7 +128,7 @@ GeoBRProvince >> name: anObject [
 { #category : #accessing }
 GeoBRProvince >> ownership [
 
-	^ ownerships detect: [ :ownership | ownership isProvince ]
+	^ ownerships detect: [ :ownership | ownership isProvince ] ifNone: nil
 ]
 
 { #category : #accessing }
