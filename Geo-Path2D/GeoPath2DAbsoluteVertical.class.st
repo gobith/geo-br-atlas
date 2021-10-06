@@ -10,23 +10,17 @@ GeoPath2DAbsoluteVertical class >> commandName [
 	^'V'
 ]
 
-{ #category : #accessing }
-GeoPath2DAbsoluteVertical >> absolutePoint: aPoint previousPoint: previousPoint in: aCollection [ 
-
-	aCollection add: aPoint.
-	^aPoint
-]
-
-{ #category : #accessing }
-GeoPath2DAbsoluteVertical >> createPoints: aCollection previousPoint: aPoint [
-
-	^ { (aPoint x @ aCollection first) }
-]
-
 { #category : #private }
-GeoPath2DAbsoluteVertical >> numberOfArguments [
+GeoPath2DAbsoluteVertical class >> numberOfArguments [
 
 	^1
+]
+
+{ #category : #accessing }
+GeoPath2DAbsoluteVertical >> createPoints: aCollection previousCommand: aCommand [
+
+	super createPoints: aCollection previousCommand: aCommand.
+	endPoint := aCommand x @ aCollection first
 ]
 
 { #category : #accessing }
@@ -34,4 +28,10 @@ GeoPath2DAbsoluteVertical >> point: aPoint on: aWriteStream [
 
 	aWriteStream
 		print: aPoint y
+]
+
+{ #category : #accessing }
+GeoPath2DAbsoluteVertical >> pointsOn: aWriteStream separator: separator [
+
+	aWriteStream print: endPoint y
 ]

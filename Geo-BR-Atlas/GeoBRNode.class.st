@@ -93,6 +93,17 @@ GeoBRNode >> pathTo: toNode [
 ]
 
 { #category : #accessing }
+GeoBRNode >> pathTo: toNode in: aDocument [
+
+	| thePath points |
+	thePath := self pathTo: toNode.
+
+	thePath a = point
+		ifTrue: [ aDocument add: thePath document ]
+		ifFalse: [ aDocument addReverse: thePath document ]
+]
+
+{ #category : #accessing }
 GeoBRNode >> point [
 	^ point
 ]

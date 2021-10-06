@@ -6,7 +6,8 @@ Class {
 		'stream',
 		'command',
 		'arguments',
-		'previousPoint'
+		'previousPoint',
+		'commandClass'
 	],
 	#category : #'Geo-Path2D'
 }
@@ -18,15 +19,18 @@ GeoPath2DParser class >> on: dString [
 ]
 
 { #category : #private }
-GeoPath2DParser >> addPoints [
+GeoPath2DParser >> addCommand [
 
-	| points |
-	points := command
+	| previousCommand |
+	previousCommand := command.
+	command := commandClass new.
+	command
 		          createPoints: arguments
-		          previousPoint: previousPoint.
+		          previousCommand: previousCommand.
 
-	points do: [ :point | document addElement: point ].
-	previousPoint := points last.
+	document addElement: command.
+	previousCommand := command.
+	command nextCommandClass ifNotNil: [: nextCommandClass | commandClass := nextCommandClass ].
 	arguments removeAll
 ]
 
@@ -64,19 +68,13 @@ GeoPath2DParser >> setArgument: argument [
 
 	arguments add: argument asNumber.
 
-	arguments size = command numberOfArguments ifTrue: [ self addPoints ]
+	arguments size = commandClass numberOfArguments ifTrue: [ self addCommand ]
 ]
 
 { #category : #parsing }
 GeoPath2DParser >> setCommand: aString [
 
-	command := (GeoPath2DCommand commandClassFor: aString) new.
-	document addElement: command
-]
-
-{ #category : #parsing }
-GeoPath2DParser >> setCommandClass: aCommandClass [
-
-	command := aCommandClass new.
-	document addElement: command
+	commandClass := GeoPath2DCommand commandClassFor: aString.
+	
+	commandClass numberOfArguments = 0  ifTrue: [ self addCommand ]
 ]

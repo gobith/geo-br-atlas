@@ -10,27 +10,28 @@ GeoPath2DAbsoluteHorizontal class >> commandName [
 	^'H'
 ]
 
-{ #category : #accessing }
-GeoPath2DAbsoluteHorizontal >> absolutePoint: aPoint previousPoint: aPoint2 in: aCollection [ 
-
-	aCollection add: aPoint.
-	^aPoint
-]
-
-{ #category : #accessing }
-GeoPath2DAbsoluteHorizontal >> createPoints: aCollection previousPoint: aPoint [
-
-	^ { (aCollection first @ aPoint y) }
-]
-
 { #category : #private }
-GeoPath2DAbsoluteHorizontal >> numberOfArguments [
+GeoPath2DAbsoluteHorizontal class >> numberOfArguments [
 
 	^1
+]
+
+{ #category : #accessing }
+GeoPath2DAbsoluteHorizontal >> createPoints: aCollection previousCommand: aCommand [
+
+	super createPoints: aCollection previousCommand: aCommand.
+
+	endPoint := (aCollection first @ aCommand y)
 ]
 
 { #category : #accessing }
 GeoPath2DAbsoluteHorizontal >> point: aPoint on: aWriteStream [
 
 	aWriteStream print: aPoint x
+]
+
+{ #category : #accessing }
+GeoPath2DAbsoluteHorizontal >> pointsOn: aWriteStream separator: separator [
+
+	aWriteStream print: endPoint x
 ]

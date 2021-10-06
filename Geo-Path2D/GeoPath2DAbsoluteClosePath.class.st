@@ -10,16 +10,26 @@ GeoPath2DAbsoluteClosePath class >> commandName [
 	^'Z'
 ]
 
-{ #category : #accessing }
-GeoPath2DAbsoluteClosePath >> createPoints: aCollection previousPoint: anObject [
-
-	self shouldNotImplement 
-]
-
 { #category : #private }
-GeoPath2DAbsoluteClosePath >> numberOfArguments [
+GeoPath2DAbsoluteClosePath class >> numberOfArguments [
 
 	^0
+]
+
+{ #category : #accessing }
+GeoPath2DAbsoluteClosePath >> createPoints: aCollection previousCommand: aCommand [
+
+	super createPoints: aCollection previousCommand: aCommand
+]
+
+{ #category : #'as yet unclassified' }
+GeoPath2DAbsoluteClosePath >> ensureSpaceOn: aWriteStream [
+]
+
+{ #category : #testing }
+GeoPath2DAbsoluteClosePath >> isClose [
+
+	^true
 ]
 
 { #category : #accessing }

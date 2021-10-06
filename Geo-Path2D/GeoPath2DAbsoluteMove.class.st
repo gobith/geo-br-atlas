@@ -10,23 +10,29 @@ GeoPath2DAbsoluteMove class >> commandName [
 	^'M'
 ]
 
-{ #category : #accessing }
-GeoPath2DAbsoluteMove >> absolutePoint: aPoint previousPoint: anUndefinedObject in: aCollection [ 
-	
-	aCollection add: aPoint.
-	^aPoint
-]
-
-{ #category : #accessing }
-GeoPath2DAbsoluteMove >> createPoints: aCollection previousPoint: aPoint [
-
-	^ { (aCollection first @ aCollection last) }
-]
-
 { #category : #private }
-GeoPath2DAbsoluteMove >> numberOfArguments [
+GeoPath2DAbsoluteMove class >> numberOfArguments [
 
 	^2
+]
+
+{ #category : #accessing }
+GeoPath2DAbsoluteMove >> createPoints: aCollection previousCommand: aCommand [
+
+	super createPoints: aCollection previousCommand: aCommand.
+	endPoint := aCollection first @ aCollection last
+]
+
+{ #category : #testing }
+GeoPath2DAbsoluteMove >> isMove [
+
+	^true
+]
+
+{ #category : #accessing }
+GeoPath2DAbsoluteMove >> nextCommandClass [ 
+	^nil
+	"^GeoPath2DAbsoluteLine "
 ]
 
 { #category : #accessing }
@@ -36,4 +42,13 @@ GeoPath2DAbsoluteMove >> point: aPoint on: aWriteStream [
 		print: aPoint x;
 		space;
 		print: aPoint y
+]
+
+{ #category : #accessing }
+GeoPath2DAbsoluteMove >> pointsOn: aWriteStream separator: separator [
+
+	aWriteStream
+		print: endPoint x;
+		nextPut: separator;
+		print: endPoint y
 ]

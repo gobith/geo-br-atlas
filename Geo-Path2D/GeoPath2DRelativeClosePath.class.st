@@ -10,16 +10,20 @@ GeoPath2DRelativeClosePath class >> commandName [
 	^'z'
 ]
 
-{ #category : #accessing }
-GeoPath2DRelativeClosePath >> createPoints: aCollection previousPoint: anObject [
-
-	self shouldNotImplement  
-]
-
 { #category : #private }
-GeoPath2DRelativeClosePath >> numberOfArguments [
+GeoPath2DRelativeClosePath class >> numberOfArguments [
 
 	^0
+]
+
+{ #category : #'as yet unclassified' }
+GeoPath2DRelativeClosePath >> ensureSpaceOn: aWriteStream [
+]
+
+{ #category : #testing }
+GeoPath2DRelativeClosePath >> isClose [
+
+	^true
 ]
 
 { #category : #accessing }

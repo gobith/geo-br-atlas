@@ -2,7 +2,8 @@ Class {
 	#name : #GeoPath2DDocument,
 	#superclass : #Object,
 	#instVars : [
-		'elements'
+		'elements',
+		'seperator'
 	],
 	#category : #'Geo-Path2D'
 }
@@ -12,20 +13,7 @@ GeoPath2DDocument >> absolutePoints [
 
 	| coll rs previousPoint command |
 	coll := OrderedCollection new.
-	rs := elements readStream.
-	previousPoint := nil.
-	command := nil.
-
-	[ rs atEnd ] whileFalse: [ 
-		| element |
-		element := rs next.
-		element isPoint
-			ifTrue: [ 
-				previousPoint := command
-					absolutePoint: element
-					previousPoint: previousPoint
-					in: coll ]
-			ifFalse: [ command := element ] ].
+	elements do: [:element | element absolutePointsIn: coll ].
 	^ coll collect: [ : point | (point x round: 3) @ (point y round: 3) ]
 ]
 
@@ -47,20 +35,74 @@ GeoPath2DDocument >> d [
 { #category : #accessing }
 GeoPath2DDocument >> dOn: aWriteStream [
 
-	| command |
 	elements
-		do: [ :element | 
-			element isPoint
-				ifTrue: [ command point: element on: aWriteStream ]
-				ifFalse: [ 
-					command := element.
-					aWriteStream nextPutAll: command commandName ] ]
+		do: [ :command | command dOn: aWriteStream separator: seperator  ]
 		separatedBy: [ aWriteStream space ]
+]
+
+{ #category : #accessing }
+GeoPath2DDocument >> elements [
+
+	^ elements
 ]
 
 { #category : #initialization }
 GeoPath2DDocument >> initialize [ 
 	
 	super initialize .
-	elements := OrderedCollection new
+	elements := OrderedCollection new.
+	seperator := Character space
+]
+
+{ #category : #accessing }
+GeoPath2DDocument >> reverseElements [
+
+	| coll first last elementsCollection command previousCommand |
+	coll := OrderedCollection new.
+
+	elementsCollection := elements copy.
+
+
+	elements first isMove ifTrue: [ 
+		first := elementsCollection removeFirst.
+		command := first class new endPoint:
+			           elementsCollection last endPoint.
+		coll add: command ].
+	elements first isLine ifTrue: [ 
+		first := elementsCollection removeFirst.
+		command := first class new
+			           beginPoint: elementsCollection last endPoint;
+			           endPoint: elementsCollection last endPoint.
+		coll add: command ].
+	elements last isClose ifTrue: [ 
+		last := elementsCollection removeLast ].
+
+	first ifNil: [ self halt ].
+
+	first ifNotNil: [  ].
+
+	elementsCollection reverseDo: [ :element | 
+		previousCommand := command.
+		command := element reverse.
+		command previousCommand: previousCommand.
+		coll addLast: command ].
+
+	last ifNotNil: [ 
+		previousCommand := command.
+		command := last class new.
+		command previousCommand: command.
+		coll add: command ].
+	^ coll
+]
+
+{ #category : #accessing }
+GeoPath2DDocument >> seperator [
+
+	^ seperator
+]
+
+{ #category : #accessing }
+GeoPath2DDocument >> seperator: anObject [
+
+	seperator := anObject
 ]

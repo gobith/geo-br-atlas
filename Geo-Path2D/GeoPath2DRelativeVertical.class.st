@@ -10,28 +10,17 @@ GeoPath2DRelativeVertical class >> commandName [
 	^'v'
 ]
 
-{ #category : #accessing }
-GeoPath2DRelativeVertical >> absolutePoint: aPoint previousPoint: aPointOrNil in: aCollection [
-
-	| absolutePoint |
-	absolutePoint := aPointOrNil
-		                 ifNil: [ aPoint ]
-		                 ifNotNil: [ aPointOrNil + aPoint ].
-
-	aCollection add: absolutePoint.
-	^ absolutePoint
-]
-
-{ #category : #accessing }
-GeoPath2DRelativeVertical >> createPoints: aCollection previousPoint: anObject [
-
-	^ { (0 @ aCollection first) }
-]
-
 { #category : #private }
-GeoPath2DRelativeVertical >> numberOfArguments [
+GeoPath2DRelativeVertical class >> numberOfArguments [
 
 	^1
+]
+
+{ #category : #accessing }
+GeoPath2DRelativeVertical >> createPoints: aCollection previousCommand: aCommand [
+
+	super createPoints: aCollection previousCommand: aCommand.
+	endPoint := 0 @ aCollection first
 ]
 
 { #category : #accessing }
@@ -39,4 +28,10 @@ GeoPath2DRelativeVertical >> point: aPoint on: aWriteStream [
 
 	aWriteStream
 		print: aPoint y
+]
+
+{ #category : #accessing }
+GeoPath2DRelativeVertical >> pointsOn: aWriteStream separator: separator [
+
+	aWriteStream print: endPoint y
 ]

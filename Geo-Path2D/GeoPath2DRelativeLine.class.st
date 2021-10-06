@@ -10,27 +10,17 @@ GeoPath2DRelativeLine class >> commandName [
 	^'l'
 ]
 
-{ #category : #accessing }
-GeoPath2DRelativeLine >> absolutePoint: aPoint previousPoint: aPointOrNil in: aCollection [ 
-	| absolutePoint |
-	absolutePoint := aPointOrNil
-		                 ifNil: [ aPoint ]
-		                 ifNotNil: [ aPointOrNil + aPoint ].
-
-	aCollection add: absolutePoint.
-	^ absolutePoint
-]
-
-{ #category : #accessing }
-GeoPath2DRelativeLine >> createPoints: aCollection previousPoint: aPoint [
-
-	^ { (aCollection first @ aCollection last) }
-]
-
 { #category : #private }
-GeoPath2DRelativeLine >> numberOfArguments [
+GeoPath2DRelativeLine class >> numberOfArguments [
 
 	^2
+]
+
+{ #category : #accessing }
+GeoPath2DRelativeLine >> createPoints: aCollection previousCommand: aCommand [
+
+	super createPoints: aCollection previousCommand: aCommand.
+	endPoint := aCollection first @ aCollection last
 ]
 
 { #category : #accessing }
@@ -40,4 +30,13 @@ GeoPath2DRelativeLine >> point: aPoint on: aWriteStream [
 		print: aPoint x;
 		space;
 		print: aPoint y
+]
+
+{ #category : #accessing }
+GeoPath2DRelativeLine >> pointsOn: aWriteStream separator: separator [
+
+	aWriteStream
+		print: endPoint x;
+		nextPut: separator;
+		print: endPoint y
 ]

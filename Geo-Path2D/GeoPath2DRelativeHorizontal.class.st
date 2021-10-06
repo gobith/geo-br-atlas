@@ -10,27 +10,17 @@ GeoPath2DRelativeHorizontal class >> commandName [
 	^'h'
 ]
 
-{ #category : #accessing }
-GeoPath2DRelativeHorizontal >> absolutePoint: aPoint previousPoint: aPointOrNil in: aCollection [ 
-	| absolutePoint |
-	absolutePoint := aPointOrNil
-		                 ifNil: [ aPoint ]
-		                 ifNotNil: [ aPointOrNil + aPoint ].
-
-	aCollection add: absolutePoint.
-	^ absolutePoint
-]
-
-{ #category : #accessing }
-GeoPath2DRelativeHorizontal >> createPoints: aCollection previousPoint: aPoint [
-
-	^ { (aCollection first @ 0) }
-]
-
 { #category : #private }
-GeoPath2DRelativeHorizontal >> numberOfArguments [
+GeoPath2DRelativeHorizontal class >> numberOfArguments [
 
 	^1
+]
+
+{ #category : #accessing }
+GeoPath2DRelativeHorizontal >> createPoints: aCollection previousCommand: aCommand [
+
+	super createPoints: aCollection previousCommand: aCommand.
+	endPoint := aCollection first @ 0
 ]
 
 { #category : #accessing }
@@ -38,4 +28,10 @@ GeoPath2DRelativeHorizontal >> point: aPoint on: aWriteStream [
 
 	aWriteStream
 		print: aPoint x
+]
+
+{ #category : #accessing }
+GeoPath2DRelativeHorizontal >> pointsOn: aWriteStream separator: separator [
+
+	aWriteStream print: endPoint x
 ]

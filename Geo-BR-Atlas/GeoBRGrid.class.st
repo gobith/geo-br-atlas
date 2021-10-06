@@ -59,7 +59,7 @@ GeoBRGrid >> areas [
 	^ (areas asOrderedCollection reject: [ :each | each size > 17 ]) 
 		  collect: [ :areaNodes | 
 			  { 
-				  ('d' -> (self dForNodes: areaNodes)).
+				  ('d' -> (self dForNodes2: areaNodes)).
 				  ('borders' -> (self borderIdsForNodes: areaNodes)) }
 				  asDictionary ]
 ]
@@ -96,6 +96,28 @@ GeoBRGrid >> calculate [
 	paths do: [ :path | self addPathToNodes: path ].
 	
 	paths do: [ :path | self defineAreasFor: path ]
+]
+
+{ #category : #accessing }
+GeoBRGrid >> dForNodes2: aCollection [
+
+	| document |
+	document := GeoPath2DCombinedDocument new.
+
+	1 to: aCollection size do: [ :fromIdx | 
+		| toIdx from to |
+		toIdx := fromIdx = aCollection size
+			         ifTrue: [ 1 ]
+			         ifFalse: [ fromIdx + 1 ].
+
+		from := aCollection at: fromIdx.
+		to := aCollection at: toIdx.
+		from pathTo: to in: document ].
+
+
+
+
+	^ document d
 ]
 
 { #category : #accessing }
