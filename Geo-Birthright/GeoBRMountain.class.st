@@ -15,3 +15,9 @@ GeoBRMountain class >> terrainName [
 
 	^'Mountain'
 ]
+
+{ #category : #accessing }
+GeoBRMountain >> color [
+
+	^ Color fromHexString: 'F5DEB3'
+]

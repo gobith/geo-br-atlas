@@ -13,7 +13,8 @@ GeoBRTerrain class >> neoJsonMappingOn: mapping [
 	mapping
 		mapAccessor: #name;
 		mapAccessor: #potential;
-		mapAccessor: #modifiers
+		mapAccessor: #modifiers;
+		mapAccessor: #colorHex to: #color
 ]
 
 { #category : #accessing }
@@ -32,6 +33,18 @@ GeoBRTerrain class >> terrainName [
 GeoBRTerrain >> addModifier: anInteger [
 
 	modifiers add: anInteger
+]
+
+{ #category : #accessing }
+GeoBRTerrain >> color [
+
+	^ Color lightYellow lighter lighter
+]
+
+{ #category : #accessing }
+GeoBRTerrain >> colorHex [
+
+	^self color asHTMLColor 
 ]
 
 { #category : #initialization }

@@ -15,3 +15,9 @@ GeoBRHills class >> terrainName [
 
 	^'Hills'
 ]
+
+{ #category : #accessing }
+GeoBRHills >> color [
+
+	^ (Color fromHexString: 'F5DEB3') lighter lighter lighter
+]

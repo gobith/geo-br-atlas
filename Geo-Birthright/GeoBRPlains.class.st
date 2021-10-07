@@ -15,3 +15,9 @@ GeoBRPlains class >> terrainName [
 
 	^'Plains'
 ]
+
+{ #category : #accessing }
+GeoBRPlains >> color [
+
+	^ Color lightYellow lighter lighter
+]

@@ -15,3 +15,9 @@ GeoBRForest class >> terrainName [
 
 	^'Forest'
 ]
+
+{ #category : #accessing }
+GeoBRForest >> color [
+
+	^ Color lightGreen lighter lighter
+]
