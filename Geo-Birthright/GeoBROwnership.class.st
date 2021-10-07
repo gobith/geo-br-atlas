@@ -14,7 +14,9 @@ GeoBROwnership class >> neoJsonMappingOn: mapping [
 
 	mapping
 		mapAccessor: #ownerId to: #owner;
-		mapAccessor: #rulerId to: #ruler
+		mapAccessor: #rulerId to: #ruler;
+		mapAccessor: #provinceId to: #province;
+		mapAccessor: #typeString to: #type
 ]
 
 { #category : #printing }
@@ -124,6 +126,12 @@ GeoBROwnership >> province [
 GeoBROwnership >> province: anObject [
 
 	province := anObject
+]
+
+{ #category : #accessing }
+GeoBROwnership >> provinceId [
+
+	^province id
 ]
 
 { #category : #accessing }

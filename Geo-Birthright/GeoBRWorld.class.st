@@ -21,7 +21,8 @@ GeoBRWorld class >> birthright [
 GeoBRWorld class >> neoJsonMappingOn: mapping [
 	mapping
 		mapAccessor: #provinceCollection to: #provinces;
-		mapAccessor: #regents to: #regents
+		mapAccessor: #regents to: #regents;
+		mapAccessor: #ownerships
 ]
 
 { #category : #accessing }

@@ -21,6 +21,7 @@ GeoBRProvince class >> neoJsonMappingOn: mapping [
 		mapAccessor: #areaId;
 		mapAccessor: #name;
 		mapAccessor: #level;
+		mapAccessor: #loyaltyString to: #loyalty;
 		mapAccessor: #sourceRating;
 		mapAccessor: #ownership;
 		mapAccessor: #guild;
@@ -117,6 +118,12 @@ GeoBRProvince >> loyalty [
 GeoBRProvince >> loyalty: anObject [
 
 	loyalty := anObject
+]
+
+{ #category : #accessing }
+GeoBRProvince >> loyaltyString [
+
+	^loyalty typeString
 ]
 
 { #category : #accessing }

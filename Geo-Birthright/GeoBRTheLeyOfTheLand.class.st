@@ -91,9 +91,9 @@ GeoBRTheLeyOfTheLand >> scriptProvinceOwnerships [
 GeoBRTheLeyOfTheLand >> scriptProvinces [
 
 	aeluin := self takeAction: (GeoBRAddProvinceAction new name: 'Aeluin'; areaId: 6; level: 6; terrain: GeoBRForest new; loyalty: GeoBRLoyaltyHigh new).
-	apex := self takeAction: (GeoBRAddProvinceAction new name: 'Apex'; areaId: 12; level: 1; terrain: GeoBRMountain new; loyalty: GeoBRLoyaltyHigh new).
-	armor := self takeAction: (GeoBRAddProvinceAction new name: 'Armor'; areaId: 16; level: 6; terrain: GeoBRMountain new; loyalty: GeoBRLoyaltyHigh new).
-	absal := self takeAction: (GeoBRAddProvinceAction new name: 'Absal'; areaId: 5; level: 1; terrain: GeoBRForest new; loyalty: GeoBRLoyaltyHigh new).
+	apex := self takeAction: (GeoBRAddProvinceAction new name: 'Apex'; areaId: 12; level: 1; terrain: GeoBRMountain new; loyalty: GeoBRLoyaltyAverage new).
+	armor := self takeAction: (GeoBRAddProvinceAction new name: 'Armor'; areaId: 16; level: 6; terrain: GeoBRMountain new; loyalty: GeoBRLoyaltyPoor new).
+	absal := self takeAction: (GeoBRAddProvinceAction new name: 'Absal'; areaId: 5; level: 1; terrain: GeoBRForest new; loyalty: GeoBRLoyaltyRebellious new).
 	abbotHill := self takeAction: (GeoBRAddProvinceAction new name: 'Abbot Hill'; areaId: 17; level: 1; terrain: GeoBRHills new; loyalty: GeoBRLoyaltyHigh new).
 	
 
@@ -136,18 +136,18 @@ GeoBRTheLeyOfTheLand >> sourceOwnerships [
 	Briana,  the Mage-Queen of Boran, controls sources in Brost,  Benderís  Ford,  and  Connor  (a province  of  Castledowns).  
 	Clio,  the  court wizard  of  Castledowns,  controls  sources in  Carp,  Connor,  and  Cardian."
 	
-	self takeAction: (GeoBRGuildOwnershipAction new province: aeluin ; owner: artorus ; ruler: artorus ; level: 1).
-	self takeAction: (GeoBRGuildOwnershipAction new province: armor ; owner: artorus ; ruler: artorus ; level: 1).
-	self takeAction: (GeoBRGuildOwnershipAction new province: abbotHill ; owner: artorus ; ruler: artorus ; level: 4).
-	self takeAction: (GeoBRGuildOwnershipAction new province: brost ; owner: artorus ; ruler: artorus ; level: 0).
-	self takeAction: (GeoBRGuildOwnershipAction new province: bendersford ; owner: artorus ; ruler: artorus ; level: 0).
-	self takeAction: (GeoBRGuildOwnershipAction new province: corina ; owner: artorus ; ruler: artorus ; level: 0).
+	self takeAction: (GeoBRSourceOwnershipAction new province: aeluin ; owner: artorus ; ruler: artorus ; level: 1).
+	self takeAction: (GeoBRSourceOwnershipAction new province: armor ; owner: artorus ; ruler: artorus ; level: 1).
+	self takeAction: (GeoBRSourceOwnershipAction new province: abbotHill ; owner: artorus ; ruler: artorus ; level: 4).
+	self takeAction: (GeoBRSourceOwnershipAction new province: brost ; owner: artorus ; ruler: artorus ; level: 0).
+	self takeAction: (GeoBRSourceOwnershipAction new province: bendersford ; owner: artorus ; ruler: artorus ; level: 0).
+	self takeAction: (GeoBRSourceOwnershipAction new province: corina ; owner: artorus ; ruler: artorus ; level: 0).
 
-	self takeAction: (GeoBRGuildOwnershipAction new province: brost  ; owner: brianna  ; ruler: brianna ; level: 0).
-	self takeAction: (GeoBRGuildOwnershipAction new province: bendersford  ; owner: brianna ; ruler: brianna ; level: 0).
-	self takeAction: (GeoBRGuildOwnershipAction new province: connor ; owner: brianna ; ruler: brianna ; level: 0).
+	self takeAction: (GeoBRSourceOwnershipAction new province: brost  ; owner: brianna  ; ruler: brianna ; level: 0).
+	self takeAction: (GeoBRSourceOwnershipAction new province: bendersford  ; owner: brianna ; ruler: brianna ; level: 0).
+	self takeAction: (GeoBRSourceOwnershipAction new province: connor ; owner: brianna ; ruler: brianna ; level: 0).
 
-	self takeAction: (GeoBRGuildOwnershipAction new province: carp ; owner: clio ; ruler: clio ; level: 0).
-	self takeAction: (GeoBRGuildOwnershipAction new province: connor ; owner: clio ; ruler: clio ; level: 0).
-	self takeAction: (GeoBRGuildOwnershipAction new province: cardian ; owner: clio ; ruler: clio ; level: 0).
+	self takeAction: (GeoBRSourceOwnershipAction new province: carp ; owner: clio ; ruler: clio ; level: 0).
+	self takeAction: (GeoBRSourceOwnershipAction new province: connor ; owner: clio ; ruler: clio ; level: 0).
+	self takeAction: (GeoBRSourceOwnershipAction new province: cardian ; owner: clio ; ruler: clio ; level: 0).
 ]
