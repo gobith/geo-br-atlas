@@ -60,7 +60,7 @@ GeoPath2DCombinedDocument >> d [
 GeoPath2DCombinedDocument >> document: aDocument dOn: commands isStart: isStart [
 
 	commands addAll: (isStart
-			 ifTrue: [ aDocument elements ]
+			 ifTrue: [ self ensureMove: aDocument elements ]
 			 ifFalse: [ self changeFirstCommand: aDocument elements commands: commands])
 ]
 
@@ -68,8 +68,20 @@ GeoPath2DCombinedDocument >> document: aDocument dOn: commands isStart: isStart 
 GeoPath2DCombinedDocument >> document: aDocument reverseDOn: commands isStart: isStart [
 
 	commands addAll: (isStart
-			 ifTrue: [ aDocument reverseElements ]
+			 ifTrue: [ self ensureMove: aDocument reverseElements ]
 			 ifFalse: [ self changeFirstCommand: aDocument reverseElements commands: commands ])
+]
+
+{ #category : #accessing }
+GeoPath2DCombinedDocument >> ensureMove: commands [
+
+	| move |
+	commands first isMove ifTrue: [ ^commands ].
+	
+	move := GeoPath2DAbsoluteMove new endPoint: commands first beginPoint.
+	
+	commands addFirst: move.
+	^commands
 ]
 
 { #category : #initialization }

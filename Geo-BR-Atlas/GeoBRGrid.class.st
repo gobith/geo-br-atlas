@@ -56,8 +56,12 @@ GeoBRGrid >> areaDots [
 { #category : #accessing }
 GeoBRGrid >> areas [
 
+	| idx |
+	idx := 1.
 	^ (areas asOrderedCollection reject: [ :each | each size > 17 ]) 
 		  collect: [ :areaNodes | 
+			  idx = 10 ifTrue: [ self halt ].
+			  idx := idx + 1.
 			  { 
 				  ('d' -> (self dForNodes2: areaNodes)).
 				  ('borders' -> (self borderIdsForNodes: areaNodes)) }
