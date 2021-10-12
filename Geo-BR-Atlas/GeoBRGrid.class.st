@@ -184,7 +184,7 @@ GeoBRGrid >> defineAreasFor: aPath start: startPoint end: endPoint [
 			        ifTrue: [ path b ]
 			        ifFalse: [ path a ] ].
 
-	idx = 100 ifTrue: [ self halt ].
+	idx = 200 ifTrue: [ self halt ].
 	
 	
 	areas at: (areaNodes collect: [:each | each id]) asSortedCollection asArray put: areaNodes
