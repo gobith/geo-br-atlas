@@ -18,5 +18,5 @@ GeoBRCerilliaTests >> setUp [
 GeoBRCerilliaTests >> test001 [
 
 	(GeoBRCeriliaData on: world) run.
-	world halt
+	world inspect
 ]

@@ -10,7 +10,7 @@ GeoBRCSVConverter >> convertedCharacters [
 	^ '/home/georges/Geo BR Atlas/csv/Characters - Anuire.csv' asFileReference 
 		  readStreamDo: [ :readStream | 
 			  (NeoCSVReader on: readStream)
-				  separator: $;;
+				  "separator: $;;"
 				  skipHeader;
 				  recordClass: GeoBRConvertedCharacter;
 				  addIntegerField: #none:;
@@ -119,7 +119,7 @@ GeoBRCSVConverter >> convertedProvinces [
 	^ '/home/georges/Geo BR Atlas/csv/Provinces - Anuire.csv'
 		  asFileReference readStreamDo: [ :readStream | 
 		  (NeoCSVReader on: readStream)
-			  separator: $;;
+			 " separator: $;;"
 			  skipHeader;
 			  recordClass: GeoBRConvertedProvince;
 			  addIntegerField: #none:;
