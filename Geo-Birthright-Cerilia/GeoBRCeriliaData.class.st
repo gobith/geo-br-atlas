@@ -30,6 +30,12 @@ GeoBRCeriliaData class >> paths [
 ]
 
 { #category : #accessing }
+GeoBRCeriliaData class >> scale [
+
+	^5
+]
+
+{ #category : #accessing }
 GeoBRCeriliaData >> areaIdForProvince: aProvince [
 
 	^self provinceNameToAreaIdMapping at: aProvince name
@@ -251,7 +257,7 @@ GeoBRCeriliaData >> provinceNameToAreaIdMapping [
 		at: 'The Gorge' put: nil;
 		at: 'The Imperial City of Anuire' put: nil;
 		at: 'The Promontory' put: nil;
-		at: 'The Spiderfell' put: nil;
+		at: 'The Spiderfell' put: 109;
 		at: 'Thoralinar' put: nil;
 		at: 'Tier' put: nil;
 		at: 'Tireste' put: nil;
@@ -306,7 +312,7 @@ GeoBRCeriliaData >> scriptProvinceOwnerships [
 				 owner: ruler;
 				 ruler: ruler) ].
 
-	self halt
+	
 ]
 
 { #category : #accessing }

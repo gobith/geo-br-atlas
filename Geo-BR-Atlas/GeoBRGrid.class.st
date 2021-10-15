@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'nodes',
 		'paths',
-		'areas'
+		'areas',
+		'scale'
 	],
 	#category : #'Geo-BR-Atlas'
 }
@@ -96,6 +97,9 @@ GeoBRGrid >> calculate [
 
 	nodes := Dictionary new.
 	areas := Dictionary new.
+	
+	self scalePaths.
+	
 	paths do: [ :path | self addPathToNodes: path ].
 	
 	paths do: [ :path | self defineAreasFor: path ]
@@ -200,6 +204,13 @@ GeoBRGrid >> dots [
 			  ('id' -> node id) } asDictionary ]
 ]
 
+{ #category : #initialization }
+GeoBRGrid >> initialize [ 
+
+	super initialize .
+	scale := 1
+]
+
 { #category : #accessing }
 GeoBRGrid >> lines [
 
@@ -209,4 +220,24 @@ GeoBRGrid >> lines [
 { #category : #accessing }
 GeoBRGrid >> paths: aCollection [ 
 	paths := aCollection
+]
+
+{ #category : #accessing }
+GeoBRGrid >> scale: scaleNumber [
+
+	scale := scaleNumber
+	
+]
+
+{ #category : #accessing }
+GeoBRGrid >> scalePaths [
+
+	| newPaths |
+	scale = 1 ifTrue: [ ^ self ].
+
+	newPaths := OrderedCollection new.
+
+	paths do: [ :path | newPaths add: (path scale: scale) ].
+
+	paths := newPaths
 ]

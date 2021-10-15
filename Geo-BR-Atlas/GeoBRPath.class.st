@@ -129,6 +129,16 @@ GeoBRPath >> printOn: aStream [
 ]
 
 { #category : #accessing }
+GeoBRPath >> scale: scaleNumber [
+
+	| newPath |
+	newPath := GeoBRPath new.
+	newPath id: id.
+	newPath d: (self document scale: scaleNumber) d.
+	^ newPath
+]
+
+{ #category : #accessing }
 GeoBRPath >> selected [
 
 	^false

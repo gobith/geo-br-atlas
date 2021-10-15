@@ -24,8 +24,10 @@ GeoBRInitialData class >> grid [
 
 	| grid |
 	grid := GeoBRGrid new.
+	grid scale: self scale.
 	grid paths: self paths.
 	grid calculate.
+	
 	^ grid
 ]
 
@@ -45,6 +47,12 @@ GeoBRInitialData class >> paths [
 GeoBRInitialData class >> run [
 
 	(self on: self world) run
+]
+
+{ #category : #accessing }
+GeoBRInitialData class >> scale [
+
+	^1
 ]
 
 { #category : #running }

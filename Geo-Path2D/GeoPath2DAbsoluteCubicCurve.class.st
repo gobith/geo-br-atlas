@@ -85,3 +85,15 @@ GeoPath2DAbsoluteCubicCurve >> reverse [
 		  endControlPoint: beginControlPoint;
 		  yourself
 ]
+
+{ #category : #converting }
+GeoPath2DAbsoluteCubicCurve >> scale: scaleNumber [
+
+	| command |
+	command := super scale: scaleNumber.
+	command beginControlPoint: (beginControlPoint ifNotNil: [ 
+			 (beginControlPoint scaleBy: scaleNumber @ scaleNumber) round: 3 ]).
+	command endControlPoint: (endControlPoint ifNotNil: [ 
+			 (endControlPoint scaleBy: scaleNumber @ scaleNumber) round: 3 ]).
+	^ command
+]

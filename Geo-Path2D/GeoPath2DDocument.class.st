@@ -96,6 +96,17 @@ GeoPath2DDocument >> reverseElements [
 ]
 
 { #category : #accessing }
+GeoPath2DDocument >> scale: scaleNumber [
+
+	| newDocument |
+	newDocument := GeoPath2DDocument new.
+	newDocument seperator: seperator.
+	elements do: [ :element | 
+		newDocument addElement: (element scale: scaleNumber) ].
+	^ newDocument
+]
+
+{ #category : #accessing }
 GeoPath2DDocument >> seperator [
 
 	^ seperator

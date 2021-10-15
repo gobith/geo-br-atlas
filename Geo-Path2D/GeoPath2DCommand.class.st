@@ -145,6 +145,18 @@ GeoPath2DCommand >> reverse [
 ]
 
 { #category : #accessing }
+GeoPath2DCommand >> scale: scaleNumber [
+
+	| command |
+	command := self copy.
+	command beginPoint: (beginPoint ifNotNil: [ 
+			 (beginPoint scaleBy: scaleNumber @ scaleNumber) round: 3 ]).
+	command endPoint: (endPoint ifNotNil: [ 
+			 (endPoint scaleBy: scaleNumber @ scaleNumber) round: 3 ]).
+	^ command
+]
+
+{ #category : #accessing }
 GeoPath2DCommand >> x [
 	^self endPoint x
 ]
