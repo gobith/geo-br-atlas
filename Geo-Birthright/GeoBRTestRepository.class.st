@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'contents'
 	],
-	#category : #'Geo-Birthright-Tests'
+	#category : #'Geo-Birthright-Repository'
 }
 
 { #category : #initialization }

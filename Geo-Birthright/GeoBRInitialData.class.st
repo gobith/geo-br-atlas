@@ -47,6 +47,17 @@ GeoBRInitialData class >> run [
 	(self on: self world) run
 ]
 
+{ #category : #running }
+GeoBRInitialData class >> testWorld [
+
+	| world |
+	world := GeoBRWorld new
+		         repository: GeoBRTestRepository new;
+		         yourself.
+	(self on: world) run.
+	^ world
+]
+
 { #category : #accessing }
 GeoBRInitialData >> areas [
 

@@ -1,7 +1,7 @@
 Class {
 	#name : #GeoBRCeriliaData,
 	#superclass : #GeoBRInitialData,
-	#category : #'Geo-Birthright-Data'
+	#category : #'Geo-Birthright-Cerilia-Data'
 }
 
 { #category : #accessing }
