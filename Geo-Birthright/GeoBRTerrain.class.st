@@ -44,7 +44,7 @@ GeoBRTerrain >> color [
 { #category : #accessing }
 GeoBRTerrain >> colorHex [
 
-	^self color asHTMLColor 
+	^'#' , self color asHexString  
 ]
 
 { #category : #initialization }
