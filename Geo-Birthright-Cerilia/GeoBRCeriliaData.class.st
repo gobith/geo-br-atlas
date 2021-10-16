@@ -32,7 +32,7 @@ GeoBRCeriliaData class >> paths [
 { #category : #accessing }
 GeoBRCeriliaData class >> scale [
 
-	^5
+	^1
 ]
 
 { #category : #accessing }
