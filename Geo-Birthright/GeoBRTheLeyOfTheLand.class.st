@@ -54,6 +54,12 @@ GeoBRTheLeyOfTheLand class >> paths [
 ]
 
 { #category : #accessing }
+GeoBRTheLeyOfTheLand class >> scale [
+
+	^ 4
+]
+
+{ #category : #accessing }
 GeoBRTheLeyOfTheLand >> script [
 
 	super script.

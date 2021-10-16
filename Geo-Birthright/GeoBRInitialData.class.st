@@ -52,7 +52,7 @@ GeoBRInitialData class >> run [
 { #category : #accessing }
 GeoBRInitialData class >> scale [
 
-	^1
+	^ 1
 ]
 
 { #category : #running }
