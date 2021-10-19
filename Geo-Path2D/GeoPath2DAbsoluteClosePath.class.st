@@ -17,12 +17,17 @@ GeoPath2DAbsoluteClosePath class >> numberOfArguments [
 ]
 
 { #category : #accessing }
+GeoPath2DAbsoluteClosePath >> absolutePointsIn: aCollection [ 
+	
+]
+
+{ #category : #accessing }
 GeoPath2DAbsoluteClosePath >> createPoints: aCollection previousCommand: aCommand [
 
 	super createPoints: aCollection previousCommand: aCommand
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 GeoPath2DAbsoluteClosePath >> ensureSpaceOn: aWriteStream [
 ]
 
