@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'name',
 		'gold',
-		'ruler'
+		'court'
 	],
 	#category : #'Geo-Birthright-Domain'
 }
