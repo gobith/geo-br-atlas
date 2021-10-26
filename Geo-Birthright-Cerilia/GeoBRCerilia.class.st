@@ -32,7 +32,9 @@ GeoBRCerilia class >> database [
 { #category : #accessing }
 GeoBRCerilia class >> paths [
 
-	^ (GeoBRPathParser onFileNamed: '/home/georges/Geo BR Atlas/Cerilia Map v1.13_scaled003.svg') parse
+	^ (GeoBRPathParser onFileNamed: '/home/georges/Downloads/Cerilia Map v1.13_scaled002.svg') parse
+	
+
 ]
 
 { #category : #accessing }

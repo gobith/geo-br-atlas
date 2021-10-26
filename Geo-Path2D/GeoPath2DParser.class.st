@@ -42,7 +42,7 @@ GeoPath2DParser >> document [
 { #category : #initialization }
 GeoPath2DParser >> initializeFor: dString [
 
-	stream := (dString substrings: ', ') readStream.
+	stream := (dString substrings: ', +') readStream.
 	arguments := OrderedCollection new.
 	document := GeoPath2DDocument new.
 ]
