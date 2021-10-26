@@ -17,6 +17,6 @@ GeoBRCerilliaTests >> setUp [
 { #category : #tests }
 GeoBRCerilliaTests >> test001 [
 
-	(GeoBRCeriliaData on: world) run.
+	(GeoBRCerilia on: world) run.
 	world inspect
 ]

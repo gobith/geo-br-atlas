@@ -28,20 +28,10 @@ GeoBRSession >> requestWorld: aRequest [
 ]
 
 { #category : #accessing }
-GeoBRSession >> setup [ 
-
-	"world := GeoBRWorld birthright."
-	world := GeoBRWorld new repository: GeoBRTestRepository new; yourself.
-	(GeoBRToWarInitialData on: world) run.
-	world replay
-]
-
-{ #category : #accessing }
 GeoBRSession >> start [
 
 	self stop.
 	
-	self setup.
 
 	teapot := Teapot configure: { 
 			          (#port -> 8101).
@@ -57,4 +47,9 @@ GeoBRSession >> stop [
 	world := nil.
 	teapot ifNotNil: [ teapot stop ].
 	teapot := nil
+]
+
+{ #category : #accessing }
+GeoBRSession >> world: aGeoBRWorld [ 
+	world := aGeoBRWorld
 ]

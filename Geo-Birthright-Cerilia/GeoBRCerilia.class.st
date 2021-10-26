@@ -1,5 +1,5 @@
 Class {
-	#name : #GeoBRCeriliaData,
+	#name : #GeoBRCerilia,
 	#superclass : #GeoBRInitialData,
 	#instVars : [
 		'regents',
@@ -9,7 +9,7 @@ Class {
 }
 
 { #category : #accessing }
-GeoBRCeriliaData class >> areasJson [
+GeoBRCerilia class >> areasJson [
 
 	| areas |
 	areas := self grid areas .
@@ -18,31 +18,37 @@ GeoBRCeriliaData class >> areasJson [
 ]
 
 { #category : #accessing }
-GeoBRCeriliaData class >> bordersJson [
+GeoBRCerilia class >> bordersJson [
 
 	^ NeoJSONWriter toStringPretty: self grid borders
 ]
 
 { #category : #accessing }
-GeoBRCeriliaData class >> paths [
+GeoBRCerilia class >> database [
+
+	^ 'birthright'
+]
+
+{ #category : #accessing }
+GeoBRCerilia class >> paths [
 
 	^ (GeoBRPathParser onFileNamed: '/home/georges/Geo BR Atlas/Cerilia Map v1.13_scaled003.svg') parse
 ]
 
 { #category : #accessing }
-GeoBRCeriliaData class >> scale [
+GeoBRCerilia class >> scale [
 
 	^1
 ]
 
 { #category : #accessing }
-GeoBRCeriliaData >> areaIdForProvince: aProvince [
+GeoBRCerilia >> areaIdForProvince: aProvince [
 
 	^self provinceNameToAreaIdMapping at: aProvince name
 ]
 
 { #category : #initialization }
-GeoBRCeriliaData >> initialize [ 
+GeoBRCerilia >> initialize [ 
 
 	super initialize.
 	regents := Dictionary new.
@@ -50,13 +56,13 @@ GeoBRCeriliaData >> initialize [
 ]
 
 { #category : #accessing }
-GeoBRCeriliaData >> loyaltyForProvince: aProvince data: aProvinceData [ 
+GeoBRCerilia >> loyaltyForProvince: aProvince data: aProvinceData [ 
 
 	^GeoBRLoyaltyHigh new
 ]
 
 { #category : #accessing }
-GeoBRCeriliaData >> provinceNameToAreaIdMapping [
+GeoBRCerilia >> provinceNameToAreaIdMapping [
 
 	| dict |
 	dict := Dictionary new.
@@ -279,7 +285,7 @@ GeoBRCeriliaData >> provinceNameToAreaIdMapping [
 ]
 
 { #category : #accessing }
-GeoBRCeriliaData >> script [
+GeoBRCerilia >> script [
 
 	super script.
 
@@ -289,7 +295,7 @@ GeoBRCeriliaData >> script [
 ]
 
 { #category : #accessing }
-GeoBRCeriliaData >> scriptProvinceOwnerships [
+GeoBRCerilia >> scriptProvinceOwnerships [
 
 	"self takeAction: (GeoBRProvinceOwnershipAction new province: aeluin; owner: aldiss ; ruler: aldiss)."
 
@@ -316,7 +322,7 @@ GeoBRCeriliaData >> scriptProvinceOwnerships [
 ]
 
 { #category : #accessing }
-GeoBRCeriliaData >> scriptProvinces [
+GeoBRCerilia >> scriptProvinces [
 
 	"aeluin := self takeAction: (GeoBRAddProvinceAction new name: 'Aeluin'; areaId: 6; level: 6; terrain: GeoBRForest new; loyalty: GeoBRLoyaltyHigh new)."
 
@@ -349,7 +355,7 @@ GeoBRCeriliaData >> scriptProvinces [
 ]
 
 { #category : #accessing }
-GeoBRCeriliaData >> scriptRegents [
+GeoBRCerilia >> scriptRegents [
 
 	GeoBRCSVConverter new convertedCharacters do: [ :each | 
 		| action |
@@ -360,13 +366,13 @@ GeoBRCeriliaData >> scriptRegents [
 ]
 
 { #category : #accessing }
-GeoBRCeriliaData >> takeAction: anAction [
+GeoBRCerilia >> takeAction: anAction [
 
 	^world takeAction: anAction
 ]
 
 { #category : #accessing }
-GeoBRCeriliaData >> terrainForProvince: aProvince [
+GeoBRCerilia >> terrainForProvince: aProvince [
 
 	^GeoBRForest new
 ]

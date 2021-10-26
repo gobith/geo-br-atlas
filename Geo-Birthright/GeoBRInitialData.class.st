@@ -20,6 +20,12 @@ GeoBRInitialData class >> bordersJson [
 ]
 
 { #category : #accessing }
+GeoBRInitialData class >> database [
+
+	^ 'birthright'
+]
+
+{ #category : #accessing }
 GeoBRInitialData class >> grid [
 
 	| grid |
@@ -53,6 +59,49 @@ GeoBRInitialData class >> run [
 GeoBRInitialData class >> scale [
 
 	^ 1
+]
+
+{ #category : #actions }
+GeoBRInitialData class >> start [
+
+	^ self startInitial: false isTest: false
+]
+
+{ #category : #actions }
+GeoBRInitialData class >> startInitial [
+
+	^ self startInitial: true isTest: false
+]
+
+{ #category : #actions }
+GeoBRInitialData class >> startInitial: isInitial isTest: isTest [
+
+	| session repository world |
+	session := GeoBRSession new.
+	repository := isTest
+		              ifTrue: [ GeoBRTestRepository new ]
+		              ifFalse: [ 
+		              VOMongoRepository
+			              host: 'localhost'
+			              database: self database ].
+
+	world := GeoBRWorld new
+		         repository: repository;
+		         yourself.
+
+	isInitial ifTrue: [ (self on: world) run ].
+	world replay.
+
+	session start.
+	session world: world.
+
+	^ session
+]
+
+{ #category : #actions }
+GeoBRInitialData class >> startTest [
+
+	^ self startInitial: true isTest: true
 ]
 
 { #category : #running }

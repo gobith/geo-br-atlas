@@ -11,13 +11,6 @@ Class {
 }
 
 { #category : #'instance creation' }
-GeoBRWorld class >> birthright [
-
-	^ self new repository:
-		  (VOMongoRepository host: 'localhost' database: 'birthright')
-]
-
-{ #category : #'instance creation' }
 GeoBRWorld class >> neoJsonMappingOn: mapping [
 	mapping
 		mapAccessor: #provinceCollection to: #provinces;

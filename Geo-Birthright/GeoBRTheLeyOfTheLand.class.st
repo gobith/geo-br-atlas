@@ -48,6 +48,12 @@ GeoBRTheLeyOfTheLand class >> bordersJson [
 ]
 
 { #category : #accessing }
+GeoBRTheLeyOfTheLand class >> database [
+
+	^ 'leyOfTheLand'
+]
+
+{ #category : #accessing }
 GeoBRTheLeyOfTheLand class >> paths [
 
 	^ (GeoBRPathParser onFileNamed: '/home/georges/Geo BR Atlas/ley_of_the_land_003.svg') parse

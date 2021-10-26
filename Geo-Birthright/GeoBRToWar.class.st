@@ -1,5 +1,5 @@
 Class {
-	#name : #GeoBRToWarInitialData,
+	#name : #GeoBRToWar,
 	#superclass : #GeoBRInitialData,
 	#instVars : [
 		'davor',
@@ -18,7 +18,7 @@ Class {
 }
 
 { #category : #accessing }
-GeoBRToWarInitialData class >> areasJson [
+GeoBRToWar class >> areasJson [
 
 	^'[
     {
@@ -718,7 +718,7 @@ GeoBRToWarInitialData class >> areasJson [
 ]
 
 { #category : #accessing }
-GeoBRToWarInitialData class >> bordersJson [
+GeoBRToWar class >> bordersJson [
 
 	^'[
   {
@@ -1517,13 +1517,19 @@ GeoBRToWarInitialData class >> bordersJson [
 ]
 
 { #category : #accessing }
-GeoBRToWarInitialData class >> paths [
+GeoBRToWar class >> database [
+
+	^ 'toWar'
+]
+
+{ #category : #accessing }
+GeoBRToWar class >> paths [
 
 	^ (GeoBRPathParser onFileNamed: '/home/georges/Geo BR Atlas/deepsouth007.svg') parse
 ]
 
 { #category : #scripts }
-GeoBRToWarInitialData >> script [
+GeoBRToWar >> script [
 
 	super script.
 	self scriptRegents.
@@ -1536,7 +1542,7 @@ GeoBRToWarInitialData >> script [
 ]
 
 { #category : #scripts }
-GeoBRToWarInitialData >> scriptGuildOwnerships [
+GeoBRToWar >> scriptGuildOwnerships [
 	
 	self takeAction: (GeoBRGuildOwnershipAction new province: cear; owner: davor; ruler: davor; level: 3).
 	self takeAction: (GeoBRGuildOwnershipAction new province: garlofs ; owner: davor; ruler: davor; level: 2).
@@ -1551,7 +1557,7 @@ GeoBRToWarInitialData >> scriptGuildOwnerships [
 ]
 
 { #category : #scripts }
-GeoBRToWarInitialData >> scriptLawOwnerships [
+GeoBRToWar >> scriptLawOwnerships [
 
 	self takeAction: (GeoBRLawOwnershipAction new province: cear; owner: davor; ruler: redfang; level: 4).
 	self takeAction: (GeoBRLawOwnershipAction new province: garlofs ; owner: davor; ruler: redfang; level: 2).
@@ -1561,7 +1567,7 @@ GeoBRToWarInitialData >> scriptLawOwnerships [
 ]
 
 { #category : #scripts }
-GeoBRToWarInitialData >> scriptProvinceOwnerships [
+GeoBRToWar >> scriptProvinceOwnerships [
 
 	self takeAction: (GeoBRProvinceOwnershipAction new province: cear; owner: davor; ruler: davor).
 	self takeAction: (GeoBRProvinceOwnershipAction new province: garlofs ; owner: davor; ruler: davor).
@@ -1574,7 +1580,7 @@ GeoBRToWarInitialData >> scriptProvinceOwnerships [
 ]
 
 { #category : #scripts }
-GeoBRToWarInitialData >> scriptProvinces [
+GeoBRToWar >> scriptProvinces [
 
 	cear := self takeAction: (GeoBRAddProvinceAction new name: 'Cear'; areaId: 63; level: 4; terrain: GeoBRMountain new; loyalty: GeoBRLoyaltyHigh new).
 	garlofs := self takeAction: (GeoBRAddProvinceAction new name: 'Garlofs'; areaId: 22; level: 2; terrain: GeoBRMountain new; loyalty: GeoBRLoyaltyHigh new).
@@ -1587,7 +1593,7 @@ GeoBRToWarInitialData >> scriptProvinces [
 ]
 
 { #category : #scripts }
-GeoBRToWarInitialData >> scriptRegents [
+GeoBRToWar >> scriptRegents [
 
 	davor := self takeAction: (GeoBRAddRegentAction new name: 'Davor Blackfal'; bloodline: 15).
 	riswynn := self takeAction: (GeoBRAddRegentAction new name: 'Riswynn Warforged'; bloodline: 15).
@@ -1597,7 +1603,7 @@ GeoBRToWarInitialData >> scriptRegents [
 ]
 
 { #category : #scripts }
-GeoBRToWarInitialData >> scriptTempleOwnerships [
+GeoBRToWar >> scriptTempleOwnerships [
 
 	self takeAction: (GeoBRTempleOwnershipAction new province: cear; owner: davor; ruler: riswynn; level: 4).
 	self takeAction: (GeoBRTempleOwnershipAction new province: garlofs ; owner: davor; ruler: riswynn; level: 2).
