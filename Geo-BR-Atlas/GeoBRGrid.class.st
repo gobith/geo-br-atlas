@@ -59,7 +59,7 @@ GeoBRGrid >> areas [
 
 	| idx |
 	idx := 1.
-	^ (areas asOrderedCollection reject: [ :each | each size > 17 ]) 
+	^ (areas asOrderedCollection reject: [ :each | each size > 200 ]) 
 		  collect: [ :areaNodes | 
 			  idx := idx + 1.
 			  { 
@@ -178,7 +178,7 @@ GeoBRGrid >> defineAreasFor: aPath start: startPoint end: endPoint [
 
 	areaNodes add: (nodes at: end).
 
-	[ head = end or: [ idx = 100 ] ] whileFalse: [ 
+	[ head = end or: [ idx = 1000 ] ] whileFalse: [ 
 		idx := idx + 1.
 
 		node := nodes at: head.
@@ -188,7 +188,7 @@ GeoBRGrid >> defineAreasFor: aPath start: startPoint end: endPoint [
 			        ifTrue: [ path b ]
 			        ifFalse: [ path a ] ].
 
-	idx = 200 ifTrue: [ self halt ].
+	idx = 1000 ifTrue: [ self halt ].
 	
 	
 	areas at: (areaNodes collect: [:each | each id]) asSortedCollection asArray put: areaNodes

@@ -30,9 +30,9 @@ GeoPath2DAbsoluteMove >> isMove [
 ]
 
 { #category : #accessing }
-GeoPath2DAbsoluteMove >> nextCommandClass [ 
-	^nil
-	"^GeoPath2DAbsoluteLine "
+GeoPath2DAbsoluteMove >> nextCommandClass [
+
+	^ GeoPath2DAbsoluteLine
 ]
 
 { #category : #accessing }

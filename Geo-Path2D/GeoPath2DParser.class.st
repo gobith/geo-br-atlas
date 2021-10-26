@@ -24,13 +24,12 @@ GeoPath2DParser >> addCommand [
 	| previousCommand |
 	previousCommand := command.
 	command := commandClass new.
-	command
-		          createPoints: arguments
-		          previousCommand: previousCommand.
+	command createPoints: arguments previousCommand: previousCommand.
 
 	document addElement: command.
 	previousCommand := command.
-	command nextCommandClass ifNotNil: [: nextCommandClass | commandClass := nextCommandClass ].
+	command nextCommandClass ifNotNil: [ :nextCommandClass | 
+		commandClass := nextCommandClass ].
 	arguments removeAll
 ]
 
