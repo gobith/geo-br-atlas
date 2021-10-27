@@ -126,17 +126,15 @@ GeoBRInitialData >> borders [
 ]
 
 { #category : #accessing }
+GeoBRInitialData >> islandAreas [
+
+	^ self class grid islandAreas
+]
+
+{ #category : #accessing }
 GeoBRInitialData >> provinceAreas [
 
-	| provinceAreas |
-	provinceAreas := (NeoJSONReader fromString: self class provinceAreasJson) collect: [ 
-		         :dict | 
-		         GeoBRProvinceArea new
-			         d: (dict at: 'd');
-			         borders: (dict at: 'borders');
-			         yourself ].
-	1 to: provinceAreas size do: [ :idx | (provinceAreas at: idx) id: idx ].
-	^ provinceAreas
+	^ self class grid provinceAreas
 ]
 
 { #category : #actions }
@@ -149,7 +147,8 @@ GeoBRInitialData >> run [
 { #category : #actions }
 GeoBRInitialData >> script [
 
-	self provinceAreas do: [ :area | world repository save: area ].
+	self provinceAreas do: [ :provinceArea | world repository save: provinceArea ].
+	self islandAreas do: [ :islandArea | world repository save: islandArea ].
 	self borders do: [ :border | world repository save: border ]
 ]
 

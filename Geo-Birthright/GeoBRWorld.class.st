@@ -69,12 +69,19 @@ GeoBRWorld >> initialize [
 ]
 
 { #category : #accessing }
+GeoBRWorld >> islandAreas [
+	
+	^ repository selectAll: GeoBRIslandArea
+]
+
+{ #category : #accessing }
 GeoBRWorld >> map [
 
 	^ GeoBRMap new
 		  provinceAreas: self provinceAreas;
 		  borders: self borders;
 		  realmBorders: self realmBorders;
+		  islandAreas: self islandAreas;
 		  yourself
 ]
 

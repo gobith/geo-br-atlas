@@ -2,10 +2,10 @@ Class {
 	#name : #GeoBRGrid,
 	#superclass : #Object,
 	#instVars : [
-		'nodes',
 		'paths',
-		'areas',
-		'scale'
+		'scale',
+		'provinceAreaDict',
+		'nodeDict'
 	],
 	#category : #'Geo-BR-Atlas'
 }
@@ -28,14 +28,14 @@ GeoBRGrid class >> neoJsonMappingOn: mapping [
 { #category : #actions }
 GeoBRGrid >> addPathToNodes: aPath [
 
-	(nodes at: aPath a ifAbsentPut: [ 
+	(nodeDict at: aPath a ifAbsentPut: [ 
 		 GeoBRNode new
-			 id: nodes size + 1;
+			 id: nodeDict size + 1;
 			 point: aPath a;
 			 yourself ]) addPath: aPath.
-	(nodes at: aPath b ifAbsentPut: [ 
+	(nodeDict at: aPath b ifAbsentPut: [ 
 		 GeoBRNode new
-			 id: nodes size + 1;
+			 id: nodeDict size + 1;
 			 point: aPath b;
 			 yourself ]) addPath: aPath
 ]
@@ -67,8 +67,8 @@ GeoBRGrid >> borders [
 { #category : #actions }
 GeoBRGrid >> calculate [
 
-	nodes := Dictionary new.
-	areas := Dictionary new.
+	nodeDict := Dictionary new.
+	provinceAreaDict := Dictionary new.
 	
 	self scalePaths.
 	
@@ -118,12 +118,12 @@ GeoBRGrid >> defineAreasFor: aPath start: startPoint end: endPoint [
 	head := startPoint.
 	path := aPath.
 
-	areaNodes add: (nodes at: end).
+	areaNodes add: (nodeDict at: end).
 
 	[ head = end or: [ idx = 1000 ] ] whileFalse: [ 
 		idx := idx + 1.
 
-		node := nodes at: head.
+		node := nodeDict at: head.
 		areaNodes add: node.
 		path := node nextPathFrom: path.
 		head := head = path a
@@ -133,7 +133,7 @@ GeoBRGrid >> defineAreasFor: aPath start: startPoint end: endPoint [
 	idx = 1000 ifTrue: [ self halt ].
 	
 	
-	areas at: (areaNodes collect: [:each | each id]) asSortedCollection asArray put: areaNodes
+	provinceAreaDict at: (areaNodes collect: [:each | each id]) asSortedCollection asArray put: areaNodes
 ]
 
 { #category : #initialization }
@@ -144,14 +144,8 @@ GeoBRGrid >> initialize [
 ]
 
 { #category : #accessing }
-GeoBRGrid >> lines [
-self halt.
-	^ paths collect: [ :path | 
-		  { 
-			  ('a' -> path aJson).
-			  ('b' -> path bJson).
-			  ('id' -> path id).
-			  ('center' -> path centerJson) } asDictionary ]
+GeoBRGrid >> islandAreas [
+	^Array new
 ]
 
 { #category : #accessing }
@@ -163,14 +157,16 @@ GeoBRGrid >> paths: aCollection [
 GeoBRGrid >> provinceAreas [
 
 	| idx |
-	idx := 1.
-	^ (areas asOrderedCollection reject: [ :each | each size < 200 ]) 
-		  collect: [ :areaNodes | 
-			  idx := idx + 1.
-			  { 
-				  ('d' -> (self dForNodes: areaNodes)).
-				  ('borders' -> (self borderIdsForNodes: areaNodes)) }
-				  asDictionary ]
+	idx := 0.
+	^ (provinceAreaDict asOrderedCollection reject: [ :each | 
+		   each size < 200 ]) collect: [ :areaNodes | 
+		  idx := idx + 1.
+
+		  GeoBRProvinceArea new
+			  id: idx;
+			  d: (self dForNodes: areaNodes);
+			  borders: (self borderIdsForNodes: areaNodes);
+			  yourself ]
 ]
 
 { #category : #accessing }
