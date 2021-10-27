@@ -2,9 +2,9 @@ Class {
 	#name : #GeoBRMap,
 	#superclass : #Object,
 	#instVars : [
-		'areas',
 		'borders',
-		'realmBorders'
+		'realmBorders',
+		'provinceAreas'
 	],
 	#category : #'Geo-BR-Atlas'
 }
@@ -17,29 +17,10 @@ GeoBRMap class >> neoJsonMapping: mapper [
 { #category : #accessing }
 GeoBRMap class >> neoJsonMappingOn: mapping [
 
-	"mapping
-		mapAccessor: #id;
-		mapAccessor: #d;
-		mapAccessor: #data;
-		mapAccessor: #selected;
-		mapAccessor: #center"
-
 	mapping
 		mapAccessor: #borders;
-		mapAccessor: #areas;
+		mapAccessor: #provinceAreas;
 		mapAccessor: #realmBorders
-]
-
-{ #category : #accessing }
-GeoBRMap >> areas [
-
-	^areas
-]
-
-{ #category : #accessing }
-GeoBRMap >> areas: anObject [
-
-	areas := anObject
 ]
 
 { #category : #accessing }
@@ -52,6 +33,18 @@ GeoBRMap >> borders [
 GeoBRMap >> borders: anObject [
 
 	borders := anObject
+]
+
+{ #category : #accessing }
+GeoBRMap >> provinceAreas [
+
+	^provinceAreas
+]
+
+{ #category : #accessing }
+GeoBRMap >> provinceAreas: anObject [
+
+	provinceAreas := anObject
 ]
 
 { #category : #accessing }

@@ -8,12 +8,6 @@ Class {
 }
 
 { #category : #accessing }
-GeoBRInitialData class >> areasJson [
-
-	^ '[]'
-]
-
-{ #category : #accessing }
 GeoBRInitialData class >> bordersJson [
 
 	^ '[]'
@@ -47,6 +41,12 @@ GeoBRInitialData class >> on: aWorld [
 GeoBRInitialData class >> paths [
 
 	^self subclassResponsibility 
+]
+
+{ #category : #accessing }
+GeoBRInitialData class >> provinceAreasJson [
+
+	^ '[]'
 ]
 
 { #category : #running }
@@ -116,20 +116,6 @@ GeoBRInitialData class >> testWorld [
 ]
 
 { #category : #accessing }
-GeoBRInitialData >> areas [
-
-	| areas |
-	areas := (NeoJSONReader fromString: self class areasJson) collect: [ 
-		         :dict | 
-		         GeoBRArea new
-			         d: (dict at: 'd');
-			         borders: (dict at: 'borders');
-			         yourself ].
-	1 to: areas size do: [ :idx | (areas at: idx) id: idx ].
-	^ areas
-]
-
-{ #category : #accessing }
 GeoBRInitialData >> borders [
 
 	^ (NeoJSONReader fromString: self class bordersJson) collect: [ :dict | 
@@ -137,6 +123,20 @@ GeoBRInitialData >> borders [
 			  id: (dict at: 'id');
 			  d: (dict at: 'd');
 			  yourself ]
+]
+
+{ #category : #accessing }
+GeoBRInitialData >> provinceAreas [
+
+	| provinceAreas |
+	provinceAreas := (NeoJSONReader fromString: self class provinceAreasJson) collect: [ 
+		         :dict | 
+		         GeoBRProvinceArea new
+			         d: (dict at: 'd');
+			         borders: (dict at: 'borders');
+			         yourself ].
+	1 to: provinceAreas size do: [ :idx | (provinceAreas at: idx) id: idx ].
+	^ provinceAreas
 ]
 
 { #category : #actions }
@@ -149,7 +149,7 @@ GeoBRInitialData >> run [
 { #category : #actions }
 GeoBRInitialData >> script [
 
-	self areas do: [ :area | world repository save: area ].
+	self provinceAreas do: [ :area | world repository save: area ].
 	self borders do: [ :border | world repository save: border ]
 ]
 

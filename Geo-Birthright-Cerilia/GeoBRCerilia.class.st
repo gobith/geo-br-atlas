@@ -9,15 +9,6 @@ Class {
 }
 
 { #category : #accessing }
-GeoBRCerilia class >> areasJson [
-
-	| areas |
-	areas := self grid areas .
-
-	^ NeoJSONWriter toStringPretty: areas
-]
-
-{ #category : #accessing }
 GeoBRCerilia class >> bordersJson [
 
 	^ NeoJSONWriter toStringPretty: self grid borders
@@ -35,6 +26,16 @@ GeoBRCerilia class >> paths [
 	^ (GeoBRPathParser onFileNamed: '/home/georges/Downloads/Cerilia Map v1.13_scaled002.svg') parse
 	
 
+]
+
+{ #category : #accessing }
+GeoBRCerilia class >> provinceAreasJson [
+
+	| areas |
+	self halt.
+	areas := self grid provinceAreas .
+
+	^ NeoJSONWriter toStringPretty: areas
 ]
 
 { #category : #accessing }

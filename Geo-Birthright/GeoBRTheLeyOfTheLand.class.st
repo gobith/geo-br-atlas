@@ -33,15 +33,6 @@ Class {
 }
 
 { #category : #accessing }
-GeoBRTheLeyOfTheLand class >> areasJson [
-
-	| areas |
-	areas := self grid areas reject: [ : each | (each at: 'borders') size = 13 ].
-
-	^ NeoJSONWriter toStringPretty: areas
-]
-
-{ #category : #accessing }
 GeoBRTheLeyOfTheLand class >> bordersJson [
 
 	^ NeoJSONWriter toStringPretty: self grid borders
@@ -57,6 +48,15 @@ GeoBRTheLeyOfTheLand class >> database [
 GeoBRTheLeyOfTheLand class >> paths [
 
 	^ (GeoBRPathParser onFileNamed: '/home/georges/Geo BR Atlas/ley_of_the_land_003.svg') parse
+]
+
+{ #category : #accessing }
+GeoBRTheLeyOfTheLand class >> provinceAreasJson [
+
+	| areas |
+	areas := self grid provinceAreas reject: [ : each | (each at: 'borders') size = 13 ].
+
+	^ NeoJSONWriter toStringPretty: areas
 ]
 
 { #category : #accessing }

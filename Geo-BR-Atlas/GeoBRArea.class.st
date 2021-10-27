@@ -82,6 +82,5 @@ GeoBRArea >> id: anObject [
 { #category : #accessing }
 GeoBRArea >> polygon [
 
-	^Polygon vertices: self document absolutePoints 
-	
+	^ Polygon vertices: self document absolutePoints
 ]

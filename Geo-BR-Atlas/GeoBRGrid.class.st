@@ -21,7 +21,7 @@ GeoBRGrid class >> neoJsonMappingOn: mapping [
 	"	mapAccessor: #areaDots;
 		mapAccessor: #lines;
 		mapAccessor: #dots;"
-		mapAccessor: #areas
+		mapAccessor: #provinceAreas
 		
 ]
 
@@ -38,34 +38,6 @@ GeoBRGrid >> addPathToNodes: aPath [
 			 id: nodes size + 1;
 			 point: aPath b;
 			 yourself ]) addPath: aPath
-]
-
-{ #category : #accessing }
-GeoBRGrid >> areaDots [
-
-	^ (areas asOrderedCollection reject: [:each | each size > 17]) collect: [ :areaNodes | 
-		  { 
-		
-			'ids' -> ( areaNodes collect: [ :node | node id ] ) .
-			('nodes' -> (areaNodes collect: [ :node | 
-			    { 
-				    ('x' -> node point x).
-				    ('y' -> node point y).
-				    ('id' -> node id) } asDictionary ])) } asDictionary ]
-]
-
-{ #category : #accessing }
-GeoBRGrid >> areas [
-
-	| idx |
-	idx := 1.
-	^ (areas asOrderedCollection reject: [ :each | each size > 200 ]) 
-		  collect: [ :areaNodes | 
-			  idx := idx + 1.
-			  { 
-				  ('d' -> (self dForNodes2: areaNodes)).
-				  ('borders' -> (self borderIdsForNodes: areaNodes)) }
-				  asDictionary ]
 ]
 
 { #category : #accessing }
@@ -106,7 +78,7 @@ GeoBRGrid >> calculate [
 ]
 
 { #category : #accessing }
-GeoBRGrid >> dForNodes2: aCollection [
+GeoBRGrid >> dForNodes: aCollection [
 
 	| document |
 	document := GeoPath2DCombinedDocument new.
@@ -125,36 +97,6 @@ GeoBRGrid >> dForNodes2: aCollection [
 
 
 	^ document d
-]
-
-{ #category : #accessing }
-GeoBRGrid >> dForNodes: aCollection [
-
-	| points ws |
-	points := OrderedCollection new.
-
-	1 to: aCollection size do: [ :fromIdx | 
-		| toIdx from to |
-		toIdx := fromIdx = aCollection size
-			         ifTrue: [ 1 ]
-			         ifFalse: [ fromIdx + 1 ].
-
-		from := aCollection at: fromIdx.
-		to := aCollection at: toIdx.
-		points addAll: (from pathPointsTo: to) ].
-
-
-	ws := String new writeStream.
-	ws nextPutAll: 'M '.
-
-	points
-		do: [ :point | 
-			ws
-				print: point x;
-				space;
-				print: point y ]
-		separatedBy: [ ws space ].
-	^ ws contents
 ]
 
 { #category : #actions }
@@ -194,16 +136,6 @@ GeoBRGrid >> defineAreasFor: aPath start: startPoint end: endPoint [
 	areas at: (areaNodes collect: [:each | each id]) asSortedCollection asArray put: areaNodes
 ]
 
-{ #category : #accessing }
-GeoBRGrid >> dots [
-
-	^ nodes asOrderedCollection collect: [ :node | 
-		  { 
-			  ('x' -> node point x).
-			  ('y' -> node point y).
-			  ('id' -> node id) } asDictionary ]
-]
-
 { #category : #initialization }
 GeoBRGrid >> initialize [ 
 
@@ -213,13 +145,32 @@ GeoBRGrid >> initialize [
 
 { #category : #accessing }
 GeoBRGrid >> lines [
-
-	^paths collect: [: path | { 'a' -> path aJson . 'b' -> path bJson . 'id' -> path id . 'center' -> path centerJson} asDictionary ]
+self halt.
+	^ paths collect: [ :path | 
+		  { 
+			  ('a' -> path aJson).
+			  ('b' -> path bJson).
+			  ('id' -> path id).
+			  ('center' -> path centerJson) } asDictionary ]
 ]
 
 { #category : #accessing }
 GeoBRGrid >> paths: aCollection [ 
 	paths := aCollection
+]
+
+{ #category : #accessing }
+GeoBRGrid >> provinceAreas [
+
+	| idx |
+	idx := 1.
+	^ (areas asOrderedCollection reject: [ :each | each size < 200 ]) 
+		  collect: [ :areaNodes | 
+			  idx := idx + 1.
+			  { 
+				  ('d' -> (self dForNodes: areaNodes)).
+				  ('borders' -> (self borderIdsForNodes: areaNodes)) }
+				  asDictionary ]
 ]
 
 { #category : #accessing }

@@ -26,12 +26,6 @@ GeoBRWorld >> actions [
 ]
 
 { #category : #accessing }
-GeoBRWorld >> areas [
-
-	^ repository selectAll: GeoBRArea
-]
-
-{ #category : #accessing }
 GeoBRWorld >> borders [
 
 	^ repository selectAll: GeoBRBorder
@@ -61,6 +55,8 @@ GeoBRWorld >> emptyAllData [
 	repository
 		removeAll: GeoBRActionWrapper;
 		removeAll: GeoBRArea;
+		removeAll: GeoBRProvinceArea;
+		removeAll: GeoBRIslandArea;
 		removeAll: GeoBRBorder.
 	self reset
 ]
@@ -76,7 +72,7 @@ GeoBRWorld >> initialize [
 GeoBRWorld >> map [
 
 	^ GeoBRMap new
-		  areas: self areas;
+		  provinceAreas: self provinceAreas;
 		  borders: self borders;
 		  realmBorders: self realmBorders;
 		  yourself
@@ -86,6 +82,12 @@ GeoBRWorld >> map [
 GeoBRWorld >> ownerships [
 
 	^ ownerships
+]
+
+{ #category : #accessing }
+GeoBRWorld >> provinceAreas [
+
+	^ repository selectAll: GeoBRProvinceArea
 ]
 
 { #category : #accessing }
@@ -112,7 +114,7 @@ GeoBRWorld >> realmBorderForOwner: aRegent provinces: collectionOfProvinces [
 	| areaIds realmAreas borderIds realmBorderIds |
 	borderIds := Bag new.
 	areaIds := (collectionOfProvinces collect: [ : each | each areaId ]).
-	realmAreas := self areas select: [ : each | areaIds includes: each id ].
+	realmAreas := self provinceAreas select: [ : each | areaIds includes: each id ].
 	realmAreas do: [ : area | borderIds addAll: area borders ].
 	realmBorderIds := OrderedCollection new.
 	borderIds keysAndValuesDo: [ :value :count | count = 1 ifTrue: [ realmBorderIds add: value ] ].
