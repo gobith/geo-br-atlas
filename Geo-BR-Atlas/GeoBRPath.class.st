@@ -113,6 +113,11 @@ GeoBRPath >> id: anObject [
 ]
 
 { #category : #accessing }
+GeoBRPath >> key [
+^id
+]
+
+{ #category : #accessing }
 GeoBRPath >> oppositePoint: aNode [
 
 	^ self a = aNode point

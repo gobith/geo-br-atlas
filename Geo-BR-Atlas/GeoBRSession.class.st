@@ -26,18 +26,9 @@ GeoBRSession >> requestMap: aRequest [
 { #category : #accessing }
 GeoBRSession >> requestSingleDots: aRequest [
 
-	| singleCollection |
-	singleCollection := OrderedCollection new.
-
-	(GeoBRCerilia grid borders collectAll: [ :each | 
-		 { 
-			 each a.
-			 each b } ]) asBag keysAndValuesDo: [ :key :value | 
-		value = 1 ifTrue: [ singleCollection add: key ] ].
+	^ OrderedCollection new.
 
 	
-
-	^ singleCollection
 ]
 
 { #category : #accessing }

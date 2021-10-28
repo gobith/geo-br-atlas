@@ -4,8 +4,9 @@ Class {
 	#instVars : [
 		'paths',
 		'scale',
-		'provinceAreaDict',
-		'nodeDict'
+		'provinceAreas',
+		'areas',
+		'nodes'
 	],
 	#category : #'Geo-BR-Atlas'
 }
@@ -28,16 +29,22 @@ GeoBRGrid class >> neoJsonMappingOn: mapping [
 { #category : #actions }
 GeoBRGrid >> addPathToNodes: aPath [
 
-	(nodeDict at: aPath a ifAbsentPut: [ 
+	(nodes at: aPath a ifAbsentPut: [ 
 		 GeoBRNode new
-			 id: nodeDict size + 1;
+			 id: nodes size + 1;
 			 point: aPath a;
 			 yourself ]) addPath: aPath.
-	(nodeDict at: aPath b ifAbsentPut: [ 
+	(nodes at: aPath b ifAbsentPut: [ 
 		 GeoBRNode new
-			 id: nodeDict size + 1;
+			 id: nodes size + 1;
 			 point: aPath b;
 			 yourself ]) addPath: aPath
+]
+
+{ #category : #accessing }
+GeoBRGrid >> areas [
+
+	^ areas
 ]
 
 { #category : #accessing }
@@ -61,20 +68,40 @@ GeoBRGrid >> borderIdsForNodes: aCollection [
 { #category : #accessing }
 GeoBRGrid >> borders [
 
-	^paths
+	^ paths collect: [ :path | 
+		  GeoBRBorder new
+			  id: path id;
+			  d: path d;
+			  yourself ]
 ]
 
 { #category : #actions }
 GeoBRGrid >> calculate [
 
-	nodeDict := Dictionary new.
-	provinceAreaDict := Dictionary new.
+	nodes := Dictionary new.
+	areas := Dictionary new.
 	
 	self scalePaths.
 	
 	paths do: [ :path | self addPathToNodes: path ].
 	
 	paths do: [ :path | self defineAreasFor: path ]
+]
+
+{ #category : #accessing }
+GeoBRGrid >> createProvinceAreas [
+
+	| idx |
+	idx := 0.
+	^ (areas asOrderedCollection reject: [ :each | 
+		   each size > 200 ]) collect: [ :areaNodes | 
+		  idx := idx + 1.
+
+		  GeoBRProvinceArea new
+			  id: idx;
+			  d: (self dForNodes: areaNodes);
+			  borders: (self borderIdsForNodes: areaNodes);
+			  yourself ]
 ]
 
 { #category : #accessing }
@@ -118,12 +145,12 @@ GeoBRGrid >> defineAreasFor: aPath start: startPoint end: endPoint [
 	head := startPoint.
 	path := aPath.
 
-	areaNodes add: (nodeDict at: end).
+	areaNodes add: (nodes at: end).
 
 	[ head = end or: [ idx = 1000 ] ] whileFalse: [ 
 		idx := idx + 1.
 
-		node := nodeDict at: head.
+		node := nodes at: head.
 		areaNodes add: node.
 		path := node nextPathFrom: path.
 		head := head = path a
@@ -133,7 +160,7 @@ GeoBRGrid >> defineAreasFor: aPath start: startPoint end: endPoint [
 	idx = 1000 ifTrue: [ self halt ].
 	
 	
-	provinceAreaDict at: (areaNodes collect: [:each | each id]) asSortedCollection asArray put: areaNodes
+	areas at: (areaNodes collect: [:each | each id]) asSortedCollection asArray put: areaNodes
 ]
 
 { #category : #initialization }
@@ -145,7 +172,30 @@ GeoBRGrid >> initialize [
 
 { #category : #accessing }
 GeoBRGrid >> islandAreas [
-	^Array new
+
+	| borderIds pathDict islandPaths grid idx |
+	borderIds := Bag new.
+	pathDict := paths asDictionary.
+
+	self provinceAreas do: [ :area | borderIds addAll: area borders ].
+	islandPaths := OrderedCollection new.
+	borderIds keysAndValuesDo: [ :value :count | 
+		count = 1 ifTrue: [ islandPaths add: (pathDict at: value) ] ].
+
+
+	grid := GeoBRGrid new.
+	grid paths: islandPaths.
+	grid calculate.
+
+	idx := 0.
+	^ grid areas asOrderedCollection collect: [ :areaNodes | 
+		  idx := idx + 1.
+
+		  GeoBRIslandArea new
+			  id: idx;
+			  d: (self dForNodes: areaNodes);
+			  borders: (self borderIdsForNodes: areaNodes);
+			  yourself ]
 ]
 
 { #category : #accessing }
@@ -156,17 +206,8 @@ GeoBRGrid >> paths: aCollection [
 { #category : #accessing }
 GeoBRGrid >> provinceAreas [
 
-	| idx |
-	idx := 0.
-	^ (provinceAreaDict asOrderedCollection reject: [ :each | 
-		   each size < 200 ]) collect: [ :areaNodes | 
-		  idx := idx + 1.
-
-		  GeoBRProvinceArea new
-			  id: idx;
-			  d: (self dForNodes: areaNodes);
-			  borders: (self borderIdsForNodes: areaNodes);
-			  yourself ]
+	provinceAreas ifNil: [ provinceAreas := self createProvinceAreas ].
+	^ provinceAreas
 ]
 
 { #category : #accessing }

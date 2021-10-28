@@ -27,7 +27,7 @@ GeoBRInitialData class >> grid [
 	grid scale: self scale.
 	grid paths: self paths.
 	grid calculate.
-	
+
 	^ grid
 ]
 
@@ -118,11 +118,7 @@ GeoBRInitialData class >> testWorld [
 { #category : #accessing }
 GeoBRInitialData >> borders [
 
-	^ (NeoJSONReader fromString: self class bordersJson) collect: [ :dict | 
-		  GeoBRBorder new
-			  id: (dict at: 'id');
-			  d: (dict at: 'd');
-			  yourself ]
+	^ self class grid borders
 ]
 
 { #category : #accessing }
@@ -157,7 +153,7 @@ GeoBRInitialData >> takeAction: anAction [
 
 	| action |
 	action := world takeAction: anAction.
-	^action id
+	^ action id
 ]
 
 { #category : #accessing }
