@@ -6,7 +6,8 @@ Class {
 		'scale',
 		'provinceAreas',
 		'areas',
-		'nodes'
+		'nodes',
+		'areaPoints'
 	],
 	#category : #'Geo-BR-Atlas'
 }
@@ -91,17 +92,20 @@ GeoBRGrid >> calculate [
 { #category : #accessing }
 GeoBRGrid >> createProvinceAreas [
 
-	| idx |
+	| idx coll centerPoints |
 	idx := 0.
-	^ (areas asOrderedCollection reject: [ :each | 
-		   each size > 200 ]) collect: [ :areaNodes | 
-		  idx := idx + 1.
+	
 
-		  GeoBRProvinceArea new
-			  id: idx;
-			  d: (self dForNodes: areaNodes);
-			  borders: (self borderIdsForNodes: areaNodes);
-			  yourself ]
+	coll := areas asOrderedCollection collect: [ :areaNodes | 
+		        idx := idx + 1.
+
+		        GeoBRProvinceArea new
+			        id: idx;
+			        d: (self dForNodes: areaNodes);
+			        borders: (self borderIdsForNodes: areaNodes);
+			        yourself ].
+	centerPoints := coll collect: [ :each | each center ].
+	^ coll select: [ : provinceArea | (centerPoints select: [ :centerPoint | provinceArea polygon containsPoint: centerPoint ]) size <= 2 ]
 ]
 
 { #category : #accessing }

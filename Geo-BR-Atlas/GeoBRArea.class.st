@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'id',
 		'd',
-		'borders'
+		'borders',
+		'polygon'
 	],
 	#category : #'Geo-BR-Atlas'
 }
@@ -62,9 +63,9 @@ GeoBRArea >> d: anObject [
 ]
 
 { #category : #accessing }
-GeoBRArea >> document [ 
-	
-	^(GeoPath2DParser on: d) parseDocument 
+GeoBRArea >> document [
+
+	^ (GeoPath2DParser on: d) parseDocument
 ]
 
 { #category : #accessing }
@@ -82,5 +83,7 @@ GeoBRArea >> id: anObject [
 { #category : #accessing }
 GeoBRArea >> polygon [
 
-	^ Polygon vertices: self document absolutePoints
+	polygon ifNil: [ 
+		polygon := Polygon vertices: self document absolutePoints ].
+	^ polygon
 ]
