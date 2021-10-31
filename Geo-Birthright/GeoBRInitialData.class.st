@@ -116,6 +116,24 @@ GeoBRInitialData class >> testWorld [
 ]
 
 { #category : #accessing }
+GeoBRInitialData class >> woods [
+
+	self subclassResponsibility 
+]
+
+{ #category : #accessing }
+GeoBRInitialData class >> woodsGrid [
+
+	| grid |
+	grid := GeoBRGrid new.
+	grid scale: self scale.
+	grid paths: self woods.
+	grid calculate.
+
+	^ grid
+]
+
+{ #category : #accessing }
 GeoBRInitialData >> borders [
 
 	^ self class grid borders
@@ -145,6 +163,7 @@ GeoBRInitialData >> script [
 
 	self provinceAreas do: [ :provinceArea | world repository save: provinceArea ].
 	self islandAreas do: [ :islandArea | world repository save: islandArea ].
+	self woodAreas do: [ :woodArea | world repository save: woodArea ].
 	self borders do: [ :border | world repository save: border ]
 ]
 
@@ -154,6 +173,12 @@ GeoBRInitialData >> takeAction: anAction [
 	| action |
 	action := world takeAction: anAction.
 	^ action id
+]
+
+{ #category : #accessing }
+GeoBRInitialData >> woodAreas [
+
+	^ self class woodsGrid woodAreas
 ]
 
 { #category : #accessing }

@@ -15,6 +15,8 @@ GeoBRSession >> addRoutes [
 	teapot GET: '/world' -> [ :request | self requestWorld: request ].
 	
 	teapot GET: '/singledots' -> [ :request | self requestSingleDots: request ].
+	
+	teapot serveStatic: '/' from: '/home/georges/apps/geo-br-atlas-frontend/public'
 ]
 
 { #category : #accessing }

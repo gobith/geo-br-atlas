@@ -45,6 +45,14 @@ GeoBRCerilia class >> scale [
 ]
 
 { #category : #accessing }
+GeoBRCerilia class >> woods [
+
+	^ (GeoBRPathParser onFileNamed: '/home/georges/Geo BR Atlas/cerilia_map/woods.svg') parse
+	
+
+]
+
+{ #category : #accessing }
 GeoBRCerilia >> areaIdForProvince: aProvince [
 
 	^self provinceNameToAreaIdMapping at: aProvince name

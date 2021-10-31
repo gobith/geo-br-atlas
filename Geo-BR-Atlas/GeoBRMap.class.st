@@ -5,7 +5,8 @@ Class {
 		'borders',
 		'realmBorders',
 		'provinceAreas',
-		'islandAreas'
+		'islandAreas',
+		'woodAreas'
 	],
 	#category : #'Geo-BR-Atlas'
 }
@@ -22,7 +23,8 @@ GeoBRMap class >> neoJsonMappingOn: mapping [
 		mapAccessor: #borders;
 		mapAccessor: #realmBorders;
 		mapAccessor: #provinceAreas;
-		mapAccessor: #islandAreas
+		mapAccessor: #islandAreas;
+		mapAccessor: #woodAreas
 ]
 
 { #category : #accessing }
@@ -71,4 +73,16 @@ GeoBRMap >> realmBorders [
 GeoBRMap >> realmBorders: anObject [
 
 	realmBorders := anObject
+]
+
+{ #category : #accessing }
+GeoBRMap >> woodAreas [
+
+	^ woodAreas
+]
+
+{ #category : #accessing }
+GeoBRMap >> woodAreas: anObject [
+
+	woodAreas := anObject
 ]

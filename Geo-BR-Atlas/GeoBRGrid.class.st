@@ -233,3 +233,18 @@ GeoBRGrid >> scalePaths [
 
 	paths := newPaths
 ]
+
+{ #category : #accessing }
+GeoBRGrid >> woodAreas [
+
+	| idx |
+	idx := 0.
+	^ areas asOrderedCollection collect: [ :areaNodes | 
+		  idx := idx + 1.
+
+		  GeoBRWoodArea new
+			  id: idx;
+			  d: (self dForNodes: areaNodes);
+			  borders: (self borderIdsForNodes: areaNodes);
+			  yourself ]
+]

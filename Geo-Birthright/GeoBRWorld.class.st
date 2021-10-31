@@ -57,6 +57,7 @@ GeoBRWorld >> emptyAllData [
 		removeAll: GeoBRArea;
 		removeAll: GeoBRProvinceArea;
 		removeAll: GeoBRIslandArea;
+		removeAll: GeoBRWoodArea;
 		removeAll: GeoBRBorder.
 	self reset
 ]
@@ -82,6 +83,7 @@ GeoBRWorld >> map [
 		  borders: self borders;
 		  realmBorders: self realmBorders;
 		  islandAreas: self islandAreas;
+		  woodAreas: self woodAreas;
 		  yourself
 ]
 
@@ -208,4 +210,10 @@ GeoBRWorld >> takeAction: anAction [
 	self saveAction: anAction.
 	self doAction: anAction.
 	^anAction
+]
+
+{ #category : #accessing }
+GeoBRWorld >> woodAreas [
+
+	^ repository selectAll: GeoBRWoodArea
 ]
