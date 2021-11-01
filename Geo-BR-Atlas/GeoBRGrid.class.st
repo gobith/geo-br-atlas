@@ -203,6 +203,21 @@ GeoBRGrid >> islandAreas [
 ]
 
 { #category : #accessing }
+GeoBRGrid >> mountainAreas [
+
+	| idx |
+	idx := 0.
+	^ areas asOrderedCollection collect: [ :areaNodes | 
+		  idx := idx + 1.
+
+		  GeoBRMountainArea new
+			  id: idx;
+			  d: (self dForNodes: areaNodes);
+			  borders: (self borderIdsForNodes: areaNodes);
+			  yourself ]
+]
+
+{ #category : #accessing }
 GeoBRGrid >> paths: aCollection [ 
 	paths := aCollection
 ]

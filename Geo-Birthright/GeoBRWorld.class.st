@@ -58,6 +58,7 @@ GeoBRWorld >> emptyAllData [
 		removeAll: GeoBRProvinceArea;
 		removeAll: GeoBRIslandArea;
 		removeAll: GeoBRWoodArea;
+		removeAll: GeoBRMountainArea;
 		removeAll: GeoBRBorder.
 	self reset
 ]
@@ -84,7 +85,14 @@ GeoBRWorld >> map [
 		  realmBorders: self realmBorders;
 		  islandAreas: self islandAreas;
 		  woodAreas: self woodAreas;
+		  mountainAreas: self mountainAreas;
 		  yourself
+]
+
+{ #category : #accessing }
+GeoBRWorld >> mountainAreas [
+
+	^ repository selectAll: GeoBRMountainArea 
 ]
 
 { #category : #accessing }

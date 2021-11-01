@@ -31,6 +31,24 @@ GeoBRInitialData class >> grid [
 	^ grid
 ]
 
+{ #category : #accessing }
+GeoBRInitialData class >> mountains [
+
+	self subclassResponsibility 
+]
+
+{ #category : #accessing }
+GeoBRInitialData class >> mountainsGrid [
+
+	| grid |
+	grid := GeoBRGrid new.
+	grid scale: self scale.
+	grid paths: self mountains .
+	grid calculate.
+
+	^ grid
+]
+
 { #category : #'instance creation' }
 GeoBRInitialData class >> on: aWorld [
 
@@ -146,6 +164,12 @@ GeoBRInitialData >> islandAreas [
 ]
 
 { #category : #accessing }
+GeoBRInitialData >> mountainAreas [
+
+	^ self class mountainsGrid mountainAreas
+]
+
+{ #category : #accessing }
 GeoBRInitialData >> provinceAreas [
 
 	^ self class grid provinceAreas
@@ -164,6 +188,7 @@ GeoBRInitialData >> script [
 	self provinceAreas do: [ :provinceArea | world repository save: provinceArea ].
 	self islandAreas do: [ :islandArea | world repository save: islandArea ].
 	self woodAreas do: [ :woodArea | world repository save: woodArea ].
+	self mountainAreas do: [ :mountainArea | world repository save: mountainArea ].
 	self borders do: [ :border | world repository save: border ]
 ]
 
