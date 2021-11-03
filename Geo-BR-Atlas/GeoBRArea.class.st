@@ -88,3 +88,10 @@ GeoBRArea >> polygon [
 		polygon := Polygon vertices: self document absolutePoints ].
 	^ polygon
 ]
+
+{ #category : #accessing }
+GeoBRArea >> polygonArray [
+
+	^ polygon vertices collect: [ :point | 
+		  Array with: point x with: point y ]
+]
