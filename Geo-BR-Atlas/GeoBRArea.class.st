@@ -22,7 +22,8 @@ GeoBRArea class >> neoJsonMappingOn: mapping [
 		mapAccessor: #d;
 		mapAccessor: #borders;
 		mapAccessor: #bounds;
-		mapAccessor: #center
+		mapAccessor: #center;
+		mapAccessor: #polygonArray to: #polygon
 ]
 
 { #category : #accessing }
