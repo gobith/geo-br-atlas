@@ -68,7 +68,7 @@ GeoBRGrid >> borderIdsForNodes: aCollection [
 
 { #category : #accessing }
 GeoBRGrid >> borders [
-
+	
 	^ paths collect: [ :path | 
 		  GeoBRBorder new
 			  id: path id;

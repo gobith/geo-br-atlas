@@ -3,6 +3,7 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'borders',
+		'provinceBorders',
 		'realmBorders',
 		'provinceAreas',
 		'islandAreas',
@@ -22,11 +23,13 @@ GeoBRMap class >> neoJsonMappingOn: mapping [
 
 	mapping
 		mapAccessor: #borders;
+		mapAccessor: #provinceBorders;
 		mapAccessor: #realmBorders;
 		mapAccessor: #provinceAreas;
 		mapAccessor: #islandAreas;
 		mapAccessor: #woodAreas;
 		mapAccessor: #mountainAreas
+		 
 ]
 
 { #category : #accessing }
@@ -75,6 +78,18 @@ GeoBRMap >> provinceAreas [
 GeoBRMap >> provinceAreas: anObject [
 
 	provinceAreas := anObject
+]
+
+{ #category : #accessing }
+GeoBRMap >> provinceBorders [
+
+	^ provinceBorders
+]
+
+{ #category : #accessing }
+GeoBRMap >> provinceBorders: anObject [
+
+	provinceBorders := anObject
 ]
 
 { #category : #accessing }

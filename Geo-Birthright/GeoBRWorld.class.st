@@ -82,6 +82,7 @@ GeoBRWorld >> map [
 	^ GeoBRMap new
 		  provinceAreas: self provinceAreas;
 		  borders: self borders;
+		  provinceBorders: self provinceBorders;
 		  realmBorders: self realmBorders;
 		  islandAreas: self islandAreas;
 		  woodAreas: self woodAreas;
@@ -114,6 +115,17 @@ GeoBRWorld >> provinceAt: provinceId [
 ]
 
 { #category : #accessing }
+GeoBRWorld >> provinceBorders [
+
+	| islandBorderIds |
+	islandBorderIds := (self islandAreas collectAll: [ :islandArea | 
+		                    islandArea borders ]) asSet.
+
+	^ (self borders reject: [ :border | 
+		  islandBorderIds includes: border id ]) collect: [ : border | border id ]
+]
+
+{ #category : #accessing }
 GeoBRWorld >> provinceCollection [
 
 	^provinces values asSortedCollection: [ :provA :provB | provA name <= provB name ]
@@ -126,17 +138,21 @@ GeoBRWorld >> provinces [
 ]
 
 { #category : #accessing }
-GeoBRWorld >> realmBorderForOwner: aRegent provinces: collectionOfProvinces [ 
-	
+GeoBRWorld >> realmBorderForOwner: aRegent provinces: collectionOfProvinces [
+
 	| areaIds realmAreas borderIds realmBorderIds |
 	borderIds := Bag new.
-	areaIds := (collectionOfProvinces collect: [ : each | each areaId ]).
-	realmAreas := self provinceAreas select: [ : each | areaIds includes: each id ].
-	realmAreas do: [ : area | borderIds addAll: area borders ].
+	areaIds := collectionOfProvinces collect: [ :each | each areaId ].
+	realmAreas := self provinceAreas select: [ :each | 
+		              areaIds includes: each center ].
+	realmAreas do: [ :area | borderIds addAll: area borders ].
 	realmBorderIds := OrderedCollection new.
-	borderIds keysAndValuesDo: [ :value :count | count = 1 ifTrue: [ realmBorderIds add: value ] ].
-	
-	^GeoBRRealmBorder new owner: aRegent; borders: realmBorderIds
+	borderIds keysAndValuesDo: [ :value :count | 
+		count = 1 ifTrue: [ realmBorderIds add: value ] ].
+
+	^ GeoBRRealmBorder new
+		  owner: aRegent;
+		  borders: realmBorderIds
 ]
 
 { #category : #accessing }
