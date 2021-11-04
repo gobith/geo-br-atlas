@@ -95,11 +95,11 @@ GeoBRCerilia >> provinceNameToAreaIdMapping [
 	dict := Dictionary new.
 
 	dict
-		at: 'Abattoir' put: 32;
-		at: 'Abbatuor' put: nil;
+		at: 'Abattoir' put: nil;
+		at: 'Abbatuor' put: 156;
 		at: 'Achiese' put: nil;
 		at: 'Aerele' put: nil;
-		at: 'Alamier' put: nil;
+		at: 'Alamier' put: 430;
 		at: 'Alamsreft' put: nil;
 		at: 'Alaroine' put: nil;
 		at: 'Algael' put: nil;
@@ -111,14 +111,14 @@ GeoBRCerilia >> provinceNameToAreaIdMapping [
 		at: 'Avarien' put: nil;
 		at: 'Bacaele' put: nil;
 		at: 'Balteruine' put: nil;
-		at: 'Banien''s Deep' put: 35;
+		at: 'Banien''s Deep' put: 267;
 		at: 'Barniere' put: nil;
 		at: 'Bayside' put: nil;
-		at: 'Bellam' put: nil;
+		at: 'Bellam' put: 208;
 		at: 'Bevaldruor' put: nil;
 		at: 'Bhaine' put: nil;
 		at: 'Bhalaene' put: nil;
-		at: 'Bheline' put: nil;
+		at: 'Bheline' put: 511;
 		at: 'Bhindraith' put: nil;
 		at: 'Bhrein' put: nil;
 		at: 'Bindier' put: nil;
@@ -126,7 +126,7 @@ GeoBRCerilia >> provinceNameToAreaIdMapping [
 		at: 'Bliene' put: nil;
 		at: 'Bloodbay' put: nil;
 		at: 'Bogsend' put: nil;
-		at: 'Braeme' put: nil;
+		at: 'Braeme' put: 328;
 		at: 'Braenthindyr' put: nil;
 		at: 'Bran''s Retreat' put: nil;
 		at: 'Brenlie' put: nil;
@@ -134,10 +134,10 @@ GeoBRCerilia >> provinceNameToAreaIdMapping [
 		at: 'Brothendar' put: nil;
 		at: 'Brushfire' put: nil;
 		at: 'Byrnnor' put: nil;
-		at: 'Caercas' put: nil;
-		at: 'Caerwil' put: nil;
+		at: 'Caercas' put: 223;
+		at: 'Caerwil' put: 420;
 		at: 'Calant' put: nil;
-		at: 'Calrie' put: 26;
+		at: 'Calrie' put: 829;
 		at: 'Careine' put: nil;
 		at: 'Caudraight' put: nil;
 		at: 'Caulnor' put: nil;
@@ -153,7 +153,7 @@ GeoBRCerilia >> provinceNameToAreaIdMapping [
 		at: 'Cwlldon' put: nil;
 		at: 'Cwmbheir' put: nil;
 		at: 'Cymryr' put: nil;
-		at: 'Danaroene' put: nil;
+		at: 'Danaroene' put: 457;
 		at: 'Daulton' put: nil;
 		at: 'Deepshadow' put: nil;
 		at: 'Deseirain' put: nil;
@@ -161,20 +161,20 @@ GeoBRCerilia >> provinceNameToAreaIdMapping [
 		at: 'Dhalier' put: nil;
 		at: 'Dhalsiel' put: nil;
 		at: 'Dharilein' put: nil;
-		at: 'Dhoenel' put: 36;
+		at: 'Dhoenel' put: 907;
 		at: 'Dhoneaghmiere' put: nil;
 		at: 'Doom''s Peak' put: nil;
 		at: 'Duene' put: nil;
-		at: 'Duerlin' put: 101;
+		at: 'Duerlin' put: 173;
 		at: 'Duornil' put: nil;
 		at: 'Duriene' put: nil;
 		at: 'Dwarf''s Hold' put: nil;
-		at: 'Edlin' put: nil;
+		at: 'Edlin' put: 608;
 		at: 'Elevesnemiere' put: nil;
 		at: 'Elfsdemise' put: nil;
 		at: 'Elfseyes' put: nil;
 		at: 'Endier' put: nil;
-		at: 'Fairfield' put: nil;
+		at: 'Fairfield' put: 657;
 		at: 'Fallen Rock' put: nil;
 		at: 'Falling Timber' put: nil;
 		at: 'Fhoruile' put: nil;
@@ -185,13 +185,13 @@ GeoBRCerilia >> provinceNameToAreaIdMapping [
 		at: 'Ghalliere' put: nil;
 		at: 'Ghiere' put: nil;
 		at: 'Ghonallison' put: nil;
-		at: 'Ghoried' put: nil;
+		at: 'Ghoried' put: 715;
 		at: 'Ghyllwn' put: nil;
 		at: 'Giant''s Fastness' put: nil;
 		at: 'Greensward' put: nil;
 		at: 'Gulfport' put: nil;
 		at: 'Haesrien' put: nil;
-		at: 'Halried' put: 73;
+		at: 'Halried' put: 23;
 		at: 'Hamein' put: nil;
 		at: 'Helmshaven' put: nil;
 		at: 'Hidaele' put: nil;
@@ -199,7 +199,7 @@ GeoBRCerilia >> provinceNameToAreaIdMapping [
 		at: 'Hoehnaen' put: nil;
 		at: 'Hope''s Demise' put: nil;
 		at: 'Ice Haven' put: nil;
-		at: 'Ilien' put: nil;
+		at: 'Ilien' put: 781;
 		at: 'Iseare' put: nil;
 		at: 'Islien' put: nil;
 		at: 'Jogh Warren' put: nil;
@@ -233,7 +233,7 @@ GeoBRCerilia >> provinceNameToAreaIdMapping [
 		at: 'Nentril' put: nil;
 		at: 'Nietier' put: nil;
 		at: 'Nolien' put: nil;
-		at: 'Northvale' put: 55;
+		at: 'Northvale' put: 425;
 		at: 'Nortmoor' put: nil;
 		at: 'Orog''s Head' put: nil;
 		at: 'Osoeriene' put: nil;
@@ -267,7 +267,7 @@ GeoBRCerilia >> provinceNameToAreaIdMapping [
 		at: 'Sere''s Hold' put: nil;
 		at: 'Serien' put: nil;
 		at: 'Serimset' put: nil;
-		at: 'Shadowgreen' put: 105;
+		at: 'Shadowgreen' put: 543;
 		at: 'Shattered Hills' put: nil;
 		at: 'Sideath' put: nil;
 		at: 'Sidhuire' put: nil;
@@ -290,7 +290,7 @@ GeoBRCerilia >> provinceNameToAreaIdMapping [
 		at: 'The Gorge' put: nil;
 		at: 'The Imperial City of Anuire' put: nil;
 		at: 'The Promontory' put: nil;
-		at: 'The Spiderfell' put: 109;
+		at: 'The Spiderfell' put: 644;
 		at: 'Thoralinar' put: nil;
 		at: 'Tier' put: nil;
 		at: 'Tireste' put: nil;
@@ -302,7 +302,7 @@ GeoBRCerilia >> provinceNameToAreaIdMapping [
 		at: 'Tuar Llyrien' put: nil;
 		at: 'Tuor''s Hold' put: nil;
 		at: 'Vanilen' put: nil;
-		at: 'Westmarch' put: 51;
+		at: 'Westmarch' put: 73;
 		at: 'Wilder''s Gorge' put: nil;
 		at: 'Winoene' put: nil;
 		at: 'Winter''s Deep' put: nil;
