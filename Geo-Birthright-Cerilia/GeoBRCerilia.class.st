@@ -23,7 +23,7 @@ GeoBRCerilia class >> database [
 { #category : #accessing }
 GeoBRCerilia class >> mountains [
 
-	^ (GeoBRPathParser onFileNamed: '/home/georges/Geo BR Atlas/cerilia_map/mountains2.svg') parse
+	^ (GeoBRPathParser onFileNamed: GeoBRFileReferences mountains) parse
 	
 
 ]
@@ -31,39 +31,21 @@ GeoBRCerilia class >> mountains [
 { #category : #accessing }
 GeoBRCerilia class >> paths [
 
-	^ (GeoBRPathParser onFileNamed: '/home/georges/Downloads/Cerilia Map v1.13_scaled002.svg') parse
+	^ (GeoBRPathParser onFileNamed: GeoBRFileReferences paths) parse
 	
 
-]
-
-{ #category : #accessing }
-GeoBRCerilia class >> provinceAreasJson [
-
-	| areas |
-	self halt.
-	areas := self grid provinceAreas .
-
-	^ NeoJSONWriter toStringPretty: areas
 ]
 
 { #category : #accessing }
 GeoBRCerilia class >> scale [
 
-	^1
-]
-
-{ #category : #accessing }
-GeoBRCerilia class >> woodPattern [
-
-	^ (GeoBRPathParser onFileNamed: '/home/georges/Downloads/wood-patten.svg') parse
-	
-
+	^ 1
 ]
 
 { #category : #accessing }
 GeoBRCerilia class >> woods [
 
-	^ (GeoBRPathParser onFileNamed: '/home/georges/Geo BR Atlas/cerilia_map/woods.svg') parse
+	^ (GeoBRPathParser onFileNamed: GeoBRFileReferences woods) parse
 	
 
 ]

@@ -7,7 +7,7 @@ Class {
 { #category : #accessing }
 GeoBRCSVConverter >> convertedCharacters [
 
-	^ '/home/georges/Geo BR Atlas/csv/Characters - Anuire.csv' asFileReference 
+	^ GeoBRFileReferences charactersAnuire asFileReference 
 		  readStreamDo: [ :readStream | 
 			  (NeoCSVReader on: readStream)
 				  "separator: $;;"
@@ -33,7 +33,7 @@ GeoBRCSVConverter >> convertedCharacters [
 
 { #category : #accessing }
 GeoBRCSVConverter >> convertedDeities [
-	^ '/home/georges/Geo BR Atlas/csv/Deities.csv' asFileReference 
+	^ GeoBRFileReferences deities asFileReference 
 		  readStreamDo: [ :readStream | 
 			  (NeoCSVReader on: readStream)
 				  separator: $;;
@@ -52,7 +52,7 @@ GeoBRCSVConverter >> convertedDeities [
 { #category : #accessing }
 GeoBRCSVConverter >> convertedDomains [
 
-	^ '/home/georges/Geo BR Atlas/csv/Domains - Anuire.csv'
+	^ GeoBRFileReferences domainsAnuire
 		  asFileReference readStreamDo: [ :readStream | 
 		  (NeoCSVReader on: readStream)
 			  separator: $;;
@@ -77,15 +77,15 @@ GeoBRCSVConverter >> convertedProvinceDatas [
 	coll := OrderedCollection new.
 
 	coll addAll: (self convertedProvinceDatas:
-			 '/home/georges/Geo BR Atlas/csv/province-data/Provinces Data - Anuire - Eastern Marches.csv').
+			 GeoBRFileReferences provinceDataEasternMarches).
 	coll addAll: (self convertedProvinceDatas:
-			 '/home/georges/Geo BR Atlas/csv/province-data/Provinces Data - Anuire - Heartlands.csv').
+			 GeoBRFileReferences provinceDataHearthlands).
 	coll addAll: (self convertedProvinceDatas:
-			 '/home/georges/Geo BR Atlas/csv/province-data/Provinces Data - Anuire - Northern Marches.csv').
+			 GeoBRFileReferences provinceDataNorthernMarches).
 	coll addAll: (self convertedProvinceDatas:
-			 '/home/georges/Geo BR Atlas/csv/province-data/Provinces Data - Anuire - Southern Coast.csv').
+			 GeoBRFileReferences provinceDataSouthernCoast).
 	coll addAll: (self convertedProvinceDatas:
-			 '/home/georges/Geo BR Atlas/csv/province-data/Provinces Data - Anuire - Western Coast.csv').
+			 GeoBRFileReferences provinceDataWesternCoast).
 
 	^ coll
 ]
@@ -116,7 +116,7 @@ GeoBRCSVConverter >> convertedProvinceDatas: referenceString [
 { #category : #accessing }
 GeoBRCSVConverter >> convertedProvinces [
 
-	^ '/home/georges/Geo BR Atlas/csv/Provinces - Anuire.csv'
+	^ GeoBRFileReferences provincesAnuire
 		  asFileReference readStreamDo: [ :readStream | 
 		  (NeoCSVReader on: readStream)
 			 " separator: $;;"
@@ -134,7 +134,7 @@ GeoBRCSVConverter >> convertedProvinces [
 { #category : #accessing }
 GeoBRCSVConverter >> convertedTerrains [
 
-	^ '/home/georges/Geo BR Atlas/csv/Terrains.csv' asFileReference 
+	^ GeoBRFileReferences terrains asFileReference 
 		  readStreamDo: [ :readStream | 
 			  (NeoCSVReader on: readStream)
 				  separator: $;;

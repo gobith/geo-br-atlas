@@ -40,7 +40,7 @@ GeoBRXMLConverter >> legends [
 { #category : #parsing }
 GeoBRXMLConverter >> parse [
 
-	'/home/georges/Geo BR Atlas/Birthright.Dataset.v13/database/domains.xml'
+	GeoBRFileReferences domains
 		asFileReference readStreamDo: [ :readStream | 
 		document := (XMLDOMParser on: readStream) optimizeForLargeDocuments
 			            parseDocument ]
