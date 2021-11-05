@@ -77,3 +77,14 @@ GeoBRTerrain >> potential [
 
 	^self class potential + (modifiers sum: [ :modifier | modifier modifier ])
 ]
+
+{ #category : #accessing }
+GeoBRTerrain >> printOn: aStream [
+
+	super printOn: aStream.
+	aStream
+		tab;
+		nextPut: $(;
+		print: self potential;
+		nextPut: $)
+]

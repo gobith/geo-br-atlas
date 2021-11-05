@@ -59,7 +59,7 @@ GeoBRXMLConverter >> provinceFromElement: anElement [
 	province := GeoBRXMLProvince new.
 	province name: (anElement attributeAt: 'name').
 	province level: (anElement attributeAt: 'level') asNumber.
-	province magic: (anElement attributeAt: 'magic').
+	province magic: (anElement attributeAt: 'magic') asNumber.
 	province realm: (anElement attributeAt: 'realm').
 
 	province holdings: ((anElement allElements

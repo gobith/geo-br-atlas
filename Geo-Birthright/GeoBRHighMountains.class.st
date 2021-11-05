@@ -1,17 +1,17 @@
 Class {
-	#name : #GeoBRMountainPeaks,
+	#name : #GeoBRHighMountains,
 	#superclass : #GeoBRTerrain,
 	#category : #'Geo-Birthright-Terrain'
 }
 
 { #category : #accessing }
-GeoBRMountainPeaks class >> potential [
+GeoBRHighMountains class >> potential [
 
 	^9
 ]
 
 { #category : #accessing }
-GeoBRMountainPeaks class >> terrainName [
+GeoBRHighMountains class >> terrainName [
 
-	^'Mountain Peaks'
+	^'High Mountains'
 ]

@@ -82,13 +82,38 @@ GeoBRInitialData class >> scale [
 { #category : #actions }
 GeoBRInitialData class >> start [
 
-	^ self startInitial: false isTest: false
+	^ self start: true initial: false isTest: false
+]
+
+{ #category : #actions }
+GeoBRInitialData class >> start: shouldStart initial: isInitial isTest: isTest [
+
+	| session repository world |
+	session := GeoBRSession new.
+	repository := isTest
+		              ifTrue: [ GeoBRTestRepository new ]
+		              ifFalse: [ 
+		              VOMongoRepository
+			              host: 'localhost'
+			              database: self database ].
+
+	world := GeoBRWorld new
+		         repository: repository;
+		         yourself.
+
+	isInitial ifTrue: [ (self on: world) run ].
+	world replay.
+
+	shouldStart ifTrue: [session start].
+	session world: world.
+
+	^ session
 ]
 
 { #category : #actions }
 GeoBRInitialData class >> startInitial [
 
-	^ self startInitial: true isTest: false
+	^ self start: true initial: true isTest: false
 ]
 
 { #category : #actions }
@@ -119,7 +144,13 @@ GeoBRInitialData class >> startInitial: isInitial isTest: isTest [
 { #category : #actions }
 GeoBRInitialData class >> startTest [
 
-	^ self startInitial: true isTest: true
+	^ self start: true initial: true isTest: true
+]
+
+{ #category : #actions }
+GeoBRInitialData class >> startTestWithoutServer [
+
+	^ self start: false initial: true isTest: true
 ]
 
 { #category : #running }

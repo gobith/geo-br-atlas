@@ -62,6 +62,11 @@ GeoBRSession >> stop [
 ]
 
 { #category : #accessing }
+GeoBRSession >> world [
+	^ world
+]
+
+{ #category : #accessing }
 GeoBRSession >> world: aGeoBRWorld [ 
 	world := aGeoBRWorld
 ]
