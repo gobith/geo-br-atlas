@@ -1,23 +1,23 @@
 Class {
-	#name : #GeoBRForest,
+	#name : #GeoBRSteppes,
 	#superclass : #GeoBRTerrain,
 	#category : #'Geo-Birthright-Terrain'
 }
 
 { #category : #accessing }
-GeoBRForest class >> potential [
+GeoBRSteppes class >> moveCost [
 
-	^7
+	^ 1
 ]
 
 { #category : #accessing }
-GeoBRForest class >> terrainName [
+GeoBRSteppes class >> potential [
 
-	^'Forest'
+	^5
 ]
 
 { #category : #accessing }
-GeoBRForest >> color [
+GeoBRSteppes class >> terrainName [
 
-	^ Color lightGreen lighter lighter
+	^'Steppes'
 ]

@@ -1,23 +1,23 @@
 Class {
-	#name : #GeoBRSwamp,
+	#name : #GeoBRLowMountains,
 	#superclass : #GeoBRTerrain,
 	#category : #'Geo-Birthright-Terrain'
 }
 
 { #category : #accessing }
-GeoBRSwamp class >> moveCost [
+GeoBRLowMountains class >> moveCost [
 
 	^ 2
 ]
 
 { #category : #accessing }
-GeoBRSwamp class >> potential [
+GeoBRLowMountains class >> potential [ 
 
-	^ 8
+	^ 7
 ]
 
 { #category : #accessing }
-GeoBRSwamp class >> terrainName [
+GeoBRLowMountains class >> terrainName [
 
-	^'Swamp'
+	^ 'Low Mountains'
 ]

@@ -5,9 +5,15 @@ Class {
 }
 
 { #category : #accessing }
+GeoBRTundra class >> moveCost [
+
+	^ 2
+]
+
+{ #category : #accessing }
 GeoBRTundra class >> potential [
 
-	^5
+	^ 5
 ]
 
 { #category : #accessing }

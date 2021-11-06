@@ -1582,9 +1582,9 @@ GeoBRToWar >> scriptProvinceOwnerships [
 { #category : #scripts }
 GeoBRToWar >> scriptProvinces [
 
-	cear := self takeAction: (GeoBRAddProvinceAction new name: 'Cear'; areaId: 63; level: 4; terrain: GeoBRMountain new; loyalty: GeoBRLoyaltyHigh new).
-	garlofs := self takeAction: (GeoBRAddProvinceAction new name: 'Garlofs'; areaId: 22; level: 2; terrain: GeoBRMountain new; loyalty: GeoBRLoyaltyHigh new).
-	numut := self takeAction: (GeoBRAddProvinceAction new name: 'Numut'; areaId: 8; level: 3; terrain: GeoBRMountain new; loyalty: GeoBRLoyaltyAverage new).
+	cear := self takeAction: (GeoBRAddProvinceAction new name: 'Cear'; areaId: 63; level: 4; terrain: GeoBRHighMountains new; loyalty: GeoBRLoyaltyHigh new).
+	garlofs := self takeAction: (GeoBRAddProvinceAction new name: 'Garlofs'; areaId: 22; level: 2; terrain: GeoBRHighMountains new; loyalty: GeoBRLoyaltyHigh new).
+	numut := self takeAction: (GeoBRAddProvinceAction new name: 'Numut'; areaId: 8; level: 3; terrain: GeoBRHighMountains new; loyalty: GeoBRLoyaltyAverage new).
 	bernau := self takeAction: (GeoBRAddProvinceAction new name: 'Bernau'; areaId: 34; level: 1; terrain: GeoBRHills new; loyalty: GeoBRLoyaltyAverage new).
 
 	hilt := self takeAction: (GeoBRAddProvinceAction new name: 'Hilt'; areaId: 67; level: 2; terrain: GeoBRHills new; loyalty: GeoBRLoyaltyAverage new).

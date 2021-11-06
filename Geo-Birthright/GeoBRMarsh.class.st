@@ -5,9 +5,15 @@ Class {
 }
 
 { #category : #accessing }
+GeoBRMarsh class >> moveCost [
+
+	^ 2
+]
+
+{ #category : #accessing }
 GeoBRMarsh class >> potential [
 
-	^5
+	^ 5
 ]
 
 { #category : #accessing }

@@ -1038,5 +1038,5 @@ GeoBRCerilia >> takeAction: anAction [
 { #category : #accessing }
 GeoBRCerilia >> terrainForProvince: aProvince [
 
-	^GeoBRForest new
+	^GeoBRLightForest new
 ]

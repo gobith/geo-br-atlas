@@ -65,7 +65,7 @@ GeoBRXMLConverter >> provinceFromElement: anElement [
 	province holdings: ((anElement allElements
 			  removeFirst;
 			  yourself) collect: [ :holdingElement | 
-			 | holding |
+			 | holding level |
 			 holding := GeoBRXMLHolding new.
 			 holding type: holdingElement name.
 			 holding level: (holdingElement attributeAt: 'l').

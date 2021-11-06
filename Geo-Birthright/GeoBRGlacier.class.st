@@ -1,23 +1,23 @@
 Class {
-	#name : #GeoBRMountain,
+	#name : #GeoBRGlacier,
 	#superclass : #GeoBRTerrain,
 	#category : #'Geo-Birthright-Terrain'
 }
 
 { #category : #accessing }
-GeoBRMountain class >> potential [
+GeoBRGlacier class >> moveCost [
 
-	^7
+	^ 4
 ]
 
 { #category : #accessing }
-GeoBRMountain class >> terrainName [
+GeoBRGlacier class >> potential [
 
-	^'Mountain'
+	^ 8
 ]
 
 { #category : #accessing }
-GeoBRMountain >> color [
+GeoBRGlacier class >> terrainName [
 
-	^ Color fromHexString: 'F5DEB3'
+	^ 'Glacier'
 ]

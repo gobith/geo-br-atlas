@@ -5,9 +5,15 @@ Class {
 }
 
 { #category : #accessing }
+GeoBRAncientForest class >> moveCost [
+
+	^ 2
+]
+
+{ #category : #accessing }
 GeoBRAncientForest class >> potential [
 
-	^9
+	^ 9
 ]
 
 { #category : #accessing }

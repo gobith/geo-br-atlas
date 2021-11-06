@@ -3,13 +3,27 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'id',
+		'areaId',
 		'name',
 		'level',
 		'loyalty',
-		'terrain'
+		'terrain',
+		'owner'
 	],
 	#category : #'Geo-Birthright-Domain Setup'
 }
+
+{ #category : #accessing }
+BRProvince >> areaId [
+
+	^ areaId
+]
+
+{ #category : #accessing }
+BRProvince >> areaId: anObject [
+
+	areaId := anObject
+]
 
 { #category : #accessing }
 BRProvince >> id [
@@ -57,6 +71,18 @@ BRProvince >> name [
 BRProvince >> name: anObject [
 
 	name := anObject
+]
+
+{ #category : #accessing }
+BRProvince >> owner [
+
+	^ owner
+]
+
+{ #category : #accessing }
+BRProvince >> owner: anObject [
+
+	owner := anObject
 ]
 
 { #category : #accessing }

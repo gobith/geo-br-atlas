@@ -5,13 +5,19 @@ Class {
 }
 
 { #category : #accessing }
+GeoBRHighMountains class >> moveCost [
+
+	^ 4
+]
+
+{ #category : #accessing }
 GeoBRHighMountains class >> potential [
 
-	^9
+	^ 9
 ]
 
 { #category : #accessing }
 GeoBRHighMountains class >> terrainName [
 
-	^'High Mountains'
+	^ 'High Mountains'
 ]

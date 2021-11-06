@@ -8,6 +8,12 @@ Class {
 }
 
 { #category : #accessing }
+GeoBRTerrain class >> moveCost [
+
+	^ self subclassResponsibility
+]
+
+{ #category : #accessing }
 GeoBRTerrain class >> neoJsonMappingOn: mapping [
 
 	mapping
@@ -20,13 +26,13 @@ GeoBRTerrain class >> neoJsonMappingOn: mapping [
 { #category : #accessing }
 GeoBRTerrain class >> potential [
 
-	^self subclassResponsibility 
+	^ self subclassResponsibility
 ]
 
 { #category : #accessing }
 GeoBRTerrain class >> terrainName [
 
-	^''
+	^ ''
 ]
 
 { #category : #accessing }

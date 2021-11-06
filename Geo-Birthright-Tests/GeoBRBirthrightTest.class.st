@@ -25,10 +25,10 @@ GeoBRBirthrightTest >> test001 [
 	
 
 	
-	world takeAction: (GeoBRAddProvinceAction new id: '1'; name: 'Province 1'; level: 3; terrain: GeoBRForest new; loyalty: GeoBRLoyaltyAverage new).
-	world takeAction: (GeoBRAddProvinceAction new id: '2'; name: 'Province 2'; level: 2; terrain: GeoBRForest new; loyalty: GeoBRLoyaltyAverage new).
-	world takeAction: (GeoBRAddProvinceAction new id: '3'; name: 'Province 3'; level: 1; terrain: GeoBRForest new; loyalty: GeoBRLoyaltyAverage new).
-	world takeAction: (GeoBRAddProvinceAction new id: '4'; name: 'Province 4'; level: 4; terrain: GeoBRForest new; loyalty: GeoBRLoyaltyAverage new).
+	world takeAction: (GeoBRAddProvinceAction new id: '1'; name: 'Province 1'; level: 3; terrain: GeoBRLightForest new; loyalty: GeoBRLoyaltyAverage new).
+	world takeAction: (GeoBRAddProvinceAction new id: '2'; name: 'Province 2'; level: 2; terrain: GeoBRLightForest new; loyalty: GeoBRLoyaltyAverage new).
+	world takeAction: (GeoBRAddProvinceAction new id: '3'; name: 'Province 3'; level: 1; terrain: GeoBRLightForest new; loyalty: GeoBRLoyaltyAverage new).
+	world takeAction: (GeoBRAddProvinceAction new id: '4'; name: 'Province 4'; level: 4; terrain: GeoBRLightForest new; loyalty: GeoBRLoyaltyAverage new).
 	
 	province1 := world provinceAt: '1'.
 	province2 := world provinceAt: '2'.
@@ -62,7 +62,7 @@ GeoBRBirthrightTest >> testAction001 [
 	
 	world takeAction: (GeoBRAddRegentAction new id: '1'; name: 'Eric Velescarpe'; bloodline: 13).
 	
-	world takeAction: (GeoBRAddProvinceAction new id: '1'; name: 'Province 1'; level: 3; terrain: GeoBRForest new; loyalty: GeoBRLoyaltyAverage new).
+	world takeAction: (GeoBRAddProvinceAction new id: '1'; name: 'Province 1'; level: 3; terrain: GeoBRLightForest new; loyalty: GeoBRLoyaltyAverage new).
 	
 	regent := world regentAt: '1'.
 	province1 := world provinceAt: '1'.
@@ -83,7 +83,7 @@ GeoBRBirthrightTest >> testAction002 [
 	
 
 	world takeAction: (GeoBRAddRegentAction new id: '1'; name: 'Eric Velescarpe'; bloodline: 13).
-	world takeAction: (GeoBRAddProvinceAction new id: '1'; name: 'Province 1'; level: 3; terrain: GeoBRForest new; loyalty: GeoBRLoyaltyAverage new).
+	world takeAction: (GeoBRAddProvinceAction new id: '1'; name: 'Province 1'; level: 3; terrain: GeoBRLightForest new; loyalty: GeoBRLoyaltyAverage new).
 	
 	regent := world regentAt: '1'.
 	province1 := world provinceAt: '1'.
@@ -106,7 +106,7 @@ GeoBRBirthrightTest >> testAction003 [
 	
 	world takeAction: (GeoBRAddRegentAction new id: '1'; name: 'Eric Velescarpe'; bloodline: 13).
 	
-	world takeAction: (GeoBRAddProvinceAction new id: '1'; name: 'Province 1'; level: 3; terrain: GeoBRForest new; loyalty: GeoBRLoyaltyAverage new).
+	world takeAction: (GeoBRAddProvinceAction new id: '1'; name: 'Province 1'; level: 3; terrain: GeoBRLightForest new; loyalty: GeoBRLoyaltyAverage new).
 	
 	regent := world regentAt: '1'.
 	province1 := world provinceAt: '1'.
@@ -130,7 +130,7 @@ GeoBRBirthrightTest >> testAction004 [
 	
 	world takeAction: (GeoBRAddRegentAction new id: '1'; name: 'Eric Velescarpe'; bloodline: 13).
 	
-	world takeAction: (GeoBRAddProvinceAction new id: '1'; name: 'Province 1'; level: 3; terrain: GeoBRForest new; loyalty: GeoBRLoyaltyAverage new).
+	world takeAction: (GeoBRAddProvinceAction new id: '1'; name: 'Province 1'; level: 3; terrain: GeoBRLightForest new; loyalty: GeoBRLoyaltyAverage new).
 	
 	regent := world regentAt: '1'.
 	province1 := world provinceAt: '1'.
@@ -155,7 +155,7 @@ GeoBRBirthrightTest >> testAction005 [
 	
 	world takeAction: (GeoBRAddRegentAction new id: '1'; name: 'Eric Velescarpe'; bloodline: 13).
 	
-	world takeAction: (GeoBRAddProvinceAction new id: '1'; name: 'Province 1'; level: 3; terrain: GeoBRForest new; loyalty: GeoBRLoyaltyAverage new).
+	world takeAction: (GeoBRAddProvinceAction new id: '1'; name: 'Province 1'; level: 3; terrain: GeoBRLightForest new; loyalty: GeoBRLoyaltyAverage new).
 	
 	regent := world regentAt: '1'.
 	province1 := world provinceAt: '1'.
@@ -210,7 +210,7 @@ GeoBRBirthrightTest >> testLoyaltyAction001 [
 	
 	world takeAction: (GeoBRAddRegentAction new id: '1'; name: 'Eric Velescarpe'; bloodline: 13).
 	
-	world takeAction: (GeoBRAddProvinceAction new id: '1'; name: 'Province 1'; level: 3; terrain: GeoBRForest new; loyalty: GeoBRLoyaltyAverage new).
+	world takeAction: (GeoBRAddProvinceAction new id: '1'; name: 'Province 1'; level: 3; terrain: GeoBRLightForest new; loyalty: GeoBRLoyaltyAverage new).
 	
 	regent := world regentAt: '1'.
 	province1 := world provinceAt: '1'.
@@ -230,7 +230,7 @@ GeoBRBirthrightTest >> testProvinceTerrain [
 	
 	
 	
-	world takeAction: (GeoBRAddProvinceAction new id: '1'; name: 'Province 1'; level: 3; terrain: GeoBRForest new; loyalty: GeoBRLoyaltyAverage new).
+	world takeAction: (GeoBRAddProvinceAction new id: '1'; name: 'Province 1'; level: 3; terrain: GeoBRLightForest new; loyalty: GeoBRLoyaltyAverage new).
 	
 	province1 := world provinceAt: '1'.
 	
@@ -243,7 +243,7 @@ GeoBRBirthrightTest >> testProvinceTerrainModifier [
 	|   province1 |
 	
 	
-	world takeAction: (GeoBRAddProvinceAction new id: '1'; name: 'Province 1'; level: 3; terrain: (GeoBRForest new modifier: 2); loyalty: GeoBRLoyaltyAverage new).
+	world takeAction: (GeoBRAddProvinceAction new id: '1'; name: 'Province 1'; level: 3; terrain: (GeoBRLightForest new modifier: 2); loyalty: GeoBRLoyaltyAverage new).
 	
 	province1 := world provinceAt: '1'.
 	
@@ -264,7 +264,7 @@ GeoBRBirthrightTest >> testVasal001 [
 	regent2 := world regentAt: '2'.
 	regent3 := world regentAt: '3'.
 	
-	world takeAction: (GeoBRAddProvinceAction new id: '1'; name: 'Province 1'; level: 3; terrain: GeoBRForest new; loyalty: GeoBRLoyaltyAverage new).
+	world takeAction: (GeoBRAddProvinceAction new id: '1'; name: 'Province 1'; level: 3; terrain: GeoBRLightForest new; loyalty: GeoBRLoyaltyAverage new).
 	
 	province1 := world provinceAt: '1'.
 	

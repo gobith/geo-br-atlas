@@ -102,23 +102,23 @@ GeoBRTheLeyOfTheLand >> scriptProvinceOwnerships [
 { #category : #accessing }
 GeoBRTheLeyOfTheLand >> scriptProvinces [
 
-	aeluin := self takeAction: (GeoBRAddProvinceAction new name: 'Aeluin'; areaId: 6; level: 6; terrain: GeoBRForest new; loyalty: GeoBRLoyaltyHigh new).
-	apex := self takeAction: (GeoBRAddProvinceAction new name: 'Apex'; areaId: 12; level: 1; terrain: GeoBRMountain new; loyalty: GeoBRLoyaltyAverage new).
-	armor := self takeAction: (GeoBRAddProvinceAction new name: 'Armor'; areaId: 16; level: 6; terrain: GeoBRMountain new; loyalty: GeoBRLoyaltyPoor new).
-	absal := self takeAction: (GeoBRAddProvinceAction new name: 'Absal'; areaId: 5; level: 1; terrain: GeoBRForest new; loyalty: GeoBRLoyaltyRebellious new).
+	aeluin := self takeAction: (GeoBRAddProvinceAction new name: 'Aeluin'; areaId: 6; level: 6; terrain: GeoBRLightForest new; loyalty: GeoBRLoyaltyHigh new).
+	apex := self takeAction: (GeoBRAddProvinceAction new name: 'Apex'; areaId: 12; level: 1; terrain: GeoBRLowMountains new; loyalty: GeoBRLoyaltyAverage new).
+	armor := self takeAction: (GeoBRAddProvinceAction new name: 'Armor'; areaId: 16; level: 6; terrain: GeoBRLowMountains new; loyalty: GeoBRLoyaltyPoor new).
+	absal := self takeAction: (GeoBRAddProvinceAction new name: 'Absal'; areaId: 5; level: 1; terrain: GeoBRLightForest new; loyalty: GeoBRLoyaltyRebellious new).
 	abbotHill := self takeAction: (GeoBRAddProvinceAction new name: 'Abbot Hill'; areaId: 17; level: 1; terrain: GeoBRHills new; loyalty: GeoBRLoyaltyHigh new).
 	
 
-	carp := self takeAction: (GeoBRAddProvinceAction new name: 'Carp'; areaId: 4; level: 1; terrain: GeoBRForest new; loyalty: GeoBRLoyaltyHigh new).
+	carp := self takeAction: (GeoBRAddProvinceAction new name: 'Carp'; areaId: 4; level: 1; terrain: GeoBRLightForest new; loyalty: GeoBRLoyaltyHigh new).
 	caidiff := self takeAction: (GeoBRAddProvinceAction new name: 'Caidiff'; areaId: 13; level: 1; terrain: GeoBRPlains new; loyalty: GeoBRLoyaltyHigh new).
 	connor := self takeAction: (GeoBRAddProvinceAction new name: 'Connor'; areaId: 2; level: 1; terrain: GeoBRPlains new; loyalty: GeoBRLoyaltyHigh new).
 	coldfell := self takeAction: (GeoBRAddProvinceAction new name: 'Coldfell'; areaId: 3; level: 1; terrain: GeoBRPlains new; loyalty: GeoBRLoyaltyHigh new).
-	cardian := self takeAction: (GeoBRAddProvinceAction new name: 'Cardain'; areaId: 14; level: 1; terrain: GeoBRForest new; loyalty: GeoBRLoyaltyHigh new).
-	corina := self takeAction: (GeoBRAddProvinceAction new name: 'Corina'; areaId: 7; level: 1; terrain: GeoBRForest new; loyalty: GeoBRLoyaltyHigh new).
+	cardian := self takeAction: (GeoBRAddProvinceAction new name: 'Cardain'; areaId: 14; level: 1; terrain: GeoBRLightForest new; loyalty: GeoBRLoyaltyHigh new).
+	corina := self takeAction: (GeoBRAddProvinceAction new name: 'Corina'; areaId: 7; level: 1; terrain: GeoBRLightForest new; loyalty: GeoBRLoyaltyHigh new).
 	
 
 	brost := self takeAction: (GeoBRAddProvinceAction new name: 'Brost'; areaId: 9; level: 1; terrain: GeoBRHills new; loyalty: GeoBRLoyaltyHigh new).
-	brookley := self takeAction: (GeoBRAddProvinceAction new name: 'Brookley'; areaId: 15; level: 1; terrain: GeoBRForest new; loyalty: GeoBRLoyaltyHigh new).
+	brookley := self takeAction: (GeoBRAddProvinceAction new name: 'Brookley'; areaId: 15; level: 1; terrain: GeoBRLightForest new; loyalty: GeoBRLoyaltyHigh new).
 	bulle := self takeAction: (GeoBRAddProvinceAction new name: 'Bulle'; areaId: 1; level: 1; terrain: GeoBRPlains new; loyalty: GeoBRLoyaltyHigh new).
 	boatswain := self takeAction: (GeoBRAddProvinceAction new name: 'Boatswain'; areaId: 8; level: 1; terrain: GeoBRHills new; loyalty: GeoBRLoyaltyHigh new).
 	bendersford := self takeAction: (GeoBRAddProvinceAction new name: 'Bendersford'; areaId: 10; level: 1; terrain: GeoBRPlains new; loyalty: GeoBRLoyaltyHigh new).
