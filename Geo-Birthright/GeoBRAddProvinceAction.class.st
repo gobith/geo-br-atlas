@@ -42,7 +42,8 @@ GeoBRAddProvinceAction >> doActionIn: aWorld [
 		level: level;
 		loyalty: loyalty;
 		terrain: terrain.
-	aWorld provinces at: province id put: province
+	aWorld provinces at: province id put: province.
+	aWorld pool at: province id put: province.
 ]
 
 { #category : #accessing }

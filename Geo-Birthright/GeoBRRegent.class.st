@@ -33,7 +33,7 @@ Class {
 		'id',
 		'name',
 		'bloodline',
-		'domain'
+		'regencyPoints'
 	],
 	#category : #'Geo-Birthright-Domain'
 }
@@ -44,7 +44,8 @@ GeoBRRegent class >> neoJsonMappingOn: mapping [
 	mapping 
 		mapAccessor: #id;
 		mapAccessor: #name;
-		mapAccessor: #bloodline
+		mapAccessor: #bloodline;
+		mapAccessor: #regencyPoints
 ]
 
 { #category : #accessing }
@@ -92,5 +93,19 @@ GeoBRRegent >> name: anObject [
 { #category : #printing }
 GeoBRRegent >> printOn: aStream [
 
-	aStream nextPutAll: self name
+	aStream
+		nextPutAll: 'Regent: ';
+		nextPutAll: self name
+]
+
+{ #category : #accessing }
+GeoBRRegent >> regencyPoints [
+
+	^ regencyPoints
+]
+
+{ #category : #accessing }
+GeoBRRegent >> regencyPoints: anObject [
+
+	regencyPoints := anObject
 ]

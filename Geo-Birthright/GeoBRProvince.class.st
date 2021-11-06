@@ -8,7 +8,8 @@ Class {
 		'level',
 		'loyalty',
 		'ownerships',
-		'terrain'
+		'terrain',
+		'owner'
 	],
 	#category : #'Geo-Birthright-Domain'
 }
@@ -23,16 +24,8 @@ GeoBRProvince class >> neoJsonMappingOn: mapping [
 		mapAccessor: #level;
 		mapAccessor: #loyaltyString to: #loyalty;
 		mapAccessor: #sourceRating;
-		mapAccessor: #ownership;
-		mapAccessor: #guild;
-		mapAccessor: #law;
-		mapAccessor: #temple;
-		mapAccessor: #source;
-		mapAccessor: #guildHoldings;
-		mapAccessor: #lawHoldings;
-		mapAccessor: #templeHoldings;
-		mapAccessor: #sourceHoldings;
-		mapAccessor: #terrain
+		mapAccessor: #terrain;
+		mapAccessor: #ownerId to: #owner
 ]
 
 { #category : #accessing }
@@ -140,7 +133,19 @@ GeoBRProvince >> name: anObject [
 
 { #category : #accessing }
 GeoBRProvince >> owner [
-	^self ownership owner
+	^owner
+]
+
+{ #category : #accessing }
+GeoBRProvince >> owner: anObject [
+
+	owner := anObject
+]
+
+{ #category : #accessing }
+GeoBRProvince >> ownerId [
+
+	^ owner ifNotNil: [ owner id ]
 ]
 
 { #category : #accessing }
@@ -157,7 +162,9 @@ GeoBRProvince >> ownerships [
 { #category : #printing }
 GeoBRProvince >> printOn: aStream [
 
-	aStream nextPutAll: self name
+	aStream
+		nextPutAll: 'Province: ';
+		nextPutAll: self name
 ]
 
 { #category : #initialization }

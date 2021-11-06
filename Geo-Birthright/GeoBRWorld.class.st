@@ -4,6 +4,9 @@ Class {
 	#instVars : [
 		'provinces',
 		'regents',
+		'domains',
+		'holdings',
+		'pool',
 		'ownerships',
 		'repository'
 	],
@@ -13,9 +16,11 @@ Class {
 { #category : #'instance creation' }
 GeoBRWorld class >> neoJsonMappingOn: mapping [
 	mapping
+		mapAccessor: #regentCollection to: #regents;
+		mapAccessor: #domainCollection to: #domains;
 		mapAccessor: #provinceCollection to: #provinces;
-		mapAccessor: #regents;
-		mapAccessor: #ownerships
+		mapAccessor: #holdingCollection to: #holdings
+		
 ]
 
 { #category : #accessing }
@@ -44,9 +49,21 @@ GeoBRWorld >> doAction: action [
 ]
 
 { #category : #accessing }
+GeoBRWorld >> domainCollection [
+
+	^ domains values asSortedCollection: [ :provA :provB | 
+		  provA name <= provB name ]
+]
+
+{ #category : #accessing }
 GeoBRWorld >> domainPowerFor: aRegent [
 
 	^ ownerships sum: [ :ownership | ownership regencyPointsFor: aRegent ]
+]
+
+{ #category : #accessing }
+GeoBRWorld >> domains [
+	^ domains
 ]
 
 { #category : #'actions database' }
@@ -61,6 +78,17 @@ GeoBRWorld >> emptyAllData [
 		removeAll: GeoBRMountainArea;
 		removeAll: GeoBRBorder.
 	self reset
+]
+
+{ #category : #accessing }
+GeoBRWorld >> holdingCollection [
+
+	^ holdings values 
+]
+
+{ #category : #accessing }
+GeoBRWorld >> holdings [
+	^ holdings
 ]
 
 { #category : #initialization }
@@ -103,6 +131,18 @@ GeoBRWorld >> ownerships [
 ]
 
 { #category : #accessing }
+GeoBRWorld >> pool [
+
+	^ pool 
+]
+
+{ #category : #accessing }
+GeoBRWorld >> poolAt: anIdentifier [
+
+	^pool at: anIdentifier 
+]
+
+{ #category : #accessing }
 GeoBRWorld >> provinceAreas [
 
 	^ repository selectAll: GeoBRProvinceArea
@@ -128,7 +168,8 @@ GeoBRWorld >> provinceBorders [
 { #category : #accessing }
 GeoBRWorld >> provinceCollection [
 
-	^provinces values asSortedCollection: [ :provA :provB | provA name <= provB name ]
+	^ provinces values asSortedCollection: [ :provA :provB | 
+		  provA name <= provB name ]
 ]
 
 { #category : #accessing }
@@ -179,7 +220,8 @@ GeoBRWorld >> regentAt: regentId [
 { #category : #accessing }
 GeoBRWorld >> regentCollection [
 
-	^regents values asSortedCollection: [ :provA :provB | provA name <= provB name ]
+	^ regents values asSortedCollection: [ :provA :provB | 
+		  provA name <= provB name ]
 ]
 
 { #category : #accessing }
@@ -212,6 +254,9 @@ GeoBRWorld >> reset [
 	provinces := Dictionary new.
 	regents := Dictionary new.
 	ownerships := OrderedCollection new.
+	domains := Dictionary new.
+	holdings := Dictionary new.
+	pool := Dictionary new
 ]
 
 { #category : #actions }

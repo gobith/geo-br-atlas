@@ -48,9 +48,9 @@ GeoBROwnershipAction >> owner: anObject [
 GeoBROwnershipAction >> ownerShipUsing: aWorld [
 
 	^ self typeClass new
-		  owner: (aWorld regents at: owner);
-		  ruler: (aWorld regents at: ruler);
-		  province: (aWorld provinces at: province);
+		  owner: (aWorld poolAt: owner);
+		  ruler: (aWorld poolAt: ruler);
+		  province: (aWorld poolAt: province);
 		  yourself
 ]
 

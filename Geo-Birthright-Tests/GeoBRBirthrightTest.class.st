@@ -21,36 +21,49 @@ GeoBRBirthrightTest >> test001 [
 
 	|  regent province1 province2 province3 province4|
 
-	world takeAction: (GeoBRAddRegentAction new id: '1'; name: 'Eric Velescarpe'; bloodline: 15).
+	world takeAction: (GeoBRAddRegentAction new id: '1'; name: 'Eric Velescarpe'; bloodline: 15; regencyPoints: 10).
+	
+	world takeAction: (GeoBRAddDomainAction new id: '2'; name: 'Erics Domain').
+	
+	world takeAction: (GeoBROwnershipAction2 new  owner: '1';  subject: '2').
 	
 
 	
-	world takeAction: (GeoBRAddProvinceAction new id: '1'; name: 'Province 1'; level: 3; terrain: GeoBRLightForest new; loyalty: GeoBRLoyaltyAverage new).
-	world takeAction: (GeoBRAddProvinceAction new id: '2'; name: 'Province 2'; level: 2; terrain: GeoBRLightForest new; loyalty: GeoBRLoyaltyAverage new).
-	world takeAction: (GeoBRAddProvinceAction new id: '3'; name: 'Province 3'; level: 1; terrain: GeoBRLightForest new; loyalty: GeoBRLoyaltyAverage new).
-	world takeAction: (GeoBRAddProvinceAction new id: '4'; name: 'Province 4'; level: 4; terrain: GeoBRLightForest new; loyalty: GeoBRLoyaltyAverage new).
+	world takeAction: (GeoBRAddProvinceAction new id: '3'; name: 'Province 1'; level: 3; terrain: GeoBRLightForest new; loyalty: GeoBRLoyaltyAverage new).
+	world takeAction: (GeoBRAddProvinceAction new id: '4'; name: 'Province 2'; level: 2; terrain: GeoBRLightForest new; loyalty: GeoBRLoyaltyAverage new).
+	world takeAction: (GeoBRAddProvinceAction new id: '5'; name: 'Province 3'; level: 1; terrain: GeoBRLightForest new; loyalty: GeoBRLoyaltyAverage new).
+	world takeAction: (GeoBRAddProvinceAction new id: '6'; name: 'Province 4'; level: 4; terrain: GeoBRLightForest new; loyalty: GeoBRLoyaltyAverage new).
 	
-	province1 := world provinceAt: '1'.
-	province2 := world provinceAt: '2'.
-	province3 := world provinceAt: '3'.
-	province4 := world provinceAt: '4'.
+	province1 := world poolAt: '3'.
+	province2 := world poolAt: '4'.
+	province3 := world poolAt: '5'.
+	province4 := world poolAt: '6'.
 	
-	world takeAction: (GeoBRProvinceOwnershipAction new province: '1'; owner: '1'; ruler: '1').
-	world takeAction: (GeoBRProvinceOwnershipAction new province: '2'; owner: '1'; ruler: '1').
-	world takeAction: (GeoBRProvinceOwnershipAction new province: '3'; owner: '1'; ruler: '1').
-	world takeAction: (GeoBRProvinceOwnershipAction new province: '4'; owner: '1'; ruler: '1').
+	world takeAction: (GeoBROwnershipAction2 new  owner: '1';  subject: '3').
+	world takeAction: (GeoBROwnershipAction2 new  owner: '1';  subject: '4').
+	world takeAction: (GeoBROwnershipAction2 new  owner: '1';  subject: '5').
+	world takeAction: (GeoBROwnershipAction2 new  owner: '1';  subject: '6').
 	
-	world takeAction: (GeoBRLawOwnershipAction new province: '1'; owner: '1'; ruler: '1'; level: 2).
-	world takeAction: (GeoBRTempleOwnershipAction new province: '1'; owner: '1'; ruler: '1'; level: 2).
-	world takeAction: (GeoBRSourceOwnershipAction new province: '1'; owner: '1'; ruler: '1'; level: 1).
-	world takeAction: (GeoBRGuildOwnershipAction new province: '1'; owner: '1'; ruler: '1'; level: 1).
+	world takeAction: (GeoBRAddHoldingAction new id: '7'; province: '3';  level: 2;  type: 'law').
+	world takeAction: (GeoBRAddHoldingAction new id: '8'; province: '3';  level: 2;  type: 'temple').
+	world takeAction: (GeoBRAddHoldingAction new id: '9'; province: '3';  level: 1;  type: 'source').
+	world takeAction: (GeoBRAddHoldingAction new id: '10'; province: '3';  level: 1;  type: 'guild').
+	
+	world takeAction: (GeoBROwnershipAction2 new  owner: '2';  subject: '7').
+	world takeAction: (GeoBROwnershipAction2 new  owner: '2';  subject: '8').
+	world takeAction: (GeoBROwnershipAction2 new  owner: '2';  subject: '9').
+	world takeAction: (GeoBROwnershipAction2 new  owner: '2';  subject: '10').
+	
+	
 	
 	world replay.
 	
-	regent := world regentAt: '1'.
+	regent := world poolAt: '1'.
 	
-	self assert: (world collectedRegencyPointsFor: regent) equals: 18.
-	self assert: (world domainPowerFor: regent) equals: 16.
+	"self assert: (world collectedRegencyPointsFor: regent) equals: 18.
+	self assert: (world domainPowerFor: regent) equals: 16."
+	
+	world inspect
 ]
 
 { #category : #tests }

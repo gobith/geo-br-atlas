@@ -16,6 +16,54 @@ Class {
 }
 
 { #category : #accessing }
+GeoBRCerilia2 >> addToWorld [
+
+	self halt.
+
+	regents do: [ :regent | 
+		| id |
+		id := self takeAction: (GeoBRAddRegentAction new
+				       name: regent name;
+				       bloodline: regent bloodline;
+				       regencyPoints: regent regencyPoints).
+		regent id: id ].
+
+	domains do: [ :domain | 
+		| id |
+		id := self takeAction: (GeoBRAddDomainAction new name: domain name).
+		domain id: id.
+
+		domain owner ifNotNil: [ 
+			self takeAction: (GeoBROwnershipAction2 new
+					 owner: domain owner id;
+					 subject: id) ] ].
+
+	provinces do: [ :province | 
+		| id |
+		id := self takeAction: (GeoBRAddProvinceAction new
+				       areaId: province areaId;
+				       name: province name;
+				       level: province level;
+				       terrain: province terrain;
+				       loyalty: province loyalty).
+		province id: id.
+
+		self takeAction: (GeoBROwnershipAction2 new
+				 owner: province owner id;
+				 subject: id) ].
+
+	holdings do: [ :holding | 
+		| id |
+		id := self takeAction: (GeoBRAddHoldingAction new
+				       province: holding province id;
+				       level: 2;
+				       type: 'law').
+		self takeAction: (GeoBROwnershipAction2 new
+				 owner: holding owner id;
+				 subject: id) ]
+]
+
+{ #category : #accessing }
 GeoBRCerilia2 >> privateScript [
 
 	| shortNameToDomains |
@@ -84,14 +132,17 @@ GeoBRCerilia2 >> privateScript [
 		self setTerrain: csvProvince terrain in: province ].
 	
 
-self halt
+	self addToWorld
 ]
 
 { #category : #accessing }
 GeoBRCerilia2 >> script [
 
-	
-	
+	self provinceAreas do: [ :provinceArea | world repository save: provinceArea ].
+	self islandAreas do: [ :islandArea | world repository save: islandArea ].
+	self woodAreas do: [ :woodArea | world repository save: woodArea ].
+	self mountainAreas do: [ :mountainArea | world repository save: mountainArea ].
+	self borders do: [ :border | world repository save: border ].
 	
 	xmlProvinces := GeoBRXMLConverter new parse provinces.
 	xmlLegends := GeoBRXMLConverter new parse legends.
@@ -117,6 +168,14 @@ GeoBRCerilia2 >> setTerrain: terrainString in: aProvince [
 	modifier := terrain potential - potential.
 	modifier ~= 0 ifTrue: [ terrain modifier: modifier ].
 	aProvince terrain: terrain
+]
+
+{ #category : #accessing }
+GeoBRCerilia2 >> takeAction: anAction [
+
+	| action |
+	action := world takeAction: anAction.
+	^ action id
 ]
 
 { #category : #accessing }

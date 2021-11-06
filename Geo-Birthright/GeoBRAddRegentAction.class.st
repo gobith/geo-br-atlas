@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'id',
 		'name',
-		'bloodline'
+		'bloodline',
+		'regencyPoints'
 	],
 	#category : #'Geo-Birthright-Actions'
 }
@@ -35,7 +36,9 @@ GeoBRAddRegentAction >> doActionIn: aWorld [
 	regent id: id.
 	regent name: name.
 	regent bloodline: bloodline.
-	aWorld regents at: regent id put: regent
+	regent regencyPoints: regencyPoints.
+	aWorld regents at: regent id put: regent.
+	aWorld pool at: regent id put: regent
 ]
 
 { #category : #accessing }
@@ -66,4 +69,16 @@ GeoBRAddRegentAction >> name [
 GeoBRAddRegentAction >> name: anObject [
 
 	name := anObject
+]
+
+{ #category : #accessing }
+GeoBRAddRegentAction >> regencyPoints [
+
+	^ regencyPoints
+]
+
+{ #category : #accessing }
+GeoBRAddRegentAction >> regencyPoints: anObject [
+
+	regencyPoints := anObject
 ]
