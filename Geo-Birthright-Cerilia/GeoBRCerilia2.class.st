@@ -18,7 +18,7 @@ Class {
 { #category : #accessing }
 GeoBRCerilia2 >> addToWorld [
 
-	self halt.
+
 
 	regents do: [ :regent | 
 		| id |

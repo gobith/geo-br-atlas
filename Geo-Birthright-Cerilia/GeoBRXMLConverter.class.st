@@ -22,7 +22,7 @@ GeoBRXMLConverter >> legendFromElement: anElement [
 
 	array := anElement nodes first string substrings: '()'.
 
-	legend name: array first.
+	legend name: array first trimBoth.
 	legend domain: (array at: 2 ifAbsent: nil).
 	
 	array size > 2 ifTrue: [ self halt ].
