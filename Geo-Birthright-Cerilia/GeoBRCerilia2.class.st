@@ -56,8 +56,8 @@ GeoBRCerilia2 >> addToWorld [
 		| id |
 		id := self takeAction: (GeoBRAddHoldingAction new
 				       province: holding province id;
-				       level: 2;
-				       type: 'law').
+				       level: holding level;
+				       type: holding type).
 		self takeAction: (GeoBROwnershipAction2 new
 				 owner: holding owner id;
 				 subject: id) ]
