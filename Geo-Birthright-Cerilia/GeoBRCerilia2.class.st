@@ -10,7 +10,8 @@ Class {
 		'csvProvinces',
 		'csvProvinceDatas',
 		'csvCharacters',
-		'csvDomains'
+		'csvDomains',
+		'provinceAreas'
 	],
 	#category : #'Geo-Birthright-Cerilia-Data'
 }
@@ -61,6 +62,19 @@ GeoBRCerilia2 >> addToWorld [
 		self takeAction: (GeoBROwnershipAction2 new
 				 owner: holding owner id;
 				 subject: id) ]
+]
+
+{ #category : #accessing }
+GeoBRCerilia2 >> coupleProvinceToArea [
+
+	| areaIdToProvinceMapping |
+	areaIdToProvinceMapping := Dictionary new.
+	(provinces select: [ :each | each areaId notNil ]) do: [ :province | 
+		areaIdToProvinceMapping at: province areaId put: province ].
+
+	provinceAreas do: [ :area | 
+		(areaIdToProvinceMapping at: area center ifAbsent: nil) ifNotNil: [ 
+			:province | area province: province id ] ]
 ]
 
 { #category : #accessing }
@@ -132,13 +146,14 @@ GeoBRCerilia2 >> privateScript [
 		self setTerrain: csvProvince terrain in: province ].
 	
 
-	self addToWorld
+	
 ]
 
 { #category : #accessing }
 GeoBRCerilia2 >> script [
 
-	self provinceAreas do: [ :provinceArea | world repository save: provinceArea ].
+	provinceAreas := self provinceAreas.
+	
 	self islandAreas do: [ :islandArea | world repository save: islandArea ].
 	self woodAreas do: [ :woodArea | world repository save: woodArea ].
 	self mountainAreas do: [ :mountainArea | world repository save: mountainArea ].
@@ -153,7 +168,11 @@ GeoBRCerilia2 >> script [
 	csvDomains := GeoBRCSVConverter new convertedDomains.
 	
 	self privateScript.
+	self addToWorld.
 	
+	self coupleProvinceToArea.
+	
+	provinceAreas do: [ :provinceArea | world repository save: provinceArea ].
 ]
 
 { #category : #accessing }
