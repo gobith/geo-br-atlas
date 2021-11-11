@@ -19,12 +19,6 @@ Class {
 }
 
 { #category : #accessing }
-GeoBRCerilia class >> bordersJson [
-
-	^ NeoJSONWriter toStringPretty: self grid borders
-]
-
-{ #category : #accessing }
 GeoBRCerilia class >> database [
 
 	^ 'birthright'

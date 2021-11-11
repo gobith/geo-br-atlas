@@ -2,16 +2,11 @@ Class {
 	#name : #GeoBRInitialData,
 	#superclass : #Object,
 	#instVars : [
-		'world'
+		'world',
+		'grid'
 	],
 	#category : #'Geo-Birthright-Data'
 }
-
-{ #category : #accessing }
-GeoBRInitialData class >> bordersJson [
-
-	^ '[]'
-]
 
 { #category : #accessing }
 GeoBRInitialData class >> database [
@@ -52,25 +47,13 @@ GeoBRInitialData class >> mountainsGrid [
 { #category : #'instance creation' }
 GeoBRInitialData class >> on: aWorld [
 
-	^self new world: aWorld
+	^ self new world: aWorld
 ]
 
 { #category : #accessing }
 GeoBRInitialData class >> paths [
 
 	^self subclassResponsibility 
-]
-
-{ #category : #accessing }
-GeoBRInitialData class >> provinceAreasJson [
-
-	^ '[]'
-]
-
-{ #category : #running }
-GeoBRInitialData class >> run [
-
-	(self on: self world) run
 ]
 
 { #category : #accessing }
@@ -153,17 +136,6 @@ GeoBRInitialData class >> startTestWithoutServer [
 	^ self start: false initial: true isTest: true
 ]
 
-{ #category : #running }
-GeoBRInitialData class >> testWorld [
-
-	| world |
-	world := GeoBRWorld new
-		         repository: GeoBRTestRepository new;
-		         yourself.
-	(self on: world) run.
-	^ world
-]
-
 { #category : #accessing }
 GeoBRInitialData class >> woods [
 
@@ -185,13 +157,20 @@ GeoBRInitialData class >> woodsGrid [
 { #category : #accessing }
 GeoBRInitialData >> borders [
 
-	^ self class grid borders
+	^ self grid borders
+]
+
+{ #category : #accessing }
+GeoBRInitialData >> grid [ 
+
+	grid ifNil: [ grid := self class grid ].
+	^ grid
 ]
 
 { #category : #accessing }
 GeoBRInitialData >> islandAreas [
 
-	^ self class grid islandAreas
+	^ self grid islandAreas
 ]
 
 { #category : #accessing }
@@ -201,9 +180,15 @@ GeoBRInitialData >> mountainAreas [
 ]
 
 { #category : #accessing }
+GeoBRInitialData >> paths [
+
+	^ self grid paths
+]
+
+{ #category : #accessing }
 GeoBRInitialData >> provinceAreas [
 
-	^ self class grid provinceAreas
+	^ self grid provinceAreas
 ]
 
 { #category : #actions }

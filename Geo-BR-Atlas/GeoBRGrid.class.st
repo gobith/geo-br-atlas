@@ -68,10 +68,12 @@ GeoBRGrid >> borderIdsForNodes: aCollection [
 
 { #category : #accessing }
 GeoBRGrid >> borders [
-	
+
 	^ paths collect: [ :path | 
 		  GeoBRBorder new
 			  id: path id;
+			  a: path a;
+			  b: path b;
 			  d: path d;
 			  yourself ]
 ]
@@ -194,7 +196,6 @@ GeoBRGrid >> islandAreas [
 	idx := 0.
 	^ grid areas asOrderedCollection collect: [ :areaNodes | 
 		  idx := idx + 1.
-
 		  GeoBRIslandArea new
 			  id: idx;
 			  d: (self dForNodes: areaNodes);
