@@ -25,7 +25,7 @@ GeoBRBirthrightTest >> test001 [
 	
 	world takeAction: (GeoBRAddDomainAction new id: '2'; name: 'Erics Domain').
 	
-	world takeAction: (GeoBROwnershipAction2 new  owner: '1';  subject: '2').
+	world takeAction: (GeoBROwnershipAction new  owner: '1';  subject: '2').
 	
 
 	
@@ -39,20 +39,20 @@ GeoBRBirthrightTest >> test001 [
 	province3 := world poolAt: '5'.
 	province4 := world poolAt: '6'.
 	
-	world takeAction: (GeoBROwnershipAction2 new  owner: '1';  subject: '3').
-	world takeAction: (GeoBROwnershipAction2 new  owner: '1';  subject: '4').
-	world takeAction: (GeoBROwnershipAction2 new  owner: '1';  subject: '5').
-	world takeAction: (GeoBROwnershipAction2 new  owner: '1';  subject: '6').
+	world takeAction: (GeoBROwnershipAction new  owner: '1';  subject: '3').
+	world takeAction: (GeoBROwnershipAction new  owner: '1';  subject: '4').
+	world takeAction: (GeoBROwnershipAction new  owner: '1';  subject: '5').
+	world takeAction: (GeoBROwnershipAction new  owner: '1';  subject: '6').
 	
 	world takeAction: (GeoBRAddHoldingAction new id: '7'; province: '3';  level: 2;  type: 'law').
 	world takeAction: (GeoBRAddHoldingAction new id: '8'; province: '3';  level: 2;  type: 'temple').
 	world takeAction: (GeoBRAddHoldingAction new id: '9'; province: '3';  level: 1;  type: 'source').
 	world takeAction: (GeoBRAddHoldingAction new id: '10'; province: '3';  level: 1;  type: 'guild').
 	
-	world takeAction: (GeoBROwnershipAction2 new  owner: '2';  subject: '7').
-	world takeAction: (GeoBROwnershipAction2 new  owner: '2';  subject: '8').
-	world takeAction: (GeoBROwnershipAction2 new  owner: '2';  subject: '9').
-	world takeAction: (GeoBROwnershipAction2 new  owner: '2';  subject: '10').
+	world takeAction: (GeoBROwnershipAction new  owner: '2';  subject: '7').
+	world takeAction: (GeoBROwnershipAction new  owner: '2';  subject: '8').
+	world takeAction: (GeoBROwnershipAction new  owner: '2';  subject: '9').
+	world takeAction: (GeoBROwnershipAction new  owner: '2';  subject: '10').
 	
 	
 	
@@ -63,127 +63,6 @@ GeoBRBirthrightTest >> test001 [
 	"self assert: (world collectedRegencyPointsFor: regent) equals: 18.
 	self assert: (world domainPowerFor: regent) equals: 16."
 	
-	world inspect
-]
-
-{ #category : #tests }
-GeoBRBirthrightTest >> testAction001 [
-	
-	|  regent province1 |
-	
-	
-	
-	world takeAction: (GeoBRAddRegentAction new id: '1'; name: 'Eric Velescarpe'; bloodline: 13).
-	
-	world takeAction: (GeoBRAddProvinceAction new id: '1'; name: 'Province 1'; level: 3; terrain: GeoBRLightForest new; loyalty: GeoBRLoyaltyAverage new).
-	
-	regent := world regentAt: '1'.
-	province1 := world provinceAt: '1'.
-	
-	world takeAction: (GeoBRLawOwnershipAction new province: '1'; owner: '1'; ruler: '1'; level: 2).
-	world takeAction: (GeoBRLawOwnershipAction new province: '1'; owner: '1'; ruler: '1'; level: 3).
-	
-	self assert: world ownerships size equals: 1.
-	self assert: world ownerships first level equals: 3.
-	self assert: province1 ownerships size equals: 1.
-	self assert: province1 ownerships first level equals: 3
-]
-
-{ #category : #tests }
-GeoBRBirthrightTest >> testAction002 [
-	
-	|  regent province1 |
-	
-
-	world takeAction: (GeoBRAddRegentAction new id: '1'; name: 'Eric Velescarpe'; bloodline: 13).
-	world takeAction: (GeoBRAddProvinceAction new id: '1'; name: 'Province 1'; level: 3; terrain: GeoBRLightForest new; loyalty: GeoBRLoyaltyAverage new).
-	
-	regent := world regentAt: '1'.
-	province1 := world provinceAt: '1'.
-	
-	world takeAction: (GeoBRGuildOwnershipAction new province: '1'; owner: '1'; ruler: '1'; level: 2).
-	world takeAction: (GeoBRGuildOwnershipAction new province: '1'; owner: '1'; ruler: '1'; level: 3).
-	
-	
-	self assert: world ownerships size equals: 1.
-	self assert: world ownerships first level equals: 3.
-	self assert: province1 ownerships size equals: 1.
-	self assert: province1 ownerships first level equals: 3
-]
-
-{ #category : #tests }
-GeoBRBirthrightTest >> testAction003 [
-	
-	|  regent province1 |
-	
-	
-	world takeAction: (GeoBRAddRegentAction new id: '1'; name: 'Eric Velescarpe'; bloodline: 13).
-	
-	world takeAction: (GeoBRAddProvinceAction new id: '1'; name: 'Province 1'; level: 3; terrain: GeoBRLightForest new; loyalty: GeoBRLoyaltyAverage new).
-	
-	regent := world regentAt: '1'.
-	province1 := world provinceAt: '1'.
-	
-	world takeAction: (GeoBRSourceOwnershipAction new province: '1'; owner: '1'; ruler: '1'; level: 2).
-	world takeAction: (GeoBRSourceOwnershipAction new province: '1'; owner: '1'; ruler: '1'; level: 3).
-	
-
-	
-	self assert: world ownerships size equals: 1.
-	self assert: world ownerships first level equals: 3.
-	self assert: province1 ownerships size equals: 1.
-	self assert: province1 ownerships first level equals: 3
-]
-
-{ #category : #tests }
-GeoBRBirthrightTest >> testAction004 [
-	
-	|  regent province1 |
-	
-	
-	world takeAction: (GeoBRAddRegentAction new id: '1'; name: 'Eric Velescarpe'; bloodline: 13).
-	
-	world takeAction: (GeoBRAddProvinceAction new id: '1'; name: 'Province 1'; level: 3; terrain: GeoBRLightForest new; loyalty: GeoBRLoyaltyAverage new).
-	
-	regent := world regentAt: '1'.
-	province1 := world provinceAt: '1'.
-	
-	
-	world takeAction: (GeoBRTempleOwnershipAction new province: '1'; owner: '1'; ruler: '1'; level: 2).
-	world takeAction: (GeoBRTempleOwnershipAction new province: '1'; owner: '1'; ruler: '1'; level: 3).
-	
-	
-	
-	self assert: world ownerships size equals: 1.
-	self assert: world ownerships first level equals: 3.
-	self assert: province1 ownerships size equals: 1.
-	self assert: province1 ownerships first level equals: 3
-]
-
-{ #category : #tests }
-GeoBRBirthrightTest >> testAction005 [
-	
-	|  regent province1 |
-	
-	
-	world takeAction: (GeoBRAddRegentAction new id: '1'; name: 'Eric Velescarpe'; bloodline: 13).
-	
-	world takeAction: (GeoBRAddProvinceAction new id: '1'; name: 'Province 1'; level: 3; terrain: GeoBRLightForest new; loyalty: GeoBRLoyaltyAverage new).
-	
-	regent := world regentAt: '1'.
-	province1 := world provinceAt: '1'.
-	
-	
-	world takeAction: (GeoBRTempleOwnershipAction new province: '1'; owner: '1'; ruler: '1'; level: 2).
-	world takeAction: (GeoBRLawOwnershipAction new province: '1'; owner: '1'; ruler: '1'; level: 3).
-	
-	
-	self assert: world ownerships size equals: 2.
-	self assert: world ownerships first level equals: 2.
-	self assert: world ownerships last level equals: 3.
-	self assert: province1 ownerships size equals: 2.
-	self assert: province1 ownerships first level equals: 2.
-	self assert: province1 ownerships last level equals: 3
 ]
 
 { #category : #tests }
@@ -216,24 +95,31 @@ GeoBRBirthrightTest >> testBloodlineModifier [
 
 { #category : #tests }
 GeoBRBirthrightTest >> testLoyaltyAction001 [
-	
-	|  regent province1 |
-	
 
-	
-	world takeAction: (GeoBRAddRegentAction new id: '1'; name: 'Eric Velescarpe'; bloodline: 13).
-	
-	world takeAction: (GeoBRAddProvinceAction new id: '1'; name: 'Province 1'; level: 3; terrain: GeoBRLightForest new; loyalty: GeoBRLoyaltyAverage new).
-	
+	| regent province1 |
+	world takeAction: (GeoBRAddRegentAction new
+			 id: '1';
+			 name: 'Eric Velescarpe';
+			 bloodline: 13).
+
+	world takeAction: (GeoBRAddProvinceAction new
+			 id: '1';
+			 name: 'Province 1';
+			 level: 3;
+			 terrain: GeoBRLightForest new;
+			 loyalty: GeoBRLoyaltyAverage new).
+
 	regent := world regentAt: '1'.
 	province1 := world provinceAt: '1'.
-	
-	world takeAction: (GeoBRLoyaltyAverageAction  new province: '1').
+
+	world takeAction: (GeoBRLoyaltyAverageAction new province: '1').
 	world takeAction: (GeoBRLoyaltyHighAction new province: '1').
-	
-	
-	
-	self assert: province1 loyalty typeString equals: GeoBRLoyaltyHigh new typeString
+
+
+
+	self
+		assert: province1 loyalty typeString
+		equals: GeoBRLoyaltyHigh new typeString
 ]
 
 { #category : #tests }
@@ -261,40 +147,4 @@ GeoBRBirthrightTest >> testProvinceTerrainModifier [
 	province1 := world provinceAt: '1'.
 	
 	self assert: province1 sourceRating equals: 6
-]
-
-{ #category : #tests }
-GeoBRBirthrightTest >> testVasal001 [
-	
-	|  regent1 regent2 regent3 province1 |
-	
-	
-	world takeAction: (GeoBRAddRegentAction new id: '1'; name: 'Owner'; bloodline: 10).
-	world takeAction: (GeoBRAddRegentAction new id: '2'; name: 'Ruler 1'; bloodline: 10).
-	world takeAction: (GeoBRAddRegentAction new id: '3'; name: 'Ruler 2'; bloodline: 10).
-	
-	regent1 := world regentAt: '1'.
-	regent2 := world regentAt: '2'.
-	regent3 := world regentAt: '3'.
-	
-	world takeAction: (GeoBRAddProvinceAction new id: '1'; name: 'Province 1'; level: 3; terrain: GeoBRLightForest new; loyalty: GeoBRLoyaltyAverage new).
-	
-	province1 := world provinceAt: '1'.
-	
-	world takeAction: (GeoBRProvinceOwnershipAction new ruler: '2'; owner: '1' ; province: '1').
-	world takeAction: (GeoBRProvinceOwnershipAction new ruler: '3'; owner: '1' ; province: '1').
-	
-	
-	
-	self assert: province1 ownerships size equals: 1.
-	self assert: province1 ownerships first owner equals: regent1.
-	
-	self assert: (world collectedRegencyPointsFor: regent1) equals: 3.
-	self assert: (world domainPowerFor: regent1) equals: 3.
-	
-	self assert: (world collectedRegencyPointsFor: regent2) equals: 0.
-	self assert: (world domainPowerFor: regent2) equals: 0.
-	
-	self assert: (world collectedRegencyPointsFor: regent3) equals: 0.
-	self assert: (world domainPowerFor: regent3) equals: 0.
 ]

@@ -35,7 +35,7 @@ GeoBRCerilia2 >> addToWorld [
 		domain id: id.
 
 		domain owner ifNotNil: [ 
-			self takeAction: (GeoBROwnershipAction2 new
+			self takeAction: (GeoBROwnershipAction new
 					 owner: domain owner id;
 					 subject: id) ] ].
 
@@ -49,7 +49,7 @@ GeoBRCerilia2 >> addToWorld [
 				       loyalty: province loyalty).
 		province id: id.
 
-		self takeAction: (GeoBROwnershipAction2 new
+		self takeAction: (GeoBROwnershipAction new
 				 owner: province owner id;
 				 subject: id) ].
 
@@ -59,7 +59,7 @@ GeoBRCerilia2 >> addToWorld [
 				       province: holding province id;
 				       level: holding level;
 				       type: holding type).
-		self takeAction: (GeoBROwnershipAction2 new
+		self takeAction: (GeoBROwnershipAction new
 				 owner: holding owner id;
 				 subject: id) ]
 ]
@@ -217,5 +217,5 @@ GeoBRCerilia2 >> terrainForProvince: aProvince [
 	potential = 1 ifTrue: [ ^ GeoBRDesert new modifier: -4 ].
 	potential = 0 ifTrue: [ ^ GeoBRDesert new modifier: -5 ].
 	potential = 8 ifTrue: [ ^ GeoBRSwamp new ].
-	self halt
+
 ]

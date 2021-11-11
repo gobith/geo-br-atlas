@@ -63,7 +63,7 @@ GeoBRRegent >> bloodline: anObject [
 { #category : #accessing }
 GeoBRRegent >> bloodlineModifier [
 
-	^(bloodline - 10) // 2
+	^ bloodline - 10 // 2
 ]
 
 { #category : #accessing }

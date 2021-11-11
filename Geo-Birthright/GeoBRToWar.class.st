@@ -1544,7 +1544,7 @@ GeoBRToWar >> script [
 { #category : #scripts }
 GeoBRToWar >> scriptGuildOwnerships [
 	
-	self takeAction: (GeoBRGuildOwnershipAction new province: cear; owner: davor; ruler: davor; level: 3).
+	"self takeAction: (GeoBRGuildOwnershipAction new province: cear; owner: davor; ruler: davor; level: 3).
 	self takeAction: (GeoBRGuildOwnershipAction new province: garlofs ; owner: davor; ruler: davor; level: 2).
 	self takeAction: (GeoBRGuildOwnershipAction new province: numut; owner: davor; ruler: davor; level: 3).
 	self takeAction: (GeoBRGuildOwnershipAction new province: bernau; owner: davor; ruler: davor; level: 1).
@@ -1553,30 +1553,30 @@ GeoBRToWar >> scriptGuildOwnerships [
 	
 	self takeAction: (GeoBRGuildOwnershipAction new province: cityStateKharozzi ; owner: davor; ruler: davor; level: 0).
 	
-	self takeAction: (GeoBRGuildOwnershipAction new province: cear; owner: greenbottle; ruler: greenbottle; level: 1)
+	self takeAction: (GeoBRGuildOwnershipAction new province: cear; owner: greenbottle; ruler: greenbottle; level: 1)"
 ]
 
 { #category : #scripts }
 GeoBRToWar >> scriptLawOwnerships [
 
-	self takeAction: (GeoBRLawOwnershipAction new province: cear; owner: davor; ruler: redfang; level: 4).
+	"self takeAction: (GeoBRLawOwnershipAction new province: cear; owner: davor; ruler: redfang; level: 4).
 	self takeAction: (GeoBRLawOwnershipAction new province: garlofs ; owner: davor; ruler: redfang; level: 2).
 	self takeAction: (GeoBRLawOwnershipAction new province: numut; owner: davor; ruler: redfang; level: 3).
 	self takeAction: (GeoBRLawOwnershipAction new province: bernau; owner: davor; ruler: redfang; level: 1).
-	
+	"
 ]
 
 { #category : #scripts }
 GeoBRToWar >> scriptProvinceOwnerships [
 
-	self takeAction: (GeoBRProvinceOwnershipAction new province: cear; owner: davor; ruler: davor).
+	"self takeAction: (GeoBRProvinceOwnershipAction new province: cear; owner: davor; ruler: davor).
 	self takeAction: (GeoBRProvinceOwnershipAction new province: garlofs ; owner: davor; ruler: davor).
 	self takeAction: (GeoBRProvinceOwnershipAction new province: numut; owner: davor; ruler: davor).
 	self takeAction: (GeoBRProvinceOwnershipAction new province: bernau; owner: davor; ruler: davor).
 	
 	self takeAction: (GeoBRProvinceOwnershipAction new province: hilt; owner: greenbottle; ruler: greenbottle).
 	
-	self takeAction: (GeoBRProvinceOwnershipAction new province: cityStateKharozzi ; owner: kharozzi ; ruler: kharozzi ).
+	self takeAction: (GeoBRProvinceOwnershipAction new province: cityStateKharozzi ; owner: kharozzi ; ruler: kharozzi )."
 ]
 
 { #category : #scripts }
@@ -1605,9 +1605,9 @@ GeoBRToWar >> scriptRegents [
 { #category : #scripts }
 GeoBRToWar >> scriptTempleOwnerships [
 
-	self takeAction: (GeoBRTempleOwnershipAction new province: cear; owner: davor; ruler: riswynn; level: 4).
+	"self takeAction: (GeoBRTempleOwnershipAction new province: cear; owner: davor; ruler: riswynn; level: 4).
 	self takeAction: (GeoBRTempleOwnershipAction new province: garlofs ; owner: davor; ruler: riswynn; level: 2).
 	self takeAction: (GeoBRTempleOwnershipAction new province: numut; owner: davor; ruler: riswynn; level: 3).
 	self takeAction: (GeoBRTempleOwnershipAction new province: bernau; owner: davor; ruler: riswynn; level: 1).
-
+"
 ]

@@ -7,7 +7,6 @@ Class {
 		'domains',
 		'holdings',
 		'pool',
-		'ownerships',
 		'repository'
 	],
 	#category : #'Geo-Birthright-Domain'
@@ -36,12 +35,6 @@ GeoBRWorld >> borders [
 	^ repository selectAll: GeoBRBorder
 ]
 
-{ #category : #accessing }
-GeoBRWorld >> collectedRegencyPointsFor: aRegent [
-
-	^ (self domainPowerFor: aRegent) + aRegent bloodlineModifier
-]
-
 { #category : #actions }
 GeoBRWorld >> doAction: action [
 
@@ -53,12 +46,6 @@ GeoBRWorld >> domainCollection [
 
 	^ domains values asSortedCollection: [ :provA :provB | 
 		  provA name <= provB name ]
-]
-
-{ #category : #accessing }
-GeoBRWorld >> domainPowerFor: aRegent [
-
-	^ ownerships sum: [ :ownership | ownership regencyPointsFor: aRegent ]
 ]
 
 { #category : #accessing }
@@ -125,12 +112,6 @@ GeoBRWorld >> mountainAreas [
 ]
 
 { #category : #accessing }
-GeoBRWorld >> ownerships [
-
-	^ ownerships
-]
-
-{ #category : #accessing }
 GeoBRWorld >> pool [
 
 	^ pool 
@@ -151,7 +132,7 @@ GeoBRWorld >> provinceAreas [
 { #category : #accessing }
 GeoBRWorld >> provinceAt: provinceId [
 
-	^provinces at: provinceId 
+	^ provinces at: provinceId
 ]
 
 { #category : #accessing }
@@ -214,7 +195,7 @@ GeoBRWorld >> realmBorders [
 { #category : #accessing }
 GeoBRWorld >> regentAt: regentId [
 
-	^regents at: regentId
+	^ regents at: regentId
 ]
 
 { #category : #accessing }
@@ -253,7 +234,6 @@ GeoBRWorld >> reset [
 	
 	provinces := Dictionary new.
 	regents := Dictionary new.
-	ownerships := OrderedCollection new.
 	domains := Dictionary new.
 	holdings := Dictionary new.
 	pool := Dictionary new
@@ -278,7 +258,7 @@ GeoBRWorld >> takeAction: anAction [
 
 	self saveAction: anAction.
 	self doAction: anAction.
-	^anAction
+	^ anAction
 ]
 
 { #category : #accessing }

@@ -78,7 +78,7 @@ GeoBRTheLeyOfTheLand >> script [
 { #category : #accessing }
 GeoBRTheLeyOfTheLand >> scriptProvinceOwnerships [
 
-	self takeAction: (GeoBRProvinceOwnershipAction new province: aeluin; owner: aldiss ; ruler: aldiss).
+	"self takeAction: (GeoBRProvinceOwnershipAction new province: aeluin; owner: aldiss ; ruler: aldiss).
 	self takeAction: (GeoBRProvinceOwnershipAction new province: armor; owner: aldiss; ruler: aldiss).
 	self takeAction: (GeoBRProvinceOwnershipAction new province: apex; owner: aldiss; ruler: aldiss).
 	self takeAction: (GeoBRProvinceOwnershipAction new province: abbotHill ; owner: aldiss; ruler: aldiss).
@@ -96,7 +96,7 @@ GeoBRTheLeyOfTheLand >> scriptProvinceOwnerships [
 	self takeAction: (GeoBRProvinceOwnershipAction new province: caidiff; owner: castledowns; ruler: castledowns).
 	self takeAction: (GeoBRProvinceOwnershipAction new province: cardian ; owner: castledowns; ruler: castledowns).
 	self takeAction: (GeoBRProvinceOwnershipAction new province: corina; owner: castledowns; ruler: castledowns).
-	self takeAction: (GeoBRProvinceOwnershipAction new province: coldfell; owner: castledowns; ruler: castledowns).
+	self takeAction: (GeoBRProvinceOwnershipAction new province: coldfell; owner: castledowns; ruler: castledowns)."
 ]
 
 { #category : #accessing }
@@ -148,7 +148,7 @@ GeoBRTheLeyOfTheLand >> sourceOwnerships [
 	Briana,  the Mage-Queen of Boran, controls sources in Brost,  Benderís  Ford,  and  Connor  (a province  of  Castledowns).  
 	Clio,  the  court wizard  of  Castledowns,  controls  sources in  Carp,  Connor,  and  Cardian."
 	
-	self takeAction: (GeoBRSourceOwnershipAction new province: aeluin ; owner: artorus ; ruler: artorus ; level: 1).
+	"self takeAction: (GeoBRSourceOwnershipAction new province: aeluin ; owner: artorus ; ruler: artorus ; level: 1).
 	self takeAction: (GeoBRSourceOwnershipAction new province: armor ; owner: artorus ; ruler: artorus ; level: 1).
 	self takeAction: (GeoBRSourceOwnershipAction new province: abbotHill ; owner: artorus ; ruler: artorus ; level: 4).
 	self takeAction: (GeoBRSourceOwnershipAction new province: brost ; owner: artorus ; ruler: artorus ; level: 0).
@@ -161,5 +161,5 @@ GeoBRTheLeyOfTheLand >> sourceOwnerships [
 
 	self takeAction: (GeoBRSourceOwnershipAction new province: carp ; owner: clio ; ruler: clio ; level: 0).
 	self takeAction: (GeoBRSourceOwnershipAction new province: connor ; owner: clio ; ruler: clio ; level: 0).
-	self takeAction: (GeoBRSourceOwnershipAction new province: cardian ; owner: clio ; ruler: clio ; level: 0).
+	self takeAction: (GeoBRSourceOwnershipAction new province: cardian ; owner: clio ; ruler: clio ; level: 0)."
 ]

@@ -943,7 +943,7 @@ GeoBRCerilia >> scriptProvinceOwnerships [
 
 	"self takeAction: (GeoBRProvinceOwnershipAction new province: aeluin; owner: aldiss ; ruler: aldiss)."
 
-	| convertedDomains leftOver |
+	"| convertedDomains leftOver |
 	leftOver := OrderedCollection new.
 	convertedDomains := Dictionary new.
 
@@ -963,7 +963,7 @@ GeoBRCerilia >> scriptProvinceOwnerships [
 				 owner: ruler;
 				 ruler: ruler) ]].
 
-
+"
 ]
 
 { #category : #accessing }
