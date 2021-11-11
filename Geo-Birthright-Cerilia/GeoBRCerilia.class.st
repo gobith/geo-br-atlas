@@ -3,7 +3,17 @@ Class {
 	#superclass : #GeoBRInitialData,
 	#instVars : [
 		'regents',
-		'provinces'
+		'provinces',
+		'domains',
+		'holdings',
+		'ownerships',
+		'xmlProvinces',
+		'xmlLegends',
+		'csvProvinces',
+		'csvProvinceDatas',
+		'csvCharacters',
+		'csvDomains',
+		'provinceAreas'
 	],
 	#category : #'Geo-Birthright-Cerilia-Data'
 }
@@ -51,23 +61,142 @@ GeoBRCerilia class >> woods [
 ]
 
 { #category : #accessing }
-GeoBRCerilia >> areaIdForProvince: aProvince [
+GeoBRCerilia >> addToWorld [
 
-	^self provinceNameToAreaIdMapping at: aProvince name ifAbsent: nil
-]
 
-{ #category : #initialization }
-GeoBRCerilia >> initialize [ 
 
-	super initialize.
-	regents := Dictionary new.
-	provinces := Dictionary new
+	regents do: [ :regent | 
+		| id |
+		id := self takeAction: (GeoBRAddRegentAction new
+				       name: regent name;
+				       bloodline: regent bloodline;
+				       regencyPoints: regent regencyPoints).
+		regent id: id ].
+
+	domains do: [ :domain | 
+		| id |
+		id := self takeAction: (GeoBRAddDomainAction new name: domain name).
+		domain id: id.
+
+		domain owner ifNotNil: [ 
+			self takeAction: (GeoBROwnershipAction new
+					 owner: domain owner id;
+					 subject: id) ] ].
+
+	provinces do: [ :province | 
+		| id |
+		id := self takeAction: (GeoBRAddProvinceAction new
+				       areaId: province areaId;
+				       name: province name;
+				       level: province level;
+				       terrain: province terrain;
+				       loyalty: province loyalty).
+		province id: id.
+
+		self takeAction: (GeoBROwnershipAction new
+				 owner: province owner id;
+				 subject: id) ].
+
+	holdings do: [ :holding | 
+		| id |
+		id := self takeAction: (GeoBRAddHoldingAction new
+				       province: holding province id;
+				       level: holding level;
+				       type: holding type).
+		self takeAction: (GeoBROwnershipAction new
+				 owner: holding owner id;
+				 subject: id) ]
 ]
 
 { #category : #accessing }
-GeoBRCerilia >> loyaltyForProvince: aProvince data: aProvinceData [ 
+GeoBRCerilia >> areaIdForProvince: aProvince [
 
-	^GeoBRLoyaltyHigh new
+	^ self provinceNameToAreaIdMapping at: aProvince name ifAbsent: nil
+]
+
+{ #category : #accessing }
+GeoBRCerilia >> coupleProvinceToArea [
+
+	| areaIdToProvinceMapping |
+	areaIdToProvinceMapping := Dictionary new.
+	(provinces select: [ :each | each areaId notNil ]) do: [ :province | 
+		areaIdToProvinceMapping at: province areaId put: province ].
+
+	provinceAreas do: [ :area | 
+		(areaIdToProvinceMapping at: area center ifAbsent: nil) ifNotNil: [ 
+			:province | area province: province id ] ]
+]
+
+{ #category : #accessing }
+GeoBRCerilia >> privateScript [
+
+	| shortNameToDomains |
+	provinces := Dictionary new.
+	holdings := OrderedCollection new.
+	regents := Dictionary new.
+	domains := Dictionary new.
+	shortNameToDomains := Dictionary new.
+	
+
+
+	(xmlLegends select: [ :each | each domain notNil ]) do: [ :legend | 
+		| regent domain |
+		regent := regents
+			          at: legend name
+			          ifAbsentPut: [ BRRegent new name: legend name ].
+		domain := BRDomain new
+			          name: legend domain;
+			          shortName: legend id;
+			          owner: regent.
+
+		domains at: domain name put: domain ].
+
+
+	(xmlLegends select: [ :each | each domain isNil ]) do: [ :legend | 
+		| domain |
+		domain := BRDomain new
+			          name: legend name;
+			          shortName: legend id;
+			          owner: nil.
+
+		domains at: domain name put: domain ].
+
+
+	domains do: [ :domain | 
+		shortNameToDomains at: domain shortName put: domain ].
+
+
+	xmlProvinces do: [ :xmlProvince | 
+		| province |
+		province := BRProvince new
+			            areaId: (self areaIdForProvince: xmlProvince);
+			            name: xmlProvince name;
+			            level: xmlProvince level;
+			            loyalty: GeoBRLoyaltyAverage new;
+			            terrain: (self terrainForProvince: xmlProvince);
+			            owner: (domains at: xmlProvince realm).
+		provinces at: xmlProvince name put: province.
+		xmlProvince holdings do: [ :xmlHolding | 
+			| holding |
+			xmlHolding owner ~= 'none' ifTrue: [ 
+				holding := BRHolding new.
+				holding
+					province: province;
+					level: xmlHolding level;
+					type: xmlHolding type;
+					owner: (shortNameToDomains at: xmlHolding owner ).
+				holdings add: holding ] ] ].
+	
+
+
+
+	csvProvinces do: [ :csvProvince | 
+		| province |
+		province := provinces at: csvProvince name.
+		self setTerrain: csvProvince terrain in: province ].
+	
+
+	
 ]
 
 { #category : #accessing }
@@ -931,112 +1060,70 @@ at: 'el-Tehara' put:   nil  .
 { #category : #accessing }
 GeoBRCerilia >> script [
 
-	super script.
-
-	self scriptRegents.
-	self scriptProvinces.
-	self scriptProvinceOwnerships.
+	provinceAreas := self provinceAreas.
+	
+	self islandAreas do: [ :islandArea | world repository save: islandArea ].
+	self woodAreas do: [ :woodArea | world repository save: woodArea ].
+	self mountainAreas do: [ :mountainArea | world repository save: mountainArea ].
+	self borders do: [ :border | world repository save: border ].
+	
+	xmlProvinces := GeoBRXMLConverter new parse provinces.
+	xmlLegends := GeoBRXMLConverter new parse legends.
+	
+	csvProvinces := GeoBRCSVConverter new convertedProvinces.
+	csvProvinceDatas := GeoBRCSVConverter new convertedProvinceDatas.
+	csvCharacters := GeoBRCSVConverter new convertedCharacters.
+	csvDomains := GeoBRCSVConverter new convertedDomains.
+	
+	self privateScript.
+	self addToWorld.
+	
+	self coupleProvinceToArea.
+	
+	provinceAreas do: [ :provinceArea | world repository save: provinceArea ].
 ]
 
 { #category : #accessing }
-GeoBRCerilia >> scriptProvinceOwnerships [
+GeoBRCerilia >> setTerrain: terrainString in: aProvince [
 
-	"self takeAction: (GeoBRProvinceOwnershipAction new province: aeluin; owner: aldiss ; ruler: aldiss)."
+	| terrain potential modifier |
+	potential := aProvince terrain potential.
 
-	"| convertedDomains leftOver |
-	leftOver := OrderedCollection new.
-	convertedDomains := Dictionary new.
+	terrain := (GeoBRTerrain allSubclasses detect: [ :cls | 
+		            cls terrainName = terrainString ]) new.
 
-	GeoBRCSVConverter new convertedDomains do: [ :domain | 
-		convertedDomains at: domain name put: domain ].
-
-	GeoBRCSVConverter new convertedProvinceDatas do: [ :provinceData | 
-		| ruler province |
-		ruler := regents at:
-			         (convertedDomains at: provinceData domain) ruler.
-		province := provinces at: provinceData province ifAbsent: nil.
-
-	province ifNotNil: [  
-
-		self takeAction: (GeoBRProvinceOwnershipAction new
-				 province: province;
-				 owner: ruler;
-				 ruler: ruler) ]].
-
-"
-]
-
-{ #category : #accessing }
-GeoBRCerilia >> scriptProvinces [
-
-	| convertedProvinces |
-
-	convertedProvinces := GeoBRXMLConverter new parse provinces.
-
-
-	convertedProvinces do: [ :province | 
-		| action |
-		action := self takeAction: (GeoBRAddProvinceAction new
-				           name: province name;
-				           areaId: (self areaIdForProvince: province);
-				           level: province level;
-				           terrain: (self terrainForProvince: province);
-				           loyalty: GeoBRLoyaltyHigh new).
-		provinces at: action name put: action id ]
-]
-
-{ #category : #accessing }
-GeoBRCerilia >> scriptProvincesOLD [
-
-	"aeluin := self takeAction: (GeoBRAddProvinceAction new name: 'Aeluin'; areaId: 6; level: 6; terrain: GeoBRForest new; loyalty: GeoBRLoyaltyHigh new)."
-
-	| convertedProvinces convertedProvinceDatas leftOver |
-	leftOver := OrderedCollection new.
-	convertedProvinces := GeoBRCSVConverter new convertedProvinces.
-	convertedProvinceDatas := Dictionary new.
-
-	GeoBRCSVConverter new convertedProvinceDatas do: [ :each | 
-		convertedProvinceDatas at: each province put: each ].
-
-	convertedProvinces do: [ :each | 
-		convertedProvinceDatas
-			at: each name
-			ifAbsent: [ leftOver add: each name ] ].
-
-	leftOver ifNotEmpty: [ self halt ].
-
-
-	convertedProvinces do: [ :province | 
-		| action provinceData |
-		provinceData := convertedProvinceDatas at: province name.
-		action := self takeAction: (GeoBRAddProvinceAction new
-				           name: province name;
-				           areaId: (self areaIdForProvince: province);
-				           level: provinceData population ;
-				           terrain: (self terrainForProvince: province);
-				           loyalty: (self loyaltyForProvince: province data: provinceData)).
-		provinces at: action name put: action id ]
-]
-
-{ #category : #accessing }
-GeoBRCerilia >> scriptRegents [
-
-	GeoBRCSVConverter new convertedCharacters do: [ :each | 
-		| action |
-		action := self takeAction: (GeoBRAddRegentAction new
-				           name: each name;
-				           bloodline: each bloodlineScore).
-		regents at: action name put: action id ]
+	modifier := terrain potential - potential.
+	modifier ~= 0 ifTrue: [ terrain modifier: modifier ].
+	aProvince terrain: terrain
 ]
 
 { #category : #accessing }
 GeoBRCerilia >> takeAction: anAction [
 
-	^world takeAction: anAction
+	| action |
+	action := world takeAction: anAction.
+	^ action id
 ]
 
 { #category : #accessing }
 GeoBRCerilia >> terrainForProvince: aProvince [
 
-	^GeoBRLightForest new
+	| potential |
+	potential := aProvince level + aProvince magic.
+	potential = 15 ifTrue: [ ^ GeoBRAncientForest new modifier: 6 ].
+	potential = 14 ifTrue: [ ^ GeoBRAncientForest new modifier: 5 ].
+	potential = 13 ifTrue: [ ^ GeoBRAncientForest new modifier: 4 ].
+	potential = 12 ifTrue: [ ^ GeoBRAncientForest new modifier: 3 ].
+	potential = 11 ifTrue: [ ^ GeoBRAncientForest new modifier: 2 ].
+	potential = 10 ifTrue: [ ^ GeoBRAncientForest new modifier: 1 ].
+	potential = 9 ifTrue: [ ^ GeoBRHighMountains new ].
+	potential = 7 ifTrue: [ ^ GeoBRLightForest new ].
+	potential = 6 ifTrue: [ ^ GeoBRPlains new modifier: 1 ].
+	potential = 5 ifTrue: [ ^ GeoBRPlains new ].
+	potential = 4 ifTrue: [ ^ GeoBRPlains new modifier: -1 ].
+	potential = 3 ifTrue: [ ^ GeoBRPlains new modifier: -2 ].
+	potential = 1 ifTrue: [ ^ GeoBRDesert new modifier: -4 ].
+	potential = 0 ifTrue: [ ^ GeoBRDesert new modifier: -5 ].
+	potential = 8 ifTrue: [ ^ GeoBRSwamp new ].
+
 ]
