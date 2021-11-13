@@ -3,7 +3,6 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'id',
-		'areaId',
 		'name',
 		'level',
 		'loyalty',
@@ -12,18 +11,6 @@ Class {
 	],
 	#category : #'Geo-Birthright-Domain Setup'
 }
-
-{ #category : #accessing }
-BRProvince >> areaId [
-
-	^ areaId
-]
-
-{ #category : #accessing }
-BRProvince >> areaId: anObject [
-
-	areaId := anObject
-]
 
 { #category : #accessing }
 BRProvince >> id [

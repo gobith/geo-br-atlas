@@ -80,7 +80,6 @@ GeoBRCerilia >> addToWorld [
 	provinces do: [ :province | 
 		| id |
 		id := self takeAction: (GeoBRAddProvinceAction new
-				       areaId: province areaId;
 				       name: province name;
 				       level: province level;
 				       terrain: province terrain;
@@ -103,22 +102,43 @@ GeoBRCerilia >> addToWorld [
 ]
 
 { #category : #accessing }
-GeoBRCerilia >> areaIdForProvince: aProvince [
+GeoBRCerilia >> areaIdForProvinceName: provinceName [
 
-	^ self provinceNameToAreaIdMapping at: aProvince name ifAbsent: nil
+	^ self provinceNameToAreaIdMapping at: provinceName ifAbsent: nil
 ]
 
 { #category : #accessing }
 GeoBRCerilia >> coupleProvinceToArea [
-
-	| areaIdToProvinceMapping |
-	areaIdToProvinceMapping := Dictionary new.
+	
+	" areaId: (self areaIdForProvinceName: xmlProvince name);""areaIdToProvinceMapping := Dictionary new.
 	(provinces select: [ :each | each areaId notNil ]) do: [ :province | 
 		areaIdToProvinceMapping at: province areaId put: province ].
 
 	provinceAreas do: [ :area | 
 		(areaIdToProvinceMapping at: area center ifAbsent: nil) ifNotNil: [ 
-			:province | area province: province id ] ]
+			:province | area province: province id ] ]"
+
+
+	| areaIdToProvinceMapping provinceAreaDict |
+	self halt.
+
+	provinceAreaDict := Dictionary new.
+	provinceAreas do: [ :provinceArea | 
+		provinceAreaDict at: provinceArea center put: provinceArea ].
+
+
+	provinces do: [ :province | 
+		| areaId areaIds |
+		areaId := self areaIdForProvinceName: province name.
+
+		areaIds := areaId isArray
+			           ifTrue: [ areaId ]
+			           ifFalse: [ Array with: areaId ].
+
+		areaIds do: [ :point | 
+			(provinceAreaDict at: point ifAbsent: [ nil ])
+				ifNil: [  ]
+				ifNotNil: [ :provinceArea | provinceArea province: province id ] ] ]
 ]
 
 { #category : #accessing }
@@ -163,7 +183,6 @@ GeoBRCerilia >> privateScript [
 	xmlProvinces do: [ :xmlProvince | 
 		| province |
 		province := BRProvince new
-			            areaId: (self areaIdForProvince: xmlProvince);
 			            name: xmlProvince name;
 			            level: xmlProvince level;
 			            loyalty: GeoBRLoyaltyAverage new;
@@ -209,7 +228,7 @@ at: 'Abbatuor' put:   1111@2941  ;
 at: 'Abrskiy' put:   3798 @ 1490  ;
 at: 'Achiese' put:   1245 @ 2536  ;
 at: 'Adaba' put:   2989 @ 2886  ;
-at: 'Adara' put:   3926 @ 2244  ;
+at: 'Adara' put:   {3926 @ 2244 . 3940 @ 2289}  ;
 at: 'Adeid' put:   3664 @ 2770  ;
 at: 'Adler' put:   1760 @ 1404  ;
 at: 'Adoga' put:   4224 @ 1691  ;
@@ -359,7 +378,7 @@ at: 'Cape Rahel' put:   4040 @ 2132  ;
 at: 'Careine' put:   1675 @ 2272  ;
 at: 'Caudraight' put:   1527 @ 2313  ;
 at: 'Caulnor' put:   709 @ 2591  ;
-at: 'Cecidein' put:   3941 @ 2973  ;
+at: 'Cecidein' put:   {3941 @ 2973 . 3976 @ 2959}  ;
 at: 'Cedeina' put:   3871 @ 2338  ;
 at: 'Challra' put:   1397 @ 872  ;
 at: 'Chalsedon' put:   1292 @ 2418  ;
@@ -396,7 +415,7 @@ at: 'Cwmbheir' put:   1202 @ 1709  ;
 at: 'Cwnddrrd' put:   1500 @ 889  ;
 at: 'Cymryr' put:   1284 @ 1598  ;
 at: 'Daikhar' put:   2971 @ 1233  ;
-at: 'Dalceir' put:   nil  ;
+at: 'Dalceir' put:   {3770 @ 2918 . 3795 @ 2939 . 3828 @ 2987 . 3862 @ 3009}  ;
 at: 'Dalmsrhuud' put:   263 @ 1238  ;
 at: 'Danaroene' put:   1157 @ 2597  ;
 at: 'Dankmaar' put:   617 @ 1292  ;
@@ -497,7 +516,7 @@ at: 'Fhylallien' put:   1507 @ 2046  ;
 at: 'Fjoltyr' put:   633 @ 854  ;
 at: 'Floodspaeth' put:   769 @ 1933  ;
 at: 'Folda Fjord' put:   1314 @ 772  ;
-at: 'Forestmarch' put:   3150 @ 2247  ;
+at: 'Forestmarch' put:   {3150 @ 2247 . 3111 @ 2225} ;
 at: 'Freestead' put:   617 @ 1853  ;
 at: 'Freikstaad' put:   2031 @ 659  ;
 at: 'Friedlund' put:   1908 @ 2277  ;
@@ -544,8 +563,8 @@ at: 'Halten' put:   1141 @ 1098  ;
 at: 'Hamein' put:   1805 @ 2384  ;
 at: 'Harlskaang' put:   387 @ 923  ;
 at: 'Isle of the Harpy' put:   2194 @ 2975  ;
-at: 'Harpy''s Watch' put:   2196 @ 2883  ;
-at: 'Hauptrehr' put:   2713 @ 1793  ;
+at: 'Harpy''s Watch' put:   {2196 @ 2883 . 2230 @ 2876} ;
+at: 'Hauptrehr' put:   {2713 @ 1793 . 2756 @ 1815} ;
 at: 'Helkstraad' put:   148 @ 1152  ;
 at: 'Hellforge' put:   3643 @ 2201  ;
 at: 'Helmshaven' put:   638 @ 2005  ;
@@ -950,7 +969,7 @@ at: 'Treumar' put:   2387 @ 2015  ;
 at: 'Treustap' put:   2485 @ 2056  ;
 at: 'Trondelaag' put:   1235 @ 1308  ;
 at: 'Tsing' put:   2996 @ 2052  ;
-at: 'Tsongya Vale' put:   3129 @ 2139  ;
+at: 'Tsongya Vale' put:   {3129 @ 2139 . 3164 @ 2147}  ;
 at: 'Tsupek' put:   4253 @ 1540  ;
 at: 'Tuar Llyrien' put:   1503 @ 1960  ;
 at: 'Tuared' put:   2466 @ 2877  ;
@@ -961,12 +980,12 @@ at: 'Two Giant''s Tread' put:   1839 @ 1363  ;
 at: 'Twopeak' put:   3077 @ 865  ;
 at: 'Tyrtep' put:   2837 @ 1082  ;
 at: 'Tzubinstak' put:   3982 @ 1093  ;
-at: 'Ubalmulen' put:   2547 @ 1969  ;
+at: 'Ubalmulen' put:   {2547 @ 1969 . 2587 @ 2031}  ;
 at: 'Udvika' put:   891 @ 1327  ;
 at: 'Uelzau' put:   2402 @ 1300  ;
 at: 'Ufhevsk' put:   3594 @ 1487  ;
 at: 'Ulbrun' put:   1976 @ 1332  ;
-at: 'Ulfsted' put:   3080 @ 1686  ;
+at: 'Ulfsted' put:   {3061 @ 1659 . 3080 @ 1686}  ;
 at: 'Unbraustadt' put:   2680 @ 2294  ;
 at: 'Uptlund' put:   2774 @ 2263  ;
 at: 'Urgtau' put:   3598 @ 1559  ;
@@ -993,7 +1012,7 @@ at: 'Vyslav' put:   3913 @ 2027  ;
 at: 'Wahlrud' put:   2853 @ 2240  ;
 at: 'Warzlau' put:   2497 @ 1181  ;
 at: 'Wasser''s Reach' put:   1924 @ 1256  ;
-at: 'Waterfjord' put:   1988 @ 2560  ;
+at: 'Waterfjord' put:   {1988 @ 2560 . 2002 @ 2537 . 2003 @ 2524} ;
 at: 'Werthangen' put:   1949 @ 2191  ;
 at: 'Wesbralen' put:   2533 @ 1860  ;
 at: 'West Direwood' put:   3266 @ 2740  ;
@@ -1049,7 +1068,7 @@ at: 'el-Qadr' put:   3259 @ 2658  ;
 at: 'el-Saroume' put:   3983 @ 2621  ;
 at: 'el-Sefra' put:   3045 @ 2443  ;
 at: 'el-Sirte' put:   3696 @ 2648  ;
-at: 'el-Tasri' put:   2250 @ 2784  ;
+at: 'el-Tasri' put:   {2250 @ 2784 . 2205 @ 2799}  ;
 at: 'el-Tehara' put:   2525 @ 2938  .
 ^dict
 ]

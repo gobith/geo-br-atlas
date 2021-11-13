@@ -4,7 +4,6 @@ Class {
 	#instVars : [
 		'id',
 		'name',
-		'areaId',
 		'level',
 		'loyalty',
 		'terrain'
@@ -18,18 +17,6 @@ GeoBRAddProvinceAction class >> typeClass [
 	^GeoBRProvince
 ]
 
-{ #category : #accessing }
-GeoBRAddProvinceAction >> areaId [
-
-	^ areaId
-]
-
-{ #category : #accessing }
-GeoBRAddProvinceAction >> areaId: anObject [
-
-	areaId := anObject
-]
-
 { #category : #actions }
 GeoBRAddProvinceAction >> doActionIn: aWorld [
 
@@ -37,7 +24,6 @@ GeoBRAddProvinceAction >> doActionIn: aWorld [
 	province := self typeClass new.
 	province
 		id: id;
-		areaId: areaId;
 		name: name;
 		level: level;
 		loyalty: loyalty;

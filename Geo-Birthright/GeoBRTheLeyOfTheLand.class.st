@@ -102,7 +102,7 @@ GeoBRTheLeyOfTheLand >> scriptProvinceOwnerships [
 { #category : #accessing }
 GeoBRTheLeyOfTheLand >> scriptProvinces [
 
-	aeluin := self takeAction: (GeoBRAddProvinceAction new name: 'Aeluin'; areaId: 6; level: 6; terrain: GeoBRLightForest new; loyalty: GeoBRLoyaltyHigh new).
+	"aeluin := self takeAction: (GeoBRAddProvinceAction new name: 'Aeluin'; areaId: 6; level: 6; terrain: GeoBRLightForest new; loyalty: GeoBRLoyaltyHigh new).
 	apex := self takeAction: (GeoBRAddProvinceAction new name: 'Apex'; areaId: 12; level: 1; terrain: GeoBRLowMountains new; loyalty: GeoBRLoyaltyAverage new).
 	armor := self takeAction: (GeoBRAddProvinceAction new name: 'Armor'; areaId: 16; level: 6; terrain: GeoBRLowMountains new; loyalty: GeoBRLoyaltyPoor new).
 	absal := self takeAction: (GeoBRAddProvinceAction new name: 'Absal'; areaId: 5; level: 1; terrain: GeoBRLightForest new; loyalty: GeoBRLoyaltyRebellious new).
@@ -122,7 +122,7 @@ GeoBRTheLeyOfTheLand >> scriptProvinces [
 	bulle := self takeAction: (GeoBRAddProvinceAction new name: 'Bulle'; areaId: 1; level: 1; terrain: GeoBRPlains new; loyalty: GeoBRLoyaltyHigh new).
 	boatswain := self takeAction: (GeoBRAddProvinceAction new name: 'Boatswain'; areaId: 8; level: 1; terrain: GeoBRHills new; loyalty: GeoBRLoyaltyHigh new).
 	bendersford := self takeAction: (GeoBRAddProvinceAction new name: 'Bendersford'; areaId: 10; level: 1; terrain: GeoBRPlains new; loyalty: GeoBRLoyaltyHigh new).
-	brokenstand := self takeAction: (GeoBRAddProvinceAction new name: 'Brokenstand'; areaId: 11; level: 1; terrain: GeoBRHills new; loyalty: GeoBRLoyaltyHigh new).
+	brokenstand := self takeAction: (GeoBRAddProvinceAction new name: 'Brokenstand'; areaId: 11; level: 1; terrain: GeoBRHills new; loyalty: GeoBRLoyaltyHigh new)."
 ]
 
 { #category : #accessing }

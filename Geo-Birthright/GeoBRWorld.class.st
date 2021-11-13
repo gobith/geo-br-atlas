@@ -175,12 +175,13 @@ GeoBRWorld >> realmBorderForOwner: aRegent provinces: collectionOfProvinces [
 	^ GeoBRRealmBorder new
 		  owner: aRegent;
 		  borders: realmBorderIds
+		
 ]
 
 { #category : #accessing }
 GeoBRWorld >> realmBorders [
 
-	| realmBorders |
+	"| realmBorders |
 	realmBorders := OrderedCollection new.
 
 	((provinces select: [ :province | province hasOwner ]) partition: [ 
@@ -189,7 +190,8 @@ GeoBRWorld >> realmBorders [
 		:provincesPerOwner | 
 		realmBorders add:
 			(self realmBorderForOwner: owner provinces: provincesPerOwner) ].
-	^ realmBorders
+	^ realmBorders"
+	^#()
 ]
 
 { #category : #accessing }

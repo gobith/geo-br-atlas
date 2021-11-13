@@ -3,7 +3,6 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'id',
-		'areaId',
 		'name',
 		'level',
 		'loyalty',
@@ -18,25 +17,12 @@ GeoBRProvince class >> neoJsonMappingOn: mapping [
 
 	mapping
 		mapAccessor: #id;
-		mapAccessor: #areaId;
 		mapAccessor: #name;
 		mapAccessor: #level;
 		mapAccessor: #loyaltyString to: #loyalty;
 		mapAccessor: #sourceRating;
 		mapAccessor: #terrain;
 		mapAccessor: #ownerId to: #owner
-]
-
-{ #category : #accessing }
-GeoBRProvince >> areaId [
-
-	^ areaId
-]
-
-{ #category : #accessing }
-GeoBRProvince >> areaId: anObject [
-
-	areaId := anObject
 ]
 
 { #category : #testing }
