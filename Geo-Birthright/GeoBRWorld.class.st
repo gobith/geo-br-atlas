@@ -106,6 +106,20 @@ GeoBRWorld >> map [
 ]
 
 { #category : #accessing }
+GeoBRWorld >> map2 [
+
+	^ GeoBRMap2 new
+		  provinceAreas: self provinceAreas;
+		  borders: self borders;
+		  provinceBorders: self provinceBorders;
+		  realmBorders: self realmBorders;
+		  islandAreas: self islandAreas;
+		  woodAreas: self woodAreas;
+		  mountainAreas: self mountainAreas;
+		  yourself
+]
+
+{ #category : #accessing }
 GeoBRWorld >> mountainAreas [
 
 	^ repository selectAll: GeoBRMountainArea 

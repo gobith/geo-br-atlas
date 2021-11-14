@@ -34,12 +34,12 @@ GeoBRGrid >> addPathToNodes: aPath [
 		 GeoBRNode new
 			 id: nodes size + 1;
 			 point: aPath a;
-			 yourself ]) addPath: aPath.
+			 yourself ]) addPath_a: aPath.
 	(nodes at: aPath b ifAbsentPut: [ 
 		 GeoBRNode new
 			 id: nodes size + 1;
 			 point: aPath b;
-			 yourself ]) addPath: aPath
+			 yourself ]) addPath_b: aPath
 ]
 
 { #category : #accessing }
@@ -72,8 +72,8 @@ GeoBRGrid >> borders [
 	^ paths collect: [ :path | 
 		  GeoBRBorder new
 			  id: path id;
-			  a: path a;
-			  b: path b;
+			  a: path aNode id;
+			  b: path bNode id;
 			  d: path d;
 			  yourself ]
 ]
@@ -180,6 +180,7 @@ GeoBRGrid >> initialize [
 GeoBRGrid >> islandAreas [
 
 	| borderIds pathDict islandPaths grid idx |
+
 	borderIds := Bag new.
 	pathDict := paths asDictionary.
 

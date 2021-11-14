@@ -6,7 +6,9 @@ Class {
 		'd',
 		'document',
 		'a',
-		'b'
+		'b',
+		'aNode',
+		'bNode'
 	],
 	#category : #'Geo-BR-Atlas'
 }
@@ -45,6 +47,18 @@ GeoBRPath >> aJson [
 ]
 
 { #category : #accessing }
+GeoBRPath >> aNode [
+
+	^ aNode
+]
+
+{ #category : #accessing }
+GeoBRPath >> aNode: anObject [
+
+	aNode := anObject
+]
+
+{ #category : #accessing }
 GeoBRPath >> absolutePoints [
 	
 	^self document absolutePoints 
@@ -61,6 +75,18 @@ GeoBRPath >> b [
 GeoBRPath >> bJson [
 
 	^{'x' -> self b x . 'y' -> self b y} asDictionary
+]
+
+{ #category : #accessing }
+GeoBRPath >> bNode [
+
+	^ bNode
+]
+
+{ #category : #accessing }
+GeoBRPath >> bNode: anObject [
+
+	bNode := anObject
 ]
 
 { #category : #accessing }

@@ -16,6 +16,20 @@ GeoBRNode >> addPath: aPath [
 ]
 
 { #category : #accessing }
+GeoBRNode >> addPath_a: aPath [
+
+	aPath aNode: self.
+	self addPath: aPath
+]
+
+{ #category : #accessing }
+GeoBRNode >> addPath_b: aPath [
+
+	aPath bNode: self.
+	self addPath: aPath
+]
+
+{ #category : #accessing }
 GeoBRNode >> id [
 
 	^ id
@@ -67,40 +81,26 @@ GeoBRNode >> nextPathFrom: aPath [
 ]
 
 { #category : #accessing }
-GeoBRNode >> nextPointFrom: aPoint [ 
-	self shouldBeImplemented.
-]
-
-{ #category : #accessing }
-GeoBRNode >> pathPointsTo: toNode [
-
-	| thePath points |
-	thePath := self pathTo: toNode.
-
-	points := thePath document absolutePoints.
-
-	^ thePath a = point
-		  ifTrue: [ points ]
-		  ifFalse: [ points reverse ]
-]
-
-{ #category : #accessing }
 GeoBRNode >> pathTo: toNode [
 
-
-	^paths detect: [ :path | 
-		           path a = toNode point or: [ path b = toNode point ] ].
+	^ paths detect: [ :path | 
+		  path a = toNode point or: [ path b = toNode point ] ]
 ]
 
 { #category : #accessing }
 GeoBRNode >> pathTo: toNode in: aDocument [
 
-	| thePath points |
+	| thePath |
 	thePath := self pathTo: toNode.
 
 	thePath a = point
 		ifTrue: [ aDocument add: thePath document ]
 		ifFalse: [ aDocument addReverse: thePath document ]
+]
+
+{ #category : #accessing }
+GeoBRNode >> paths [
+	^ paths
 ]
 
 { #category : #accessing }

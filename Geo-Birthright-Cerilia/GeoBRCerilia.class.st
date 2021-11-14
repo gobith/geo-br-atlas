@@ -120,8 +120,7 @@ GeoBRCerilia >> coupleProvinceToArea [
 
 
 	| areaIdToProvinceMapping provinceAreaDict |
-	self halt.
-
+	
 	provinceAreaDict := Dictionary new.
 	provinceAreas do: [ :provinceArea | 
 		provinceAreaDict at: provinceArea center put: provinceArea ].

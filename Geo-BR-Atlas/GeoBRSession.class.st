@@ -11,39 +11,21 @@ Class {
 { #category : #accessing }
 GeoBRSession >> addRoutes [
 
-	teapot GET: '/map' -> [ :request | self requestMap: request ].
-	teapot GET: '/world' -> [ :request | self requestWorld: request ].
+	teapot GET: '/map' -> [ :request | world map ].
 	
-	teapot GET: '/singledots' -> [ :request | self requestSingleDots: request ].
+	teapot GET: '/map2' -> [ :request | world map2 ].
+	
+	
+	teapot GET: '/world' -> [ :request | world ].
 	
 	teapot serveStatic: '/' from: '/home/georges/apps/geo-br-atlas-frontend/public'
-]
-
-{ #category : #accessing }
-GeoBRSession >> requestMap: aRequest [
-
-	^world map
-]
-
-{ #category : #accessing }
-GeoBRSession >> requestSingleDots: aRequest [
-
-	^ OrderedCollection new.
-
-	
-]
-
-{ #category : #accessing }
-GeoBRSession >> requestWorld: aRequest [
-
-	^world
 ]
 
 { #category : #accessing }
 GeoBRSession >> start [
 
 	self stop.
-	
+
 
 	teapot := Teapot configure: { 
 			          (#port -> 8101).
