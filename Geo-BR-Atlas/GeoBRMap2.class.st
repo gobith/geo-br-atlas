@@ -24,7 +24,9 @@ GeoBRMap2 class >> neoJsonMappingOn: mapping [
 
 	mapping
 		mapAccessor: #borders;
-		mapAccessor: #areas
+		mapAccessor: #areas;
+		mapAccessor: #woodAreas;
+		mapAccessor: #mountainAreas
 		
 		";
 		mapAccessor: #provinceBorders;
@@ -33,7 +35,7 @@ GeoBRMap2 class >> neoJsonMappingOn: mapping [
 		mapAccessor: #islandAreas;
 		mapAccessor: #woodAreas;
 		mapAccessor: #mountainAreas"
-		
+		 
 ]
 
 { #category : #accessing }
