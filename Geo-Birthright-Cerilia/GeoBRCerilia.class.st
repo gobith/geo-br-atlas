@@ -1077,7 +1077,7 @@ GeoBRCerilia >> script [
 
 	provinceAreas := self provinceAreas.
 	
-	self islandAreas do: [ :islandArea | world repository save: islandArea ].
+	"self islandAreas do: [ :islandArea | world repository save: islandArea ]."
 	self woodAreas do: [ :woodArea | world repository save: woodArea ].
 	self mountainAreas do: [ :mountainArea | world repository save: mountainArea ].
 	self borders do: [ :border | world repository save: border ].

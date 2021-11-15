@@ -71,3 +71,16 @@ GeoBRBorder >> id: anObject [
 
 	id := anObject
 ]
+
+{ #category : #printing }
+GeoBRBorder >> printOn: aStream [
+
+	aStream
+		nextPut: $(;
+		print: a;
+		nextPutAll: ') - ';
+		print: id;
+		nextPutAll: ' -> (';
+		print: b;
+		nextPut: $)
+]
