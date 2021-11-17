@@ -43,7 +43,7 @@ GeoBRMap2 >> areas [
 
 	^ provinceAreas collect: [ :provinceArea | 
 		  { 
-			  ('b' -> provinceArea borders).
+			  ('borders' -> provinceArea borders).
 			  ('p' -> provinceArea province) } asDictionary ]
 ]
 
