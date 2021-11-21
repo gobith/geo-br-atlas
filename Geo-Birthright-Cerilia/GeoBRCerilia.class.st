@@ -69,7 +69,7 @@ GeoBRCerilia >> addToWorld [
 
 	domains do: [ :domain | 
 		| id |
-		id := self takeAction: (GeoBRAddDomainAction new name: domain name).
+		id := self takeAction: (GeoBRAddDomainAction new name: domain name; abbr: domain shortName).
 		domain id: id.
 
 		domain owner ifNotNil: [ 

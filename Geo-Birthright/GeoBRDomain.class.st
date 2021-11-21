@@ -6,7 +6,8 @@ Class {
 		'name',
 		'gold',
 		'court',
-		'owner'
+		'owner',
+		'abbr'
 	],
 	#category : #'Geo-Birthright-Domain'
 }
@@ -19,7 +20,20 @@ GeoBRDomain class >> neoJsonMappingOn: mapping [
 		mapAccessor: #name;
 		mapAccessor: #gold;
 		mapAccessor: #court;
-		mapAccessor: #ownerId to: #owner
+		mapAccessor: #ownerId to: #owner;
+		mapAccessor: #abbr
+]
+
+{ #category : #accessing }
+GeoBRDomain >> abbr [
+
+	^ abbr
+]
+
+{ #category : #accessing }
+GeoBRDomain >> abbr: anObject [
+
+	abbr := anObject
 ]
 
 { #category : #accessing }

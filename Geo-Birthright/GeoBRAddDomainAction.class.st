@@ -3,7 +3,8 @@ Class {
 	#superclass : #GeoBRAction,
 	#instVars : [
 		'id',
-		'name'
+		'name',
+		'abbr'
 	],
 	#category : #'Geo-Birthright-Actions'
 }
@@ -14,6 +15,18 @@ GeoBRAddDomainAction class >> typeClass [
 	^ GeoBRDomain
 ]
 
+{ #category : #accessing }
+GeoBRAddDomainAction >> abbr [
+
+	^ abbr
+]
+
+{ #category : #accessing }
+GeoBRAddDomainAction >> abbr: anObject [
+
+	abbr := anObject
+]
+
 { #category : #actions }
 GeoBRAddDomainAction >> doActionIn: aWorld [
 
@@ -21,6 +34,7 @@ GeoBRAddDomainAction >> doActionIn: aWorld [
 	domain := self typeClass new.
 	domain id: id.
 	domain name: name.
+	domain abbr: abbr.
 	domain gold: 0.
 	aWorld domains at: domain id put: domain.
 	aWorld pool at: domain id put: domain
